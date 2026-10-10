@@ -141,7 +141,7 @@ export default function App() {
     <ToastProvider>
       <TocProvider>
         <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
-          {/* Top Bar with Brand, Zoom, Density, Theme Toggles, and Hamburger */}
+          {/* Top Bar with Brand, Zoom, Density, Theme Toggles, Hamburger, and Command Search */}
           <TopBar
             theme={theme}
             onThemeChange={setTheme}
@@ -153,6 +153,7 @@ export default function App() {
             onZoomChange={setZoom}
             isSidebarCollapsed={isSidebarCollapsed}
             onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+            onRouteChange={handleRouteChange}
           />
 
           {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
