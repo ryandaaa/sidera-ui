@@ -2,7 +2,6 @@ import * as React from 'react'
 import { TopBar } from './showcase/TopBar'
 import { Sidebar } from './showcase/Sidebar'
 import { LandingPage } from './showcase/LandingPage'
-import { DocsSkeleton } from './showcase/DocsSkeleton'
 import { TokensPage } from './showcase/TokensPage'
 import { ButtonPreview } from './showcase/previews/ButtonPreview'
 import { InputPreview } from './showcase/previews/InputPreview'
@@ -135,7 +134,7 @@ export default function App() {
   const handleRouteChange = (newRoute: string) => {
     if (newRoute === route && !isTransitioning) return
 
-    // If crossing boundary between landing page and docs workspace, trigger smooth transition
+    // If crossing boundary between landing page and docs workspace, trigger smooth cinematic crossfade
     const isBoundaryCross = (route === '' && newRoute !== '') || (route !== '' && newRoute === '')
 
     if (isBoundaryCross) {
@@ -145,13 +144,9 @@ export default function App() {
       setTimeout(() => {
         setRoute(newRoute)
         window.location.hash = newRoute
-
-        // Brief skeleton reveal before rendering full docs
-        setTimeout(() => {
-          setIsTransitioning(false)
-          setTransitionTarget(null)
-        }, 120)
-      }, 250)
+        setIsTransitioning(false)
+        setTransitionTarget(null)
+      }, 220)
     } else {
       setRoute(newRoute)
       window.location.hash = newRoute
@@ -161,9 +156,9 @@ export default function App() {
   return (
     <ToastProvider>
       <TocProvider>
-        {/* Sleek top glowing progress bar during boundary transition */}
+        {/* Sleek top glowing laser progress bar during transition */}
         {isTransitioning && (
-          <div className="fixed top-0 left-0 right-0 h-[2px] bg-white z-50 animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.9)]" />
+          <div className="fixed top-0 left-0 right-0 h-[2px] bg-white z-50 animate-pulse shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
         )}
 
         {/* Landing Page (shown when hash is empty / root URL) */}
@@ -174,18 +169,15 @@ export default function App() {
           />
         )}
 
-        {/* Skeleton pulse during transition into docs */}
-        {isTransitioning && transitionTarget !== '' && route === '' && (
-          <div className="fixed inset-0 z-20 pointer-events-none">
-            <DocsSkeleton />
-          </div>
-        )}
-
-        {/* Docs layout (shown for all component routes) */}
+        {/* Docs layout (shown for all component routes) — smooth crossfade without fake skeleton */}
         {route !== '' && (
-          <div className={`min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-opacity duration-300 ease-out ${
-            isTransitioning ? 'opacity-0' : 'opacity-100'
-          }`}>
+          <div
+            className={`min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-all duration-300 ease-out ${
+              isTransitioning
+                ? 'opacity-0 scale-[0.99] filter blur-[1px]'
+                : 'opacity-100 scale-100 filter-none animate-in fade-in'
+            }`}
+          >
             {/* Top Bar with Brand, Zoom, Density, Theme Toggles, Hamburger, and Command Search */}
             <TopBar
               theme={theme}
