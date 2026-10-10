@@ -5,10 +5,10 @@ import { cn } from '@/lib/cn'
 export const inputVariants = cva(
   [
     'flex w-full select-text text-[var(--text)] bg-transparent',
-    'border-0 border-b border-[var(--border)] rounded-none',
+    'border-0 border-b border-[var(--border-strong)] rounded-none',
     'placeholder:text-[var(--text-muted)]',
     'transition-colors duration-150',
-    'hover:border-[var(--text-secondary)]',
+    'hover:border-[var(--border-hover)]',
     'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
     'disabled:pointer-events-none disabled:opacity-40 disabled:border-dashed',
   ],
@@ -90,7 +90,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <span
           aria-hidden="true"
           className={cn(
-            'absolute bottom-0 left-0 right-0 h-[1.5px] pointer-events-none origin-left transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)]',
+            'absolute bottom-0 left-0 right-0 h-[2px] pointer-events-none origin-left transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)]',
             hasError
               ? 'bg-[var(--danger)] scale-x-100'
               : 'bg-[var(--primary)] scale-x-0 group-focus-within:scale-x-100',

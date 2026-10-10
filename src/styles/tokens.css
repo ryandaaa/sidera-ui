@@ -74,7 +74,7 @@
 
   /* Hairline Borders (Crisp 1px Cloudflare separation) */
   --border: #202020;                         /* Subtle separation line */
-  --border-strong: #333333;                  /* Input borders, focus boundaries */
+  --border-strong: #3f3f46;                  /* Input borders, focus boundaries (zinc-700) */
   --border-hover: #71717a;                   /* Prominent crisp light-gray hover border */
   --border-tertiary: #171717;
 
@@ -138,7 +138,7 @@
 
   /* Hairline Borders (Crisp 1px Cloudflare separation) */
   --border: #eeeeee;                         /* Card outline & divider */
-  --border-strong: #d1d5db;                  /* Inputs & active element borders */
+  --border-strong: #a1a1aa;                  /* Inputs & active element borders (zinc-400) */
   --border-hover: #525252;                   /* Prominent crisp dark-gray hover border */
   --border-tertiary: #f0f0f0;
 

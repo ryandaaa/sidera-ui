@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn'
 export const textareaVariants = cva(
   [
     'flex w-full select-text text-xs text-[var(--text)] bg-transparent',
-    'rounded-[var(--radius-sm)] border border-[var(--border)]',
+    'rounded-[var(--radius-sm)] border border-[var(--border-strong)]',
     'placeholder:text-[var(--text-muted)]',
     'transition-colors duration-150',
     'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
