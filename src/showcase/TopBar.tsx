@@ -38,7 +38,7 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
           return (
             <span
               key={i}
-              className="text-[var(--text)] font-semibold bg-[var(--surface-active)] px-0.5 rounded-[2px] underline underline-offset-2 decoration-1 decoration-current"
+              className="text-[var(--text)] font-semibold underline underline-offset-2 decoration-1 decoration-current"
             >
               {part}
             </span>
@@ -150,8 +150,8 @@ export function TopBar({
         </span>
       </div>
 
-      {/* Center: Full-width responsive Command Search bar */}
-      <div className="flex-1 max-w-2xl mx-4 sm:mx-8 md:mx-12 relative min-w-[140px]">
+      {/* Center: Full-width Command Search bar */}
+      <div className="flex-1 relative min-w-[140px]">
         <CommandSearch
           ref={searchInputRef}
           size="sm"
