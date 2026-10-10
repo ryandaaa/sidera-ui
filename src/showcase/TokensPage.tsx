@@ -157,8 +157,8 @@ export function TokensPage() {
             </p>
           </div>
 
-          <div className="border-y border-[var(--border)] overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
+          <div className="border-y border-[var(--border)] overflow-x-auto w-full max-w-full">
+            <table className="w-full min-w-[520px] text-left text-xs border-collapse">
               <thead>
                 <tr className="border-b border-[var(--border)] text-xs text-[var(--text)] font-semibold font-mono">
                   <th className="py-2.5 px-2 font-medium">Token</th>
@@ -208,18 +208,18 @@ export function TokensPage() {
             ].map((r) => (
               <div
                 key={r.token}
-                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors"
+                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors gap-2 min-w-0"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0 shrink-0">
                   <div
-                    className="h-4 w-4 border border-[var(--text)] bg-[var(--surface-raised)]"
+                    className="h-4 w-4 border border-[var(--text)] bg-[var(--surface-raised)] shrink-0"
                     style={{ borderRadius: r.px }}
                   />
                   <span className="font-mono text-xs font-semibold text-[var(--text)]">
                     {r.token}
                   </span>
                 </div>
-                <div className="text-xs text-[var(--text-secondary)] font-mono">
+                <div className="text-xs text-[var(--text-secondary)] font-mono text-right truncate">
                   {r.px} &bull; {r.desc}
                 </div>
               </div>
@@ -247,12 +247,12 @@ export function TokensPage() {
             ].map((d) => (
               <div
                 key={d.token}
-                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors"
+                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors gap-2 min-w-0"
               >
-                <span className="font-mono text-xs font-semibold text-[var(--text)]">
+                <span className="font-mono text-xs font-semibold text-[var(--text)] shrink-0">
                   {d.token}
                 </span>
-                <span className="text-xs text-[var(--text-secondary)] font-mono">
+                <span className="text-xs text-[var(--text-secondary)] font-mono text-right truncate">
                   {d.desc}
                 </span>
               </div>

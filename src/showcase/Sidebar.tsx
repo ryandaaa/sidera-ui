@@ -234,6 +234,17 @@ export function Sidebar({
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  // Lock body scroll when mobile sidebar drawer is open to prevent background scrolling
+  React.useEffect(() => {
+    if (isMobile && !isCollapsed) {
+      const prevOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = prevOverflow
+      }
+    }
+  }, [isMobile, isCollapsed])
+
   const handleSelectRoute = (routeId: string) => {
     onRouteChange(routeId)
     setSearchQuery('')
@@ -281,7 +292,8 @@ export function Sidebar({
       {isMobile && !isCollapsed && (
         <div
           onClick={onToggleCollapse}
-          className="fixed inset-0 top-12 bg-black/60 backdrop-blur-[2px] z-30 md:hidden animate-in fade-in duration-200"
+          onTouchMove={(e) => e.preventDefault()}
+          className="fixed inset-0 top-12 bg-black/60 backdrop-blur-[2px] z-30 md:hidden animate-in fade-in duration-200 touch-none overscroll-none"
           aria-label="Close sidebar"
         />
       )}
@@ -423,7 +435,7 @@ export function Sidebar({
       </div>
 
       <div
-        className="flex-1 overflow-y-auto p-4 flex flex-col min-w-[200px]"
+        className="flex-1 overflow-y-auto overscroll-contain p-4 flex flex-col min-w-[200px]"
         style={isMobile ? { width: '100%' } : { width: `${width}px` }}
       >
         <nav className="flex flex-col gap-6 text-[13px]">

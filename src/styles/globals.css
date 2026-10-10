@@ -83,6 +83,13 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+}
+
 /* Tabular figures for dense financial / data display */
 .tabular-nums {
   font-variant-numeric: tabular-nums;

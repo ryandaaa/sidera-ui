@@ -216,7 +216,7 @@ export default function App() {
         {/* Docs layout (shown for all component routes) — smooth crossfade without fake skeleton */}
         {route !== '' && (
           <div
-            className={`min-h-screen w-full max-w-full bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-all duration-300 ease-out ${
+            className={`min-h-screen w-full max-w-full overflow-x-clip bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-all duration-300 ease-out ${
               isTransitioning
                 ? 'opacity-0 scale-[0.99] filter blur-[1px]'
                 : 'opacity-100 scale-100 filter-none animate-in fade-in'
@@ -236,7 +236,7 @@ export default function App() {
             />
 
             {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
-            <div className="flex-1 flex w-full max-w-full items-start">
+            <div className="flex-1 flex w-full max-w-full min-w-0 items-start overflow-x-clip">
               <Sidebar
                 currentRoute={route}
                 onRouteChange={handleRouteChange}
