@@ -12,31 +12,72 @@ export interface TableOfContentsProps {
 
 export function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = React.useState<string>(items[0]?.id || '')
+  const isManualClickRef = React.useRef(false)
+  const timeoutRef = React.useRef<number | undefined>(undefined)
 
   React.useEffect(() => {
     if (items.length === 0) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
+    // Set first item as active initially if none
+    if (!activeId && items[0]) {
+      setActiveId(items[0].id)
+    }
+
+    const updateActiveSection = () => {
+      if (isManualClickRef.current) return
+
+      const scrollY = window.scrollY || window.pageYOffset
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+
+      // If scrolled to the bottom of the page, activate the last TOC section
+      if (scrollY + windowHeight >= documentHeight - 50) {
+        const lastItem = items[items.length - 1]
+        if (lastItem) setActiveId(lastItem.id)
+        return
+      }
+
+      // Find the last section whose top edge has scrolled past the top threshold
+      // 120px threshold accounts for sticky header (48px) + comfortable viewing offset
+      const offsetThreshold = 120
+      let currentActive = items[0]?.id || ''
+
+      for (let i = 0; i < items.length; i++) {
+        const el = document.getElementById(items[i].id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= offsetThreshold) {
+            currentActive = items[i].id
+          } else {
+            break
           }
-        })
-      },
-      {
-        rootMargin: '-80px 0% -60% 0%',
-        threshold: 0.1,
-      },
-    )
+        }
+      }
 
-    items.forEach((item) => {
-      const el = document.getElementById(item.id)
-      if (el) observer.observe(el)
-    })
+      setActiveId(currentActive)
+    }
 
-    return () => observer.disconnect()
-  }, [items])
+    updateActiveSection()
+
+    let rafId: number | null = null
+    const handleScroll = () => {
+      if (rafId !== null) return
+      rafId = window.requestAnimationFrame(() => {
+        updateActiveSection()
+        rafId = null
+      })
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+      if (rafId !== null) window.cancelAnimationFrame(rafId)
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
+    }
+  }, [items, activeId])
 
   if (items.length === 0) return null
 
@@ -59,16 +100,21 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                   e.preventDefault()
                   const target = document.getElementById(item.id)
                   if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
                     setActiveId(item.id)
+                    isManualClickRef.current = true
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    if (timeoutRef.current) window.clearTimeout(timeoutRef.current)
+                    timeoutRef.current = window.setTimeout(() => {
+                      isManualClickRef.current = false
+                    }, 800)
                   }
                 }}
-                className={`transition-colors py-0.5 leading-snug block truncate ${
+                className={`transition-colors duration-150 py-0.5 leading-snug block truncate ${
                   item.level === 2 ? 'pl-2 text-[11px]' : ''
                 } ${
                   isActive
-                    ? 'text-[var(--text)] font-medium -ml-[13px] border-l-2 border-[var(--primary)] pl-2.5'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text)]'
+                    ? 'text-[var(--text)] font-semibold'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                 }`}
               >
                 {item.label}
