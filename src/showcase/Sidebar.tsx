@@ -28,7 +28,7 @@ import {
   Navigation,
   Search,
   LayoutGrid,
-  Globe,
+  Orbit,
   ExternalLink,
 } from 'lucide-react'
 
@@ -463,7 +463,7 @@ export function Sidebar({
           title={`Visit personal website (${EXTERNAL_LINKS.personalSpace.label})`}
         >
           <div className="flex items-center gap-2.5 min-w-0">
-            <Globe className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
+            <Orbit className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
             <span className="truncate font-mono text-[11px]">{EXTERNAL_LINKS.personalSpace.label}</span>
           </div>
           <ExternalLink className="h-3 w-3 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors opacity-60 group-hover:opacity-100" />
