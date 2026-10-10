@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Search, X } from 'lucide-react'
+import { Search, X, Command } from 'lucide-react'
 import { Kbd } from '@/components/ui/Kbd'
 import { cn } from '@/lib/cn'
 
@@ -88,8 +88,13 @@ export const CommandSearch = React.forwardRef<HTMLInputElement, CommandSearchPro
           )}
           {shortcutKey && (
             <div className="hidden sm:flex items-center gap-0.5">
-              <Kbd size="sm">⌘</Kbd>
-              <Kbd size="sm">{shortcutKey}</Kbd>
+              <Kbd size={size}>
+                <Command
+                  className={size === 'sm' ? 'h-2.5 w-2.5 stroke-[2]' : 'h-3 w-3 stroke-[2]'}
+                  aria-label="Command"
+                />
+              </Kbd>
+              <Kbd size={size}>{shortcutKey}</Kbd>
             </div>
           )}
         </div>

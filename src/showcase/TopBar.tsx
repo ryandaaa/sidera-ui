@@ -135,7 +135,7 @@ export function TopBar({
         >
           sidera-ui
         </a>
-        <span className="font-mono text-[10px] text-[var(--text-muted)] bg-[var(--surface-raised)] px-1.5 py-0.2 rounded-[var(--radius-xs)] border border-[var(--border)] ml-0.5 hidden sm:inline-block">
+        <span className="font-mono text-[11px] text-[var(--text-muted)] ml-1 hidden sm:inline-block select-none">
           v0.1.0
         </span>
       </div>

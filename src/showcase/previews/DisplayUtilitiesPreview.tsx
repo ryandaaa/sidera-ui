@@ -3,7 +3,7 @@ import { Separator } from '@/components/ui/Separator'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { Button } from '@/components/ui/Button'
-import { FolderGit2, Plus } from 'lucide-react'
+import { FolderGit2, Plus, Command } from 'lucide-react'
 import { ComponentDoc, type PropSpec } from '../ComponentDoc'
 
 const propsSpec: PropSpec[] = [
@@ -68,7 +68,9 @@ export function DisplayUtilitiesPreview() {
         <div className="flex flex-wrap items-center gap-3 text-xs text-[var(--text-secondary)]">
           <div className="flex items-center gap-1.5">
             <span>Quick search:</span>
-            <Kbd>⌘</Kbd>
+            <Kbd>
+              <Command className="h-3 w-3 stroke-[2]" aria-label="Command" />
+            </Kbd>
             <Kbd>K</Kbd>
           </div>
           <div className="flex items-center gap-1.5">
