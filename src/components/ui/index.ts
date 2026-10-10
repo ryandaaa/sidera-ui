@@ -21,3 +21,10 @@ export * from './Kbd'
 export * from './Separator'
 export * from './Skeleton'
 export * from './EmptyState'
+
+// Feedback
+export * from './Alert'
+export * from './Spinner'
+export * from './Progress'
+export * from './Tooltip'
+export * from './Toast'

@@ -18,6 +18,11 @@ import { TablePreview } from './showcase/previews/TablePreview'
 import { DescriptionListPreview } from './showcase/previews/DescriptionListPreview'
 import { CodeBlockPreview } from './showcase/previews/CodeBlockPreview'
 import { DisplayUtilitiesPreview } from './showcase/previews/DisplayUtilitiesPreview'
+import { AlertPreview } from './showcase/previews/AlertPreview'
+import { ToastPreview } from './showcase/previews/ToastPreview'
+import { ProgressSpinnerPreview } from './showcase/previews/ProgressSpinnerPreview'
+import { TooltipPreview } from './showcase/previews/TooltipPreview'
+import { ToastProvider } from './components/ui/Toast'
 
 export default function App() {
   // 1. Theme State (Default: dark, persisted in localStorage)
@@ -78,41 +83,47 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
-      {/* Top Bar with Brand, Density, and Theme Toggles */}
-      <TopBar
-        theme={theme}
-        onThemeChange={setTheme}
-        density={density}
-        onDensityChange={setDensity}
-        brand={brand}
-        onBrandChange={setBrand}
-      />
+    <ToastProvider>
+      <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
+        {/* Top Bar with Brand, Density, and Theme Toggles */}
+        <TopBar
+          theme={theme}
+          onThemeChange={setTheme}
+          density={density}
+          onDensityChange={setDensity}
+          brand={brand}
+          onBrandChange={setBrand}
+        />
 
-      {/* Main Workspace: Left Sidebar + Right Content Area */}
-      <div className="flex-1 flex w-full items-start">
-        <Sidebar currentRoute={route} onRouteChange={handleRouteChange} />
+        {/* Main Workspace: Left Sidebar + Right Content Area */}
+        <div className="flex-1 flex w-full items-start">
+          <Sidebar currentRoute={route} onRouteChange={handleRouteChange} />
 
-        <main className="flex-1 min-w-0 p-8 lg:p-10">
-          {route === 'tokens' && <TokensPage />}
-          {route === 'button' && <ButtonPreview />}
-          {route === 'input' && <InputPreview />}
-          {route === 'textarea' && <TextareaPreview />}
-          {route === 'select' && <SelectPreview />}
-          {route === 'checkbox' && <CheckboxPreview />}
-          {route === 'radio' && <RadioPreview />}
-          {route === 'switch' && <SwitchPreview />}
-          {route === 'field' && <FieldPreview />}
-          {route === 'badge' && <BadgePreview />}
-          {route === 'tag' && <TagPreview />}
-          {route === 'avatar' && <AvatarPreview />}
-          {route === 'card' && <CardPreview />}
-          {route === 'table' && <TablePreview />}
-          {route === 'desc-list' && <DescriptionListPreview />}
-          {route === 'code-block' && <CodeBlockPreview />}
-          {route === 'display-utils' && <DisplayUtilitiesPreview />}
-        </main>
+          <main className="flex-1 min-w-0 p-8 lg:p-10">
+            {route === 'tokens' && <TokensPage />}
+            {route === 'button' && <ButtonPreview />}
+            {route === 'input' && <InputPreview />}
+            {route === 'textarea' && <TextareaPreview />}
+            {route === 'select' && <SelectPreview />}
+            {route === 'checkbox' && <CheckboxPreview />}
+            {route === 'radio' && <RadioPreview />}
+            {route === 'switch' && <SwitchPreview />}
+            {route === 'field' && <FieldPreview />}
+            {route === 'badge' && <BadgePreview />}
+            {route === 'tag' && <TagPreview />}
+            {route === 'avatar' && <AvatarPreview />}
+            {route === 'card' && <CardPreview />}
+            {route === 'table' && <TablePreview />}
+            {route === 'desc-list' && <DescriptionListPreview />}
+            {route === 'code-block' && <CodeBlockPreview />}
+            {route === 'display-utils' && <DisplayUtilitiesPreview />}
+            {route === 'alert' && <AlertPreview />}
+            {route === 'toast' && <ToastPreview />}
+            {route === 'progress-spinner' && <ProgressSpinnerPreview />}
+            {route === 'tooltip' && <TooltipPreview />}
+          </main>
+        </div>
       </div>
-    </div>
+    </ToastProvider>
   )
 }

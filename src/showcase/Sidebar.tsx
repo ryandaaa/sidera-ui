@@ -46,9 +46,17 @@ const groups: NavGroup[] = [
     ],
   },
   {
+    title: 'Feedback',
+    items: [
+      { id: 'alert', label: 'Alert' },
+      { id: 'toast', label: 'Toast' },
+      { id: 'progress-spinner', label: 'Progress & Spinner' },
+      { id: 'tooltip', label: 'Tooltip' },
+    ],
+  },
+  {
     title: 'Upcoming (Phase 2)',
     items: [
-      { id: 'feedback', label: 'Feedback (Alert, Toast, Spinner)', badge: 'next' },
       { id: 'overlay', label: 'Overlay (Dialog, Popover, Menu)', badge: 'next' },
       { id: 'navigation', label: 'Navigation (Tabs, Breadcrumb)', badge: 'next' },
       { id: 'layout', label: 'Layout (Stack, Inline, PageHeader)', badge: 'next' },
