@@ -272,7 +272,7 @@ export function Sidebar({
     >
       {/* Pinned Search Header at Top of Sidebar */}
       <div
-        className="p-3 border-b border-[var(--border)] relative shrink-0 z-20"
+        className="px-4 py-3 border-b border-[var(--border)] relative shrink-0 z-20"
         style={{ width: `${width}px` }}
       >
         <CommandSearch
@@ -323,7 +323,7 @@ export function Sidebar({
         {isSearchOpen && searchQuery.trim() && (
           <div
             ref={dropdownRef}
-            className="absolute left-3 right-3 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-80 overflow-y-auto p-1 text-xs"
+            className="absolute left-4 right-4 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-80 overflow-y-auto p-1 text-xs"
           >
             {searchResults.length === 0 ? (
               <div className="py-3 px-3 text-center text-[var(--text-muted)] text-xs font-mono">
