@@ -82,10 +82,10 @@ export function TokensPage() {
         {/* 1. Live Semantic Tokens */}
         <section id="semantic-tokens" className="space-y-4 scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               1. Semantic Tokens (Current Theme Live Values)
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Dynamically updated when switching Light/Dark, Compact/Comfortable, or Brand.
             </p>
           </div>
@@ -94,17 +94,16 @@ export function TokensPage() {
             {semanticColors.map((item) => (
               <div
                 key={item.token}
-                className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors"
+                className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--surface)] hover:border-[var(--text-secondary)] transition-colors shadow-2xs"
               >
                 <div
-                  className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border shadow-xs"
+                  className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border-2 border-[var(--border-strong)]"
                   style={{
                     backgroundColor: item.bgVar,
-                    borderColor: item.borderVar || 'var(--border)',
                   }}
                 />
                 <div className="min-w-0 flex-1">
-                  <span className="text-xs font-mono font-medium text-[var(--text)] block truncate">
+                  <span className="text-[13px] font-mono font-bold text-[var(--text)] block truncate">
                     {item.token}
                   </span>
                   <span className="text-xs text-[var(--text-secondary)] block truncate">
@@ -117,12 +116,12 @@ export function TokensPage() {
         </section>
 
         {/* 2. Raw Grayscale Primitives */}
-        <section id="raw-primitives" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+        <section id="raw-primitives" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               2. Raw Grayscale Primitives (primitives.css)
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Strict monochrome neutral scale. Components never import these directly.
             </p>
           </div>
@@ -131,16 +130,16 @@ export function TokensPage() {
             {rawGrays.map((g) => (
               <div
                 key={g.name}
-                className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] flex flex-col gap-2"
+                className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--surface)] flex flex-col gap-2 shadow-2xs"
               >
                 <div
-                  className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border)]"
+                  className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border-strong)]"
                   style={{ backgroundColor: g.color }}
                 />
-                <div className="font-mono text-[11px] font-medium text-[var(--text)] truncate">
+                <div className="font-mono text-xs font-semibold text-[var(--text)] truncate">
                   {g.name.replace('--raw-', '')}
                 </div>
-                <div className="font-mono text-[11px] text-[var(--text-muted)]">
+                <div className="font-mono text-xs text-[var(--text-muted)]">
                   {g.color}
                 </div>
               </div>
@@ -149,12 +148,12 @@ export function TokensPage() {
         </section>
 
         {/* 3. Typography Scale */}
-        <section id="typography" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+        <section id="typography" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               3. Typography Scale (Satoshi Self-Hosted)
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Dense, tight scale with negative letter-spacing for high-density tools.
             </p>
           </div>
@@ -191,12 +190,12 @@ export function TokensPage() {
         </section>
 
         {/* 4. Radius Scale */}
-        <section id="radius-scale" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+        <section id="radius-scale" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               4. Radius Scale (Restrained 0-4px)
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Strictly compact, non-pill structural corners.
             </p>
           </div>
@@ -235,12 +234,12 @@ export function TokensPage() {
         </section>
 
         {/* 5. Density & Control Heights */}
-        <section id="density-scale" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+        <section id="density-scale" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               5. Density & Control Heights
             </h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Controlled via <code className="font-mono text-xs">[data-density="compact|comfortable"]</code>.
             </p>
           </div>

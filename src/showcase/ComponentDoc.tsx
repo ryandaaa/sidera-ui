@@ -68,7 +68,7 @@ export function ComponentDoc({
         {/* Live Interactive Previews */}
         <section id="preview" className="space-y-4 scroll-mt-20">
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               Live Preview & State Ladder
             </h2>
           </div>
@@ -80,7 +80,7 @@ export function ComponentDoc({
         {/* Code Usage */}
         <section id="usage" className="space-y-3 scroll-mt-20">
           <div className="flex items-center justify-between">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               Usage Snippet
             </h2>
             <Button
@@ -106,13 +106,13 @@ export function ComponentDoc({
         {/* Props Specification Table */}
         {propsSpec.length > 0 && (
           <section id="props" className="space-y-3 scroll-mt-20">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+            <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               Props Specification
             </h2>
             <div className="rounded-[var(--radius-sm)] border border-[var(--border)] overflow-hidden">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)]/60 text-xs text-[var(--text-muted)] font-mono">
+                  <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)] text-xs text-[var(--text)] font-semibold font-mono">
                     <th className="py-2.5 px-3.5 font-medium">Prop</th>
                     <th className="py-2.5 px-3.5 font-medium">Type</th>
                     <th className="py-2.5 px-3.5 font-medium">Default</th>

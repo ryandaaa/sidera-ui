@@ -69,7 +69,7 @@ export function InputPreview() {
     >
       {/* 1. Sizes */}
       <div id="sizes" className="space-y-2.5 scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Sizes
         </span>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -81,7 +81,7 @@ export function InputPreview() {
 
       {/* 2. With Icons */}
       <div id="elements" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           With Left & Right Elements
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -103,7 +103,7 @@ export function InputPreview() {
 
       {/* 3. States */}
       <div id="states" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           States (Default &bull; Error &bull; Disabled)
         </span>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

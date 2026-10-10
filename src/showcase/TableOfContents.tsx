@@ -43,7 +43,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   return (
     <nav className="w-56 shrink-0 hidden xl:block sticky top-12 h-[calc(100vh-48px)] overflow-y-auto py-6 pr-4 select-none">
       <div className="space-y-3">
-        <h4 className="text-[11px] font-mono font-medium uppercase tracking-wider text-[var(--text-muted)]">
+        <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text)]">
           On this page
         </h4>
 

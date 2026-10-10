@@ -109,22 +109,22 @@ export function CardPreview() {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div className="p-2 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
-                <span className="text-[var(--text-muted)] block text-[10px]">
+              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
+                <span className="text-[var(--text-secondary)] block text-[11px] font-medium">
                   CPU TIME
                 </span>
-                <span className="text-[var(--text)] font-semibold">1.82 ms</span>
+                <span className="text-[var(--text)] font-bold text-sm">1.82 ms</span>
               </div>
-              <div className="p-2 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
-                <span className="text-[var(--text-muted)] block text-[10px]">
+              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
+                <span className="text-[var(--text-secondary)] block text-[11px] font-medium">
                   P99 LATENCY
                 </span>
-                <span className="text-[var(--text)] font-semibold">24 ms</span>
+                <span className="text-[var(--text)] font-bold text-sm">24 ms</span>
               </div>
             </div>
           </CardContent>
           <CardFooter>
-            <span className="text-[10px] font-mono text-[var(--text-muted)]">
+            <span className="text-xs font-mono text-[var(--text-muted)]">
               Last deployed 12m ago
             </span>
             <div className="flex items-center gap-1.5">

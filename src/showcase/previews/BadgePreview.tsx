@@ -62,7 +62,7 @@ export function BadgePreview() {
     >
       {/* 1. Variants */}
       <div id="variants" className="space-y-2.5 scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Semantic Status Variants
         </span>
         <div className="flex flex-wrap items-center gap-2">
@@ -77,7 +77,7 @@ export function BadgePreview() {
 
       {/* 2. With Status Dot */}
       <div id="dot" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           With Status Dot Indicator
         </span>
         <div className="flex flex-wrap items-center gap-2">
@@ -101,7 +101,7 @@ export function BadgePreview() {
 
       {/* 3. Sizes & Shapes */}
       <div id="shapes" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Sizes & Shapes (Rectangular Restrained vs Pill)
         </span>
         <div className="flex flex-wrap items-center gap-2">

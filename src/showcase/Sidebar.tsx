@@ -51,7 +51,7 @@ export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
       <nav className="flex flex-col gap-6 text-[13px]">
         {groups.map((group) => (
           <div key={group.title} className="flex flex-col gap-1.5">
-            <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-[var(--text-muted)] px-2.5">
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[var(--text)] px-2.5">
               {group.title}
             </span>
             <div className="flex flex-col gap-0.5">

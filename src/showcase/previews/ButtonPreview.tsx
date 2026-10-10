@@ -82,7 +82,7 @@ export function ButtonPreview() {
     >
       {/* 1. Variants */}
       <div id="variants" className="space-y-2.5 scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Variants
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
@@ -95,7 +95,7 @@ export function ButtonPreview() {
 
       {/* 2. Sizes */}
       <div id="sizes" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Sizes (sm: 28px &bull; md: 32px &bull; lg: 36px)
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
@@ -107,7 +107,7 @@ export function ButtonPreview() {
 
       {/* 3. Icons & Icon-Only */}
       <div id="icons" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Icons & Square Icon-Only
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
@@ -144,7 +144,7 @@ export function ButtonPreview() {
 
       {/* 4. States */}
       <div id="states" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
-        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
+        <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           States (Default &bull; Disabled &bull; Interactive Loading)
         </span>
         <div className="flex flex-wrap items-center gap-2.5">
