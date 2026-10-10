@@ -12,6 +12,7 @@
 /* 2. Token Architecture */
 @import "./primitives.css";
 @import "./tokens.css";
+@import "./syntax.css";
 @import "../themes/default.css";
 @import "../themes/example-client.css";
 

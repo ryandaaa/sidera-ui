@@ -1,0 +1,121 @@
+/**
+ * syntax.css
+ * Polished, high-contrast syntax highlighting for code snippets.
+ * Supports automatic dark & light mode token transitions.
+ */
+
+:root,
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  --syntax-text: #f3f4f6;
+  --syntax-comment: #71717a;
+  --syntax-keyword: #ff7b72;
+  --syntax-string: #a5d6ff;
+  --syntax-function: #d2a8ff;
+  --syntax-tag: #7ee787;
+  --syntax-attr-name: #ffa657;
+  --syntax-attr-value: #a5d6ff;
+  --syntax-punctuation: #8b949e;
+  --syntax-operator: #8b949e;
+  --syntax-number: #79c0ff;
+  --syntax-boolean: #ff7b72;
+  --syntax-variable: #ffa657;
+  --syntax-class-name: #79c0ff;
+}
+
+:root[data-theme="light"],
+[data-theme="light"] {
+  --syntax-text: #24292f;
+  --syntax-comment: #6e7781;
+  --syntax-keyword: #cf222e;
+  --syntax-string: #0a3069;
+  --syntax-function: #8250df;
+  --syntax-tag: #116329;
+  --syntax-attr-name: #953800;
+  --syntax-attr-value: #0a3069;
+  --syntax-punctuation: #57606a;
+  --syntax-operator: #57606a;
+  --syntax-number: #0550ae;
+  --syntax-boolean: #cf222e;
+  --syntax-variable: #953800;
+  --syntax-class-name: #0550ae;
+}
+
+/* Prism Token Styles */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--syntax-punctuation);
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.symbol,
+.token.deleted {
+  color: var(--syntax-attr-name);
+}
+
+.token.tag {
+  color: var(--syntax-tag);
+}
+
+.token.boolean,
+.token.number {
+  color: var(--syntax-number);
+}
+
+.token.selector,
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--syntax-attr-name);
+}
+
+.token.string {
+  color: var(--syntax-string);
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: var(--syntax-operator);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--syntax-keyword);
+}
+
+.token.function {
+  color: var(--syntax-function);
+}
+
+.token.class-name {
+  color: var(--syntax-class-name);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--syntax-variable);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}

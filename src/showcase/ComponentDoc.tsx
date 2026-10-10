@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { highlightCode } from '@/lib/highlight'
 import { useToc, type TocItem } from './TableOfContents'
 
 export interface PropSpec {
@@ -97,8 +98,13 @@ export function ComponentDoc({
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--bg)] p-4 overflow-x-auto font-mono text-xs text-[var(--text-secondary)] leading-relaxed transition-colors duration-200 hover:border-[var(--border-hover)]">
-          <pre>{usageCode}</pre>
+        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] p-4 overflow-x-auto font-mono text-xs leading-relaxed transition-colors duration-200 hover:border-[var(--border-hover)] select-text">
+          <pre
+            className="text-[var(--syntax-text)] whitespace-pre font-mono"
+            dangerouslySetInnerHTML={{
+              __html: highlightCode(usageCode.trim(), 'tsx'),
+            }}
+          />
         </div>
       </section>
 

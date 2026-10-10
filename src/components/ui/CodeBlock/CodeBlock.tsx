@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Check, Copy } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { highlightCode } from '@/lib/highlight'
 
 export interface CodeProps extends React.HTMLAttributes<HTMLElement> {}
 
@@ -32,7 +33,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
     {
       className,
       code,
-      language,
+      language = 'tsx',
       filename,
       showLineNumbers = false,
       ...props
@@ -47,7 +48,14 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
       setTimeout(() => setCopied(false), 2000)
     }
 
-    const lines = code.trim().split('\n')
+    const trimmedCode = code.trim()
+    const highlightedCode = React.useMemo(() => {
+      return highlightCode(trimmedCode, language)
+    }, [trimmedCode, language])
+
+    const lines = React.useMemo(() => {
+      return trimmedCode.split('\n').map((line) => highlightCode(line, language))
+    }, [trimmedCode, language])
 
     return (
       <div
@@ -67,7 +75,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
             <button
               type="button"
               onClick={handleCopy}
-              className="inline-flex items-center gap-1 font-mono text-[10px] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors focus-visible:outline-none"
+              className="inline-flex items-center gap-1 font-mono text-[10px] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors focus-visible:outline-none cursor-pointer"
             >
               {copied ? (
                 <>
@@ -89,7 +97,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
             <button
               type="button"
               onClick={handleCopy}
-              className="absolute right-3 top-3 p-1 rounded-[var(--radius-xs)] bg-[var(--surface-raised)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors focus-visible:outline-none"
+              className="absolute right-3 top-3 p-1 rounded-[var(--radius-xs)] bg-[var(--surface-raised)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] transition-colors focus-visible:outline-none cursor-pointer"
               title="Copy code"
             >
               {copied ? (
@@ -102,21 +110,23 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
 
           {showLineNumbers ? (
             <div className="table w-full">
-              {lines.map((line, idx) => (
+              {lines.map((lineHtml, idx) => (
                 <div key={idx} className="table-row">
                   <span className="table-cell select-none pr-4 text-right text-[11px] text-[var(--text-muted)] font-mono opacity-50 w-8">
                     {idx + 1}
                   </span>
-                  <span className="table-cell whitespace-pre text-[var(--text)]">
-                    {line}
-                  </span>
+                  <span
+                    className="table-cell whitespace-pre text-[var(--syntax-text)] font-mono"
+                    dangerouslySetInnerHTML={{ __html: lineHtml || '&nbsp;' }}
+                  />
                 </div>
               ))}
             </div>
           ) : (
-            <pre className="text-[var(--text)] whitespace-pre font-mono">
-              {code}
-            </pre>
+            <pre
+              className="text-[var(--syntax-text)] whitespace-pre font-mono"
+              dangerouslySetInnerHTML={{ __html: highlightedCode }}
+            />
           )}
         </div>
       </div>

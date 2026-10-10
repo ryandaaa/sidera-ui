@@ -81,6 +81,7 @@ export function CodeBlockPreview() {
         </span>
         <CodeBlock
           filename="wrangler.jsonc"
+          language="json"
           code={sampleJson}
           showLineNumbers
         />
