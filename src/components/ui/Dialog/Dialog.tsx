@@ -34,7 +34,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4',
+        'fixed left-1/2 top-1/2 z-50 grid w-[calc(100%-2rem)] max-w-lg gap-4',
         'border border-[var(--border)] bg-[var(--surface-overlay)] p-6 shadow-2xl',
         'rounded-[var(--radius-md)] animate-dialog-content',
         className,
