@@ -48,28 +48,23 @@ export default function App() {
     return (localStorage.getItem('sidera-density') as 'compact' | 'comfortable') || 'compact'
   })
 
-  // 3. Brand State (Default: default monochrome)
-  const [brand, setBrand] = React.useState<'default' | 'cloudflare' | 'linear'>(() => {
-    return (localStorage.getItem('sidera-brand') as 'default' | 'cloudflare' | 'linear') || 'default'
-  })
-
-  // 4. UI Zoom State (Default: 110% as preferred by user)
+  // 3. UI Zoom State (Default: 110% as preferred by user)
   const [zoom, setZoom] = React.useState<'100%' | '110%' | '125%'>(() => {
     return (localStorage.getItem('sidera-zoom') as '100%' | '110%' | '125%') || '110%'
   })
 
-  // 5. Sidebar Resizable Width State (Default: 256px)
+  // 4. Sidebar Resizable Width State (Default: 256px)
   const [sidebarWidth, setSidebarWidth] = React.useState<number>(() => {
     const saved = localStorage.getItem('sidera-sidebar-width')
     return saved ? Math.min(Math.max(parseInt(saved, 10), 200), 480) : 256
   })
 
-  // 6. Sidebar Collapsed State (Default: false)
+  // 5. Sidebar Collapsed State (Default: false)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState<boolean>(() => {
     return localStorage.getItem('sidera-sidebar-collapsed') === 'true'
   })
 
-  // 7. Hash Routing State
+  // 6. Hash Routing State
   const [route, setRoute] = React.useState<string>(() => {
     const hash = window.location.hash.replace('#', '')
     return hash || 'tokens'
@@ -86,10 +81,10 @@ export default function App() {
     localStorage.setItem('sidera-density', density)
   }, [density])
 
+  // Default Brand Theme (Monochrome)
   React.useEffect(() => {
-    document.documentElement.setAttribute('data-brand', brand)
-    localStorage.setItem('sidera-brand', brand)
-  }, [brand])
+    document.documentElement.setAttribute('data-brand', 'default')
+  }, [])
 
   // Synchronize UI Zoom (Scale root font-size cleanly to avoid Chromium sticky compositor drift bug)
   React.useEffect(() => {
@@ -147,8 +142,6 @@ export default function App() {
             onThemeChange={setTheme}
             density={density}
             onDensityChange={setDensity}
-            brand={brand}
-            onBrandChange={setBrand}
             zoom={zoom}
             onZoomChange={setZoom}
             isSidebarCollapsed={isSidebarCollapsed}

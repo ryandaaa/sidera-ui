@@ -61,7 +61,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       >
         {leftElement && (
-          <div className="absolute left-0 flex items-center pointer-events-none text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
             {leftElement}
           </div>
         )}
@@ -81,7 +81,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
 
         {rightElement && (
-          <div className="absolute right-0 flex items-center text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
             {rightElement}
           </div>
         )}

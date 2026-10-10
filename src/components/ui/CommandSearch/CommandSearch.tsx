@@ -52,7 +52,7 @@ export const CommandSearch = React.forwardRef<HTMLInputElement, CommandSearchPro
           className,
         )}
       >
-        <Search className="absolute left-0 h-3.5 w-3.5 pointer-events-none text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150" />
+        <Search className="absolute left-0 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150" />
         <input
           ref={ref}
           type="text"
@@ -64,23 +64,23 @@ export const CommandSearch = React.forwardRef<HTMLInputElement, CommandSearchPro
           className={cn(
             'flex w-full select-text text-[var(--text)] bg-transparent',
             'border-0 border-b border-[var(--border)] rounded-none',
-            'pl-6 pr-14 placeholder:text-[var(--text-muted)]',
+            'pl-6 pr-16 placeholder:text-[var(--text-muted)]',
             'transition-colors duration-150',
             'hover:border-[var(--text-secondary)]',
             'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
             size === 'sm'
-              ? 'h-[var(--control-h-sm)] text-[11px] pb-1 pt-1'
+              ? 'h-[var(--control-h-sm)] text-xs pb-1 pt-1'
               : 'h-[var(--control-h-md)] text-xs pb-1.5 pt-1.5',
           )}
           {...props}
         />
 
-        <div className="absolute right-0 flex items-center gap-1.5">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
           {currentValue && (
             <button
               type="button"
               onClick={handleClear}
-              className="p-0.5 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors cursor-pointer"
+              className="p-0.5 text-[var(--text-muted)] hover:text-[var(--text)] transition-colors cursor-pointer flex items-center justify-center"
               aria-label="Clear search"
             >
               <X className="h-3 w-3" />

@@ -8,8 +8,8 @@ export interface TopBarProps {
   onThemeChange: (theme: 'dark' | 'light') => void
   density: 'compact' | 'comfortable'
   onDensityChange: (density: 'compact' | 'comfortable') => void
-  brand: 'default' | 'cloudflare' | 'linear'
-  onBrandChange: (brand: 'default' | 'cloudflare' | 'linear') => void
+  brand?: 'default' | 'cloudflare' | 'linear'
+  onBrandChange?: (brand: 'default' | 'cloudflare' | 'linear') => void
   zoom: '100%' | '110%' | '125%'
   onZoomChange: (zoom: '100%' | '110%' | '125%') => void
   isSidebarCollapsed: boolean
@@ -53,8 +53,6 @@ export function TopBar({
   onThemeChange,
   density,
   onDensityChange,
-  brand,
-  onBrandChange,
   zoom,
   onZoomChange,
   isSidebarCollapsed,
@@ -143,7 +141,7 @@ export function TopBar({
       </div>
 
       {/* Center: Full-width responsive Command Search bar */}
-      <div className="flex-1 max-w-xl mx-2 sm:mx-4 relative min-w-[120px]">
+      <div className="flex-1 max-w-2xl mx-4 sm:mx-8 md:mx-12 relative min-w-[140px]">
         <CommandSearch
           ref={searchInputRef}
           size="sm"
@@ -173,7 +171,7 @@ export function TopBar({
         {isSearchOpen && searchQuery.trim() && (
           <div
             ref={dropdownRef}
-            className="absolute left-0 right-0 top-full mt-1 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-72 overflow-y-auto p-1 text-xs"
+            className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-72 overflow-y-auto p-1 text-xs"
           >
             {filteredItems.length === 0 ? (
               <div className="py-3 px-3 text-center text-[var(--text-muted)] text-xs font-mono">
@@ -202,57 +200,8 @@ export function TopBar({
         )}
       </div>
 
-      {/* Right: Controls (Brand Switcher, Zoom, Density, Theme) */}
+      {/* Right: Controls (Zoom, Density, Theme) */}
       <div className="flex items-center gap-1.5 shrink-0">
-        {/* Borderless Brand Switcher */}
-        <div className="flex items-center gap-0.5 text-xs hidden lg:flex">
-          <button
-            type="button"
-            onClick={() => onBrandChange('default')}
-            className={`px-2.5 py-1 rounded-[var(--radius-xs)] text-xs transition-colors ${
-              brand === 'default'
-                ? 'text-[var(--text)] font-semibold bg-[var(--surface-hover)]'
-                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-            }`}
-          >
-            Monochrome
-          </button>
-          <button
-            type="button"
-            onClick={() => onBrandChange('cloudflare')}
-            className={`px-2.5 py-1 rounded-[var(--radius-xs)] text-xs transition-colors flex items-center gap-1.5 ${
-              brand === 'cloudflare'
-                ? 'text-[var(--text)] font-semibold bg-[var(--surface-hover)]'
-                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-            }`}
-          >
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: '#f6821f' }}
-              aria-hidden="true"
-            />
-            Cloudflare
-          </button>
-          <button
-            type="button"
-            onClick={() => onBrandChange('linear')}
-            className={`px-2.5 py-1 rounded-[var(--radius-xs)] text-xs transition-colors flex items-center gap-1.5 ${
-              brand === 'linear'
-                ? 'text-[var(--text)] font-semibold bg-[var(--surface-hover)]'
-                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
-            }`}
-          >
-            <span
-              className="inline-block h-1.5 w-1.5 rounded-full"
-              style={{ backgroundColor: '#5e6ad2' }}
-              aria-hidden="true"
-            />
-            Linear
-          </button>
-        </div>
-
-        <div className="h-3.5 w-px bg-[var(--border)] mx-1 hidden lg:block" aria-hidden="true" />
-
         {/* UI Zoom Controller */}
         <div className="flex items-center gap-0.5 text-xs font-mono hidden sm:flex">
           {(['100%', '110%', '125%'] as const).map((level) => (
