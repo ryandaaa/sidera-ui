@@ -222,11 +222,26 @@ export function Sidebar({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  const [isMobile, setIsMobile] = React.useState(() => {
+    return typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  })
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const handleSelectRoute = (routeId: string) => {
     onRouteChange(routeId)
     setSearchQuery('')
     setIsSearchOpen(false)
     searchInputRef.current?.blur()
+    if (isMobile && !isCollapsed) {
+      onToggleCollapse()
+    }
   }
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -261,29 +276,51 @@ export function Sidebar({
   }
 
   return (
-    <aside
-      style={{
-        width: isCollapsed ? 0 : `${width}px`,
-        transition: isDragging
-          ? 'none'
-          : 'width 200ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms ease',
-      }}
-      className={`relative shrink-0 bg-[var(--surface)] h-[calc(100vh-3rem)] sticky top-12 overflow-hidden flex flex-col select-none ${
-        isCollapsed
-          ? 'border-r-0 opacity-0 pointer-events-none'
-          : 'border-r border-[var(--border)] opacity-100'
-      }`}
-    >
-      {/* Pinned Search Header at Top of Sidebar */}
-      <div
-        className="px-4 py-3 border-b border-[var(--border)] relative shrink-0 z-20"
-        style={{ width: `${width}px` }}
+    <>
+      {/* Mobile Backdrop Overlay */}
+      {isMobile && !isCollapsed && (
+        <div
+          onClick={onToggleCollapse}
+          className="fixed inset-0 top-12 bg-black/60 backdrop-blur-[2px] z-30 md:hidden animate-in fade-in duration-200"
+          aria-label="Close sidebar"
+        />
+      )}
+
+      <aside
+        style={
+          isMobile
+            ? { width: 'min(280px, 85vw)' }
+            : {
+                width: isCollapsed ? 0 : `${width}px`,
+                transition: isDragging
+                  ? 'none'
+                  : 'width 200ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms ease',
+              }
+        }
+        className={`shrink-0 bg-[var(--surface)] overflow-hidden flex flex-col select-none ${
+          isMobile
+            ? `fixed top-12 left-0 bottom-0 z-40 border-r border-[var(--border)] shadow-2xl transition-transform duration-250 ease-out ${
+                isCollapsed
+                  ? '-translate-x-full pointer-events-none opacity-0'
+                  : 'translate-x-0 opacity-100'
+              }`
+            : `relative h-[calc(100vh-3rem)] sticky top-12 md:transition-all md:duration-200 ${
+                isCollapsed
+                  ? 'border-r-0 opacity-0 pointer-events-none'
+                  : 'border-r border-[var(--border)] opacity-100'
+              }`
+        }`}
       >
-        <CommandSearch
-          ref={searchInputRef}
-          size="sm"
-          placeholder="Search components..."
-          shortcutKey="K"
+        {/* Pinned Search Header at Top of Sidebar */}
+        <div
+          className="px-4 py-3 border-b border-[var(--border)] relative shrink-0 z-20"
+          style={isMobile ? { width: '100%' } : { width: `${width}px` }}
+        >
+          <CommandSearch
+            ref={searchInputRef}
+            size="sm"
+            placeholder="Search"
+            shortcutKey="K"
           value={searchQuery}
           onChange={(e) => {
             setSearchQuery(e.target.value)
@@ -387,7 +424,7 @@ export function Sidebar({
 
       <div
         className="flex-1 overflow-y-auto p-4 flex flex-col min-w-[200px]"
-        style={{ width: `${width}px` }}
+        style={isMobile ? { width: '100%' } : { width: `${width}px` }}
       >
         <nav className="flex flex-col gap-6 text-[13px]">
           {groups.map((group) => (
@@ -422,7 +459,12 @@ export function Sidebar({
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => onRouteChange(item.id)}
+                      onClick={() => {
+                        onRouteChange(item.id)
+                        if (isMobile && !isCollapsed) {
+                          onToggleCollapse()
+                        }
+                      }}
                       className={`group flex w-full items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-left text-[13px] border transition-all duration-100 active:scale-[0.98] active:translate-y-[0.5px] select-none ${
                         isActive
                           ? 'bg-[var(--surface-raised)] border-[var(--border)] text-[var(--text)] font-semibold'
@@ -452,7 +494,7 @@ export function Sidebar({
       {/* Pinned Sticky Footer at Bottom of Sidebar */}
       <div
         className="px-4 py-2.5 border-t border-[var(--border)] bg-[var(--surface)] shrink-0 z-20 flex flex-col gap-1"
-        style={{ width: `${width}px` }}
+        style={isMobile ? { width: '100%' } : { width: `${width}px` }}
       >
         {/* Link 1: Personal Web */}
         <a
@@ -485,8 +527,8 @@ export function Sidebar({
         </a>
       </div>
 
-      {/* Manual Resize Handle on Right Border */}
-      {!isCollapsed && (
+      {/* Manual Resize Handle on Right Border (Desktop only) */}
+      {!isCollapsed && !isMobile && (
         <div
           role="separator"
           aria-orientation="vertical"
@@ -505,5 +547,6 @@ export function Sidebar({
         </div>
       )}
     </aside>
+    </>
   )
 }

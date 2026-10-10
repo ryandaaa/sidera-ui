@@ -60,8 +60,11 @@ export default function App() {
     return saved ? Math.min(Math.max(parseInt(saved, 10), 200), 480) : 256
   })
 
-  // 5. Sidebar Collapsed State (Default: false)
+  // 5. Sidebar Collapsed State (Default: true on mobile < 768px, saved setting on desktop)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState<boolean>(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return true
+    }
     return localStorage.getItem('sidera-sidebar-collapsed') === 'true'
   })
 
@@ -96,14 +99,27 @@ export default function App() {
     window.dispatchEvent(new Event('resize'))
   }, [zoom])
 
-  // Persist sidebar width and collapsed state
+  // Persist sidebar width and collapsed state (only persist collapse preference on desktop)
   React.useEffect(() => {
     localStorage.setItem('sidera-sidebar-width', String(sidebarWidth))
   }, [sidebarWidth])
 
   React.useEffect(() => {
-    localStorage.setItem('sidera-sidebar-collapsed', String(isSidebarCollapsed))
+    if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+      localStorage.setItem('sidera-sidebar-collapsed', String(isSidebarCollapsed))
+    }
   }, [isSidebarCollapsed])
+
+  // Collapse sidebar when resizing to mobile viewport
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsSidebarCollapsed(true)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Ctrl+B / Cmd+B keyboard shortcut to toggle sidebar collapse
   React.useEffect(() => {

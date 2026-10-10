@@ -57,7 +57,7 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
 
       {/* Dark overlay for contrast and legibility */}
       <div
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{ background: 'rgba(0,0,0,0.32)' }}
       />
 
@@ -140,9 +140,9 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
         <div className="flex items-center gap-3 mb-4 sm:mb-5">
           <button
             onClick={onEnter}
-            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150 cursor-pointer active:scale-95"
+            className="flex items-center justify-center gap-2 rounded-md font-medium transition-all duration-150 cursor-pointer active:scale-95 whitespace-nowrap shrink-0 h-[36px]"
             style={{
-              padding: '0.5rem 1.15rem',
+              padding: '0 1.15rem',
               fontSize: '0.8rem',
               background: 'rgba(255,255,255,0.95)',
               color: '#0a0a0f',
@@ -155,7 +155,7 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
               (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.95)';
             }}
           >
-            Browse Components
+            Browse
             <ArrowRight size={13} strokeWidth={2} />
           </button>
 
@@ -163,9 +163,9 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
             href={EXTERNAL_LINKS.githubRepo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150 active:scale-95"
+            className="flex items-center justify-center gap-2 rounded-md font-medium transition-all duration-150 active:scale-95 whitespace-nowrap shrink-0 h-[36px]"
             style={{
-              padding: '0.5rem 1.15rem',
+              padding: '0 1.15rem',
               fontSize: '0.8rem',
               background: 'transparent',
               color: 'rgba(255,255,255,0.7)',
