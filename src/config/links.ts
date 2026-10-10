@@ -1,7 +1,7 @@
 export const EXTERNAL_LINKS = {
   personalSpace: {
     label: 'ryanda-space',
-    url: 'https://space.ryandaollama.dev',
+    url: 'https://ourspace.web.id',
   },
   githubProfile: {
     label: 'ryandaaa',
