@@ -76,6 +76,13 @@ export function Example() {
   )
 }`
 
+const cardToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'examples', label: 'Modular Card Examples' },
+  { id: 'usage', label: 'Usage Snippet' },
+  { id: 'props', label: 'Props Specification' },
+]
+
 export function CardPreview() {
   return (
     <ComponentDoc
@@ -84,8 +91,9 @@ export function CardPreview() {
       componentPath="src/components/ui/Card"
       propsSpec={propsSpec}
       usageCode={usageCode}
+      tocItems={cardToc}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div id="examples" className="grid grid-cols-1 md:grid-cols-2 gap-4 scroll-mt-24">
         {/* Sample 1: Service Card */}
         <Card>
           <CardHeader>

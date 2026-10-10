@@ -58,6 +58,16 @@ export function Example() {
   )
 }`
 
+const buttonToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'variants', label: 'Variants' },
+  { id: 'sizes', label: 'Sizes' },
+  { id: 'icons', label: 'Icons & Icon-Only' },
+  { id: 'states', label: 'States & Loading' },
+  { id: 'usage', label: 'Usage Snippet' },
+  { id: 'props', label: 'Props Specification' },
+]
+
 export function ButtonPreview() {
   const [loading, setLoading] = React.useState(false)
 
@@ -68,13 +78,14 @@ export function ButtonPreview() {
       componentPath="src/components/ui/Button"
       propsSpec={propsSpec}
       usageCode={usageCode}
+      tocItems={buttonToc}
     >
       {/* 1. Variants */}
-      <div className="space-y-2">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="variants" className="space-y-2.5 scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Variants
         </span>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Button variant="primary">Primary Action</Button>
           <Button variant="secondary">Secondary Action</Button>
           <Button variant="ghost">Ghost Action</Button>
@@ -83,11 +94,11 @@ export function ButtonPreview() {
       </div>
 
       {/* 2. Sizes */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="sizes" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Sizes (sm: 28px &bull; md: 32px &bull; lg: 36px)
         </span>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Button size="sm">Small (28px)</Button>
           <Button size="md">Medium (32px)</Button>
           <Button size="lg">Large (36px)</Button>
@@ -95,22 +106,22 @@ export function ButtonPreview() {
       </div>
 
       {/* 3. Icons & Icon-Only */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="icons" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Icons & Square Icon-Only
         </span>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Button
             variant="secondary"
             size="sm"
-            leftIcon={<Plus className="h-3 w-3" />}
+            leftIcon={<Plus className="h-3.5 w-3.5" />}
           >
             Create Issue
           </Button>
           <Button
             variant="secondary"
             size="md"
-            rightIcon={<ArrowRight className="h-3 w-3" />}
+            rightIcon={<ArrowRight className="h-3.5 w-3.5" />}
           >
             Next Step
           </Button>
@@ -119,24 +130,24 @@ export function ButtonPreview() {
             size="icon-sm"
             aria-label="Add entry"
           >
-            <Plus className="h-3.5 w-3.5" />
+            <Plus className="h-4 w-4" />
           </Button>
           <Button
             variant="secondary"
             size="icon-md"
             aria-label="Delete entry"
           >
-            <Trash2 className="h-3.5 w-3.5 text-[var(--danger)]" />
+            <Trash2 className="h-4 w-4 text-[var(--danger)]" />
           </Button>
         </div>
       </div>
 
       {/* 4. States */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="states" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           States (Default &bull; Disabled &bull; Interactive Loading)
         </span>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Button variant="primary" disabled>
             Primary Disabled
           </Button>

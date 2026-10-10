@@ -41,6 +41,15 @@ export function Example() {
   )
 }`
 
+const badgeToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'variants', label: 'Semantic Variants' },
+  { id: 'dot', label: 'Status Dot Indicators' },
+  { id: 'shapes', label: 'Sizes & Shapes' },
+  { id: 'usage', label: 'Usage Snippet' },
+  { id: 'props', label: 'Props Specification' },
+]
+
 export function BadgePreview() {
   return (
     <ComponentDoc
@@ -49,10 +58,11 @@ export function BadgePreview() {
       componentPath="src/components/ui/Badge"
       propsSpec={propsSpec}
       usageCode={usageCode}
+      tocItems={badgeToc}
     >
       {/* 1. Variants */}
-      <div className="space-y-2">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="variants" className="space-y-2.5 scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Semantic Status Variants
         </span>
         <div className="flex flex-wrap items-center gap-2">
@@ -66,8 +76,8 @@ export function BadgePreview() {
       </div>
 
       {/* 2. With Status Dot */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="dot" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           With Status Dot Indicator
         </span>
         <div className="flex flex-wrap items-center gap-2">
@@ -90,8 +100,8 @@ export function BadgePreview() {
       </div>
 
       {/* 3. Sizes & Shapes */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="shapes" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Sizes & Shapes (Rectangular Restrained vs Pill)
         </span>
         <div className="flex flex-wrap items-center gap-2">

@@ -51,6 +51,13 @@ export function Example() {
   )
 }`
 
+const fieldToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'examples', label: 'Field State Examples' },
+  { id: 'usage', label: 'Usage Snippet' },
+  { id: 'props', label: 'Props Specification' },
+]
+
 export function FieldPreview() {
   const [val, setVal] = React.useState('production-db')
 
@@ -61,8 +68,9 @@ export function FieldPreview() {
       componentPath="src/components/ui/Field"
       propsSpec={propsSpec}
       usageCode={usageCode}
+      tocItems={fieldToc}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
+      <div id="examples" className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl scroll-mt-24">
         <Field
           label="Database Cluster Name"
           hint="Internal identifier for your production database instance."

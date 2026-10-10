@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { TableOfContents, type TocItem } from './TableOfContents'
 
 interface TokenSwatch {
   token: string
@@ -44,200 +45,236 @@ const rawGrays = [
 ]
 
 const typeScale = [
-  { token: '--raw-text-2xs', size: '10px', leading: '13px', sample: 'Micro labels, badges, status counters' },
-  { token: '--raw-text-xs', size: '11px', leading: '15px', sample: 'Secondary metadata, table footers, hints' },
-  { token: '--raw-text-sm', size: '12px', leading: '16px', sample: 'Table data, code annotations, dense inputs' },
-  { token: '--raw-text-base', size: '13px', leading: '18px', sample: 'Standard body text across UI components' },
-  { token: '--raw-text-md', size: '14px', leading: '20px', sample: 'Form labels, emphasized card titles' },
-  { token: '--raw-text-lg', size: '16px', leading: '22px', sample: 'Section headers, page subtitles' },
-  { token: '--raw-text-xl', size: '18px', leading: '24px', sample: 'Page primary titles, modal headers' },
-  { token: '--raw-text-2xl', size: '22px', leading: '28px', sample: 'Dashboard summary headers, display text' },
+  { token: '--raw-text-2xs', size: '11px', leading: '14px', sample: 'Micro labels, badges, status counters' },
+  { token: '--raw-text-xs', size: '12px', leading: '16px', sample: 'Secondary metadata, table footers, hints' },
+  { token: '--raw-text-sm', size: '13px', leading: '18px', sample: 'Table data, code annotations, dense inputs' },
+  { token: '--raw-text-base', size: '14px', leading: '20px', sample: 'Standard body text across UI components' },
+  { token: '--raw-text-md', size: '15px', leading: '22px', sample: 'Form labels, emphasized card titles' },
+  { token: '--raw-text-lg', size: '18px', leading: '24px', sample: 'Section headers, page subtitles' },
+  { token: '--raw-text-xl', size: '22px', leading: '28px', sample: 'Page primary titles, modal headers' },
+  { token: '--raw-text-2xl', size: '28px', leading: '34px', sample: 'Dashboard summary headers, display text' },
+]
+
+const tokensToc: TocItem[] = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'semantic-tokens', label: '1. Semantic Tokens' },
+  { id: 'raw-primitives', label: '2. Raw Primitives' },
+  { id: 'typography', label: '3. Typography Scale' },
+  { id: 'radius-scale', label: '4. Radius Scale' },
+  { id: 'density-scale', label: '5. Density Scale' },
 ]
 
 export function TokensPage() {
   return (
-    <div className="space-y-10 max-w-5xl text-left">
-      {/* Intro */}
-      <div className="space-y-1.5 border-b border-[var(--border)] pb-4">
-        <h1 className="text-xl font-bold tracking-tight text-[var(--text)]">
-          Design Tokens Architecture
-        </h1>
-        <p className="text-xs text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-          Two-tier token design: raw scales in <code className="text-[var(--text)] font-mono">primitives.css</code> are mapped to semantic tokens in <code className="text-[var(--text)] font-mono">tokens.css</code>. Components consume exclusively semantic tokens.
-        </p>
-      </div>
-
-      {/* 1. Live Semantic Tokens */}
-      <section className="space-y-4">
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
-            1. Semantic Tokens (Current Theme Live Values)
-          </h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-            Dynamically updated when switching Light/Dark, Compact/Comfortable, or Brand.
+    <div className="flex w-full items-start justify-between gap-10">
+      {/* Center Documentation Content */}
+      <div className="flex-1 min-w-0 max-w-4xl space-y-12 text-left">
+        {/* Intro */}
+        <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-5 scroll-mt-20">
+          <h1 className="text-2xl font-bold tracking-tight text-[var(--text)]">
+            Design Tokens Architecture
+          </h1>
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+            Two-tier token design: raw scales in <code className="text-[var(--text)] font-mono text-xs">primitives.css</code> are mapped to semantic tokens in <code className="text-[var(--text)] font-mono text-xs">tokens.css</code>. Components consume exclusively semantic tokens.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {semanticColors.map((item) => (
-            <div
-              key={item.token}
-              className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors"
-            >
+        {/* 1. Live Semantic Tokens */}
+        <section id="semantic-tokens" className="space-y-4 scroll-mt-20">
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+              1. Semantic Tokens (Current Theme Live Values)
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+              Dynamically updated when switching Light/Dark, Compact/Comfortable, or Brand.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {semanticColors.map((item) => (
               <div
-                className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border shadow-xs"
-                style={{
-                  backgroundColor: item.bgVar,
-                  borderColor: item.borderVar || 'var(--border)',
-                }}
-              />
-              <div className="min-w-0 flex-1">
-                <span className="text-xs font-mono font-medium text-[var(--text)] block truncate">
-                  {item.token}
-                </span>
-                <span className="text-xs text-[var(--text-secondary)] block truncate">
-                  {item.label}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 2. Raw Grayscale Primitives */}
-      <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
-            2. Raw Grayscale Primitives (primitives.css)
-          </h2>
-          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-            Strict monochrome neutral scale. Components never import these directly.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-          {rawGrays.map((g) => (
-            <div
-              key={g.name}
-              className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] flex flex-col gap-2"
-            >
-              <div
-                className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border)]"
-                style={{ backgroundColor: g.color }}
-              />
-              <div className="font-mono text-[11px] font-medium text-[var(--text)] truncate">
-                {g.name.replace('--raw-', '')}
-              </div>
-              <div className="font-mono text-[11px] text-[var(--text-muted)]">
-                {g.color}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Typography Scale */}
-      <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-        <div>
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
-            3. Typography Scale (Satoshi Self-Hosted)
-          </h2>
-          <p className="text-[11px] text-[var(--text-secondary)]">
-            Dense, tight scale with negative letter-spacing for high-density tools.
-          </p>
-        </div>
-
-        <div className="rounded-[var(--radius-sm)] border border-[var(--border)] overflow-hidden">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)]/60 text-[11px] text-[var(--text-muted)] font-mono">
-                <th className="py-2 px-3 font-medium">Token</th>
-                <th className="py-2 px-3 font-medium">Size / Leading</th>
-                <th className="py-2 px-3 font-medium">Visual Sample</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--border)] bg-[var(--surface)] text-[11px]">
-              {typeScale.map((t) => (
-                <tr key={t.token} className="hover:bg-[var(--surface-hover)]">
-                  <td className="py-2 px-3 font-mono font-medium text-[var(--text)]">
-                    {t.token}
-                  </td>
-                  <td className="py-2 px-3 font-mono text-[var(--text-secondary)]">
-                    {t.size} / {t.leading}
-                  </td>
-                  <td
-                    className="py-2 px-3 text-[var(--text)] tracking-tight"
-                    style={{ fontSize: t.size, lineHeight: t.leading }}
-                  >
-                    {t.sample}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* 4. Radius & Spacing */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-[var(--border)]">
-        <Card>
-          <CardHeader>
-            <CardTitle>Radius Scale (Restrained 0-4px)</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2.5">
-            {[
-              { token: '--radius-none', px: '0px', desc: 'Square raw corners' },
-              { token: '--radius-xs', px: '2px', desc: 'Badges, small status dots' },
-              { token: '--radius-sm', px: '3px', desc: 'Buttons, Inputs, Cards' },
-              { token: '--radius-md', px: '4px', desc: 'Dialogs, floating menus' },
-            ].map((r) => (
-              <div
-                key={r.token}
-                className="flex items-center justify-between p-2 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
+                key={item.token}
+                className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors"
               >
-                <div className="flex items-center gap-2">
-                  <div
-                    className="h-5 w-5 border border-[var(--text-secondary)] bg-[var(--surface)]"
-                    style={{ borderRadius: r.px }}
-                  />
-                  <span className="font-mono text-[11px] text-[var(--text)]">
-                    {r.token}
+                <div
+                  className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border shadow-xs"
+                  style={{
+                    backgroundColor: item.bgVar,
+                    borderColor: item.borderVar || 'var(--border)',
+                  }}
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs font-mono font-medium text-[var(--text)] block truncate">
+                    {item.token}
+                  </span>
+                  <span className="text-xs text-[var(--text-secondary)] block truncate">
+                    {item.label}
                   </span>
                 </div>
-                <div className="text-[10px] text-[var(--text-muted)] font-mono">
-                  {r.px} &bull; {r.desc}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 2. Raw Grayscale Primitives */}
+        <section id="raw-primitives" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+              2. Raw Grayscale Primitives (primitives.css)
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+              Strict monochrome neutral scale. Components never import these directly.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
+            {rawGrays.map((g) => (
+              <div
+                key={g.name}
+                className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] flex flex-col gap-2"
+              >
+                <div
+                  className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border)]"
+                  style={{ backgroundColor: g.color }}
+                />
+                <div className="font-mono text-[11px] font-medium text-[var(--text)] truncate">
+                  {g.name.replace('--raw-', '')}
+                </div>
+                <div className="font-mono text-[11px] text-[var(--text-muted)]">
+                  {g.color}
                 </div>
               </div>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+        </section>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Density & Control Heights</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2.5">
-            {[
-              { token: '--control-h-sm', desc: '28px compact / 32px comfortable' },
-              { token: '--control-h-md', desc: '32px compact / 36px comfortable' },
-              { token: '--control-h-lg', desc: '36px compact / 40px comfortable' },
-              { token: '--space-unit', desc: '4px compact / 6px comfortable' },
-            ].map((d) => (
-              <div
-                key={d.token}
-                className="flex items-center justify-between p-2 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
-              >
-                <span className="font-mono text-[11px] text-[var(--text)]">
-                  {d.token}
-                </span>
-                <span className="text-[10px] text-[var(--text-muted)] font-mono">
-                  {d.desc}
-                </span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
+        {/* 3. Typography Scale */}
+        <section id="typography" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+              3. Typography Scale (Satoshi Self-Hosted)
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+              Dense, tight scale with negative letter-spacing for high-density tools.
+            </p>
+          </div>
+
+          <div className="rounded-[var(--radius-sm)] border border-[var(--border)] overflow-hidden">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)]/60 text-xs text-[var(--text-muted)] font-mono">
+                  <th className="py-2.5 px-3.5 font-medium">Token</th>
+                  <th className="py-2.5 px-3.5 font-medium">Size / Leading</th>
+                  <th className="py-2.5 px-3.5 font-medium">Visual Sample</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--border)] bg-[var(--surface)] text-xs">
+                {typeScale.map((t) => (
+                  <tr key={t.token} className="hover:bg-[var(--surface-hover)]">
+                    <td className="py-2.5 px-3.5 font-mono font-medium text-[var(--text)]">
+                      {t.token}
+                    </td>
+                    <td className="py-2.5 px-3.5 font-mono text-[var(--text-secondary)]">
+                      {t.size} / {t.leading}
+                    </td>
+                    <td
+                      className="py-2.5 px-3.5 text-[var(--text)] tracking-tight"
+                      style={{ fontSize: t.size, lineHeight: t.leading }}
+                    >
+                      {t.sample}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* 4. Radius Scale */}
+        <section id="radius-scale" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+              4. Radius Scale (Restrained 0-4px)
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+              Strictly compact, non-pill structural corners.
+            </p>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Corner Tokens</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2.5">
+              {[
+                { token: '--radius-none', px: '0px', desc: 'Square raw corners' },
+                { token: '--radius-xs', px: '2px', desc: 'Badges, small status dots' },
+                { token: '--radius-sm', px: '3px', desc: 'Buttons, Inputs, Cards' },
+                { token: '--radius-md', px: '4px', desc: 'Dialogs, floating menus' },
+              ].map((r) => (
+                <div
+                  key={r.token}
+                  className="flex items-center justify-between p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="h-6 w-6 border border-[var(--text-secondary)] bg-[var(--surface)]"
+                      style={{ borderRadius: r.px }}
+                    />
+                    <span className="font-mono text-xs text-[var(--text)]">
+                      {r.token}
+                    </span>
+                  </div>
+                  <div className="text-xs text-[var(--text-muted)] font-mono">
+                    {r.px} &bull; {r.desc}
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* 5. Density & Control Heights */}
+        <section id="density-scale" className="space-y-4 pt-6 border-t border-[var(--border)] scroll-mt-20">
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
+              5. Density & Control Heights
+            </h2>
+            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+              Controlled via <code className="font-mono text-xs">[data-density="compact|comfortable"]</code>.
+            </p>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Height System</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2.5">
+              {[
+                { token: '--control-h-sm', desc: '28px compact / 32px comfortable' },
+                { token: '--control-h-md', desc: '32px compact / 36px comfortable' },
+                { token: '--control-h-lg', desc: '36px compact / 40px comfortable' },
+                { token: '--space-unit', desc: '4px compact / 6px comfortable' },
+              ].map((d) => (
+                <div
+                  key={d.token}
+                  className="flex items-center justify-between p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
+                >
+                  <span className="font-mono text-xs text-[var(--text)]">
+                    {d.token}
+                  </span>
+                  <span className="text-xs text-[var(--text-muted)] font-mono">
+                    {d.desc}
+                  </span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+      </div>
+
+      {/* Right Column: Sticky Table of Contents */}
+      <TableOfContents items={tokensToc} />
     </div>
   )
 }

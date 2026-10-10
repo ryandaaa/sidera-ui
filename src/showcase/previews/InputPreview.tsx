@@ -48,6 +48,15 @@ export function Example() {
   )
 }`
 
+const inputToc = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'sizes', label: 'Sizes' },
+  { id: 'elements', label: 'Left & Right Elements' },
+  { id: 'states', label: 'States (Error & Disabled)' },
+  { id: 'usage', label: 'Usage Snippet' },
+  { id: 'props', label: 'Props Specification' },
+]
+
 export function InputPreview() {
   return (
     <ComponentDoc
@@ -56,10 +65,11 @@ export function InputPreview() {
       componentPath="src/components/ui/Input"
       propsSpec={propsSpec}
       usageCode={usageCode}
+      tocItems={inputToc}
     >
       {/* 1. Sizes */}
-      <div className="space-y-2">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="sizes" className="space-y-2.5 scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           Sizes
         </span>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -70,20 +80,20 @@ export function InputPreview() {
       </div>
 
       {/* 2. With Icons */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="elements" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           With Left & Right Elements
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <Input
             placeholder="Search API endpoints..."
-            leftElement={<Search className="h-3.5 w-3.5" />}
+            leftElement={<Search className="h-4 w-4" />}
           />
           <Input
             placeholder="API Access Token"
-            leftElement={<KeyRound className="h-3.5 w-3.5" />}
+            leftElement={<KeyRound className="h-4 w-4" />}
             rightElement={
-              <span className="text-[10px] font-mono text-[var(--text-muted)] bg-[var(--surface-raised)] px-1.5 py-0.5 rounded-[var(--radius-xs)] border border-[var(--border)]">
+              <span className="text-[11px] font-mono text-[var(--text-muted)] bg-[var(--surface-raised)] px-2 py-0.5 rounded-[var(--radius-xs)] border border-[var(--border)]">
                 CMD+K
               </span>
             }
@@ -92,8 +102,8 @@ export function InputPreview() {
       </div>
 
       {/* 3. States */}
-      <div className="space-y-2 pt-2 border-t border-[var(--border)]">
-        <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase tracking-wider block">
+      <div id="states" className="space-y-2.5 pt-4 border-t border-[var(--border)] scroll-mt-24">
+        <span className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider block">
           States (Default &bull; Error &bull; Disabled)
         </span>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">

@@ -82,7 +82,7 @@ export default function App() {
       <div className="flex-1 flex w-full min-h-[calc(100vh-48px)]">
         <Sidebar currentRoute={route} onRouteChange={handleRouteChange} />
 
-        <main className="flex-1 p-8 lg:p-12 max-w-6xl overflow-y-auto">
+        <main className="flex-1 min-w-0 p-8 lg:p-10 overflow-y-auto">
           {route === 'tokens' && <TokensPage />}
           {route === 'button' && <ButtonPreview />}
           {route === 'input' && <InputPreview />}
