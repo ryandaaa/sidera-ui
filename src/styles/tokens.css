@@ -56,120 +56,128 @@
 }
 
 /* ==========================================================================
-   Dark Theme (High-Contrast Utilitarian Dark)
+   Dark Theme (Extracted from Cloudflare Dark Dashboard)
+   Canvas, Sidebar, and Cards share the same deep #030303 tone
    ========================================================================== */
 :root,
 :root[data-theme="dark"],
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* Surfaces (4-step surface ladder with distinct depth) */
-  --bg: #08090b;                             /* Deep canvas */
-  --surface: #111317;                        /* Level 1: Cards & Panels */
-  --surface-raised: #181b22;                 /* Level 2: Nested tiles / tables */
-  --surface-overlay: #21252e;                /* Level 3: Menus, tooltips, dialogs */
+  /* Surfaces (Unified canvas & cards with #030303 base) */
+  --bg: #030303;                             /* Pitch black canvas */
+  --surface: #030303;                        /* Level 1: Cards & Panels match background */
+  --surface-raised: #171717;                 /* Level 2: Inputs, codeblocks, search, active items */
+  --surface-overlay: #1c1c1c;                /* Level 3: Menus, tooltips, dialogs */
   --surface-hover: rgba(255, 255, 255, 0.05);
-  --surface-active: rgba(255, 255, 255, 0.09);
+  --surface-active: rgba(255, 255, 255, 0.08);
 
-  /* Hairline Borders (Crisp structural visibility) */
-  --border: #242831;                         /* Subtle separation */
-  --border-strong: #3a414f;                  /* Controls, inputs, focus borders */
-  --border-tertiary: #191c23;
+  /* Hairline Borders (Crisp 1px Cloudflare separation) */
+  --border: #202020;                         /* Subtle separation line */
+  --border-strong: #333333;                  /* Input borders, focus boundaries */
+  --border-tertiary: #171717;
 
-  /* High-Contrast Text (Ink scale: passes WCAG AAA/AA) */
-  --text: #f8fafc;                           /* Primary text & headings (17:1 contrast) */
-  --text-secondary: #cbd5e1;                 /* Body & descriptions (10:1 contrast) */
-  --text-muted: #94a3b8;                     /* Hints & metadata (6:1 contrast) */
-  --text-tertiary: #64748b;                  /* Disabled / footnotes */
+  /* High-Contrast Text (WCAG AAA/AA compliant) */
+  --text: #f3f4f6;                           /* Primary text & headings (17:1 contrast) */
+  --text-secondary: #9ca3af;                 /* Body & descriptions */
+  --text-muted: #71717a;                     /* Hints & metadata */
+  --text-tertiary: #52525b;                  /* Disabled / footnotes */
 
-  /* Primary Monochrome Accent (Emphasis via Inversion) */
+  /* Primary Monochrome Accent (Inverted white on black) */
   --primary: #ffffff;
-  --primary-foreground: #08090b;
-  --primary-hover: #f1f5f9;
+  --primary-foreground: #030303;
+  --primary-hover: #e5e7eb;
+
+  /* Cloudflare Brand Accent Token */
+  --cf-orange: #f6821f;
 
   /* Focus Ring */
-  --focus-ring: rgba(255, 255, 255, 0.7);
+  --focus-ring: rgba(246, 130, 31, 0.7);
 
-  /* Semantic Status (Low-saturation & distinct) */
+  /* Semantic Status (Muted low-saturation status communication) */
   --success: #22c55e;
   --success-fg: #86efac;
   --success-bg: rgba(34, 197, 94, 0.1);
-  --success-border: rgba(34, 197, 94, 0.3);
+  --success-border: rgba(34, 197, 94, 0.25);
 
   --warning: #f59e0b;
   --warning-fg: #fde047;
   --warning-bg: rgba(245, 158, 11, 0.1);
-  --warning-border: rgba(245, 158, 11, 0.3);
+  --warning-border: rgba(245, 158, 11, 0.25);
 
-  --danger: #f43f5e;
+  --danger: #ef4444;
   --danger-fg: #fca5a5;
-  --danger-bg: rgba(244, 63, 94, 0.1);
-  --danger-border: rgba(244, 63, 94, 0.3);
+  --danger-bg: rgba(239, 68, 68, 0.1);
+  --danger-border: rgba(239, 68, 68, 0.25);
 
-  --info: #38bdf8;
+  --info: #0284c7;
   --info-fg: #7dd3fc;
-  --info-bg: rgba(56, 189, 248, 0.1);
-  --info-border: rgba(56, 189, 248, 0.3);
+  --info-bg: rgba(2, 132, 199, 0.1);
+  --info-border: rgba(2, 132, 199, 0.25);
 
   /* Shadows (Only for floating overlays) */
-  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-strong);
+  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-strong);
 }
 
 /* ==========================================================================
-   Light Theme (High-Contrast, Eye-Friendly Utilitarian Light)
+   Light Theme (Extracted from Cloudflare One Light Dashboard)
+   Canvas, Sidebar, and Cards share the same cohesive #fbfbfb tone
    ========================================================================== */
 :root[data-theme="light"],
 [data-theme="light"] {
   color-scheme: light;
 
-  /* Surfaces (Calm cool-gray canvas makes pure white cards stand out cleanly) */
-  --bg: #f4f5f8;                             /* Clean canvas with clear depth */
-  --surface: #ffffff;                        /* Crisp pure white card surface */
-  --surface-raised: #ebedf2;                 /* Level 2: Nested surfaces */
-  --surface-overlay: #ffffff;                /* Level 3: Menus & dialogs */
+  /* Surfaces (Cohesive #fbfbfb canvas, sidebar & cards) */
+  --bg: #fbfbfb;                             /* Cloudflare One canvas */
+  --surface: #fbfbfb;                        /* Cards & panels match background */
+  --surface-raised: #f3f3f3;                 /* Active sidebar items, inputs, tables */
+  --surface-overlay: #ffffff;                /* Floating menus & dialogs */
   --surface-hover: rgba(0, 0, 0, 0.04);
-  --surface-active: rgba(0, 0, 0, 0.08);
+  --surface-active: rgba(0, 0, 0, 0.07);
 
-  /* Hairline Borders (Crisp & clearly visible, no washed-out lines) */
-  --border: #d4d8e0;                         /* Sharp hairline (1.5:1 on canvas, 1.8:1 on card) */
-  --border-strong: #9ca3af;                  /* Strong border for inputs & active elements */
-  --border-tertiary: #e4e7ec;
+  /* Hairline Borders (Crisp 1px Cloudflare separation) */
+  --border: #eeeeee;                         /* Card outline & divider */
+  --border-strong: #d1d5db;                  /* Inputs & active element borders */
+  --border-tertiary: #f0f0f0;
 
-  /* High-Contrast Text (Deep dark ink: passes WCAG AAA/AA, zero eye-strain) */
-  --text: #0f172a;                           /* Deep slate near-black (16:1 contrast ratio) */
-  --text-secondary: #334155;                 /* Slate-700 (9:1 contrast ratio) */
-  --text-muted: #64748b;                     /* Slate-500 (4.8:1 contrast ratio - passes AA) */
-  --text-tertiary: #94a3b8;                  /* Slate-400 for disabled text */
+  /* High-Contrast Text (Deep dark ink) */
+  --text: #171717;                           /* Primary text & headings (16:1 contrast) */
+  --text-secondary: #525252;                 /* Body & descriptions */
+  --text-muted: #737373;                     /* Hints & metadata */
+  --text-tertiary: #a3a3a3;                  /* Disabled / footnotes */
 
-  /* Primary Monochrome Accent (Near-black button fill on light) */
-  --primary: #0f172a;
+  /* Primary Monochrome Accent (Near-black button fill) */
+  --primary: #171717;
   --primary-foreground: #ffffff;
-  --primary-hover: #1e293b;
+  --primary-hover: #262626;
+
+  /* Cloudflare Brand Accent Token */
+  --cf-orange: #f6821f;
 
   /* Focus Ring */
-  --focus-ring: rgba(15, 23, 42, 0.6);
+  --focus-ring: rgba(246, 130, 31, 0.65);
 
   /* Semantic Status (Legible on light surface) */
-  --success: #15803d;
+  --success: #16a34a;
   --success-fg: #15803d;
-  --success-bg: rgba(22, 163, 74, 0.1);
-  --success-border: rgba(22, 163, 74, 0.35);
+  --success-bg: rgba(22, 163, 74, 0.08);
+  --success-border: rgba(22, 163, 74, 0.3);
 
-  --warning: #b45309;
+  --warning: #d97706;
   --warning-fg: #b45309;
-  --warning-bg: rgba(217, 119, 6, 0.1);
-  --warning-border: rgba(217, 119, 6, 0.35);
+  --warning-bg: rgba(217, 119, 6, 0.08);
+  --warning-border: rgba(217, 119, 6, 0.3);
 
-  --danger: #be123c;
-  --danger-fg: #be123c;
-  --danger-bg: rgba(225, 29, 72, 0.1);
-  --danger-border: rgba(225, 29, 72, 0.35);
+  --danger: #dc2626;
+  --danger-fg: #b91c1c;
+  --danger-bg: rgba(220, 38, 38, 0.08);
+  --danger-border: rgba(220, 38, 38, 0.3);
 
-  --info: #0369a1;
+  --info: #0284c7;
   --info-fg: #0369a1;
-  --info-bg: rgba(2, 132, 199, 0.1);
-  --info-border: rgba(2, 132, 199, 0.35);
+  --info-bg: rgba(2, 132, 199, 0.08);
+  --info-border: rgba(2, 132, 199, 0.3);
 
   /* Shadows (Only for floating overlays) */
-  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--border-strong);
+  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--border);
 }

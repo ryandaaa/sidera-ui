@@ -48,8 +48,8 @@ export default function App() {
   })
 
   // 3. Brand State (Default: default monochrome)
-  const [brand, setBrand] = React.useState<'default' | 'linear'>(() => {
-    return (localStorage.getItem('sidera-brand') as 'default' | 'linear') || 'default'
+  const [brand, setBrand] = React.useState<'default' | 'cloudflare' | 'linear'>(() => {
+    return (localStorage.getItem('sidera-brand') as 'default' | 'cloudflare' | 'linear') || 'default'
   })
 
   // 4. Hash Routing State

@@ -61,7 +61,7 @@ export const CommandSearch = React.forwardRef<HTMLInputElement, CommandSearchPro
           disabled={disabled}
           placeholder={placeholder}
           className={cn(
-            'flex w-full select-text text-xs text-[var(--text)] bg-[var(--surface)]',
+            'flex w-full select-text text-xs text-[var(--text)] bg-[var(--surface-raised)]',
             'rounded-[var(--radius-sm)] border border-[var(--border-strong)] pl-8 pr-16',
             'placeholder:text-[var(--text-muted)] transition-colors duration-100',
             'hover:border-[var(--text-secondary)]',

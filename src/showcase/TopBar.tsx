@@ -6,8 +6,8 @@ export interface TopBarProps {
   onThemeChange: (theme: 'dark' | 'light') => void
   density: 'compact' | 'comfortable'
   onDensityChange: (density: 'compact' | 'comfortable') => void
-  brand: 'default' | 'linear'
-  onBrandChange: (brand: 'default' | 'linear') => void
+  brand: 'default' | 'cloudflare' | 'linear'
+  onBrandChange: (brand: 'default' | 'cloudflare' | 'linear') => void
 }
 
 export function TopBar({
@@ -48,6 +48,22 @@ export function TopBar({
             }`}
           >
             Monochrome
+          </button>
+          <button
+            type="button"
+            onClick={() => onBrandChange('cloudflare')}
+            className={`px-2.5 py-1 rounded-[var(--radius-xs)] text-xs transition-colors flex items-center gap-1.5 ${
+              brand === 'cloudflare'
+                ? 'text-[var(--text)] font-semibold bg-[var(--surface-hover)]'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+            }`}
+          >
+            <span
+              className="inline-block h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: '#f6821f' }}
+              aria-hidden="true"
+            />
+            Cloudflare
           </button>
           <button
             type="button"

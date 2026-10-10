@@ -10,7 +10,7 @@ export const SelectValue = SelectPrimitive.Value
 
 export const selectTriggerVariants = cva(
   [
-    'flex w-full items-center justify-between select-none text-xs text-[var(--text)] bg-[var(--surface)]',
+    'flex w-full items-center justify-between select-none text-xs text-[var(--text)] bg-[var(--surface-raised)]',
     'rounded-[var(--radius-sm)] border border-[var(--border-strong)]',
     'placeholder:text-[var(--text-muted)]',
     'transition-colors duration-100',

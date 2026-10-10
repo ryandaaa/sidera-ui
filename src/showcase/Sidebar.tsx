@@ -113,7 +113,7 @@ export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
                     onClick={() => onRouteChange(item.id)}
                     className={`flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-left text-[13px] transition-colors ${
                       isActive
-                        ? 'bg-[var(--surface-overlay)] text-[var(--text)] font-semibold'
+                        ? 'bg-[var(--surface-raised)] text-[var(--text)] font-semibold'
                         : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)]'
                     }`}
                   >

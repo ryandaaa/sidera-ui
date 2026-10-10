@@ -17,6 +17,18 @@
   --radius-md: 6px;
 }
 
+/* Cloudflare Orange Brand */
+[data-brand="cloudflare"] {
+  --primary: #f6821f;
+  --primary-foreground: #ffffff;
+  --primary-hover: #ff7a1c;
+  --focus-ring: rgba(246, 130, 31, 0.7);
+
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
 /* Light Mode Brand Overrides */
 :root[data-theme="light"][data-brand="linear"],
 :root[data-theme="light"][data-brand="example-client"],
@@ -26,4 +38,12 @@
   --primary-foreground: #ffffff;
   --primary-hover: #3d469c;
   --focus-ring: rgba(76, 87, 184, 0.45);
+}
+
+:root[data-theme="light"][data-brand="cloudflare"],
+[data-theme="light"][data-brand="cloudflare"] {
+  --primary: #f6821f;
+  --primary-foreground: #ffffff;
+  --primary-hover: #ea580c;
+  --focus-ring: rgba(246, 130, 31, 0.65);
 }
