@@ -76,49 +76,55 @@ export function LandingPage({ onEnter }: LandingPageProps) {
           built with React and Tailwind CSS.
         </p>
 
-        {/* Quick copy install command box (pnpm / npm / curl) */}
+        {/* Quick copy install command box — 2-row terminal card */}
         <div
-          className="mb-4 sm:mb-5 flex items-center justify-between rounded-md border border-white/15 bg-black/40 backdrop-blur-md px-2.5 py-1.5 transition-colors hover:border-white/25 w-full max-w-[340px] sm:max-w-[370px]"
-          style={{ height: '36px' }}
+          className="mb-4 sm:mb-5 w-full max-w-[340px] sm:max-w-[420px] rounded-md border border-white/15 bg-black/45 backdrop-blur-md overflow-hidden text-left transition-colors hover:border-white/25 shadow-lg"
         >
-          {/* Package manager pill toggle */}
-          <div className="flex items-center gap-1 shrink-0 font-mono text-[10px]">
-            {(['pnpm', 'npm', 'curl'] as const).map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setPkgManager(tab)}
-                className={`px-1.5 py-0.5 rounded transition-colors cursor-pointer ${
-                  pkgManager === tab
-                    ? 'bg-white/15 text-white font-medium'
-                    : 'text-white/40 hover:text-white/70'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+          {/* Row 1: Header with package manager tabs and copy action */}
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/[0.08] bg-white/[0.02]">
+            <div className="flex items-center gap-1 font-mono text-[10px]">
+              {(['pnpm', 'npm', 'curl'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setPkgManager(tab)}
+                  className={`px-2 py-0.5 rounded transition-colors cursor-pointer ${
+                    pkgManager === tab
+                      ? 'bg-white/15 text-white font-medium'
+                      : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="flex items-center gap-1 font-mono text-[10px] text-white/45 hover:text-white transition-colors cursor-pointer px-1.5 py-0.5 rounded hover:bg-white/10"
+              title="Copy command"
+              aria-label="Copy install command"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-3 w-3 text-emerald-400" />
+                  <span className="text-emerald-400 font-medium">copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="h-3 w-3" />
+                  <span>copy</span>
+                </>
+              )}
+            </button>
           </div>
 
-          {/* Command display */}
-          <div className="flex items-center gap-1.5 min-w-0 px-2 font-mono text-[11px] text-white/85 truncate">
+          {/* Row 2: Full width command line */}
+          <div className="flex items-center gap-2 px-3.5 py-2.5 font-mono text-[11px] sm:text-xs text-white/90 select-text overflow-x-auto whitespace-nowrap">
             <span className="text-white/30 select-none">$</span>
-            <span className="truncate">{activeCommand}</span>
+            <span className="tracking-tight text-white/95">{activeCommand}</span>
           </div>
-
-          {/* Copy button */}
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="h-6 w-6 rounded flex items-center justify-center text-white/45 hover:text-white hover:bg-white/10 transition-colors shrink-0 cursor-pointer"
-            title="Copy command"
-            aria-label="Copy install command"
-          >
-            {copied ? (
-              <Check className="h-3 w-3 text-emerald-400" />
-            ) : (
-              <Copy className="h-3 w-3" />
-            )}
-          </button>
         </div>
 
         {/* CTA buttons */}
