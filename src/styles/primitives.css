@@ -62,29 +62,29 @@
   --raw-font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
   --raw-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  --raw-text-2xs: 10px;
-  --raw-leading-2xs: 13px;
+  --raw-text-2xs: 11px;
+  --raw-leading-2xs: 14px;
 
-  --raw-text-xs: 11px;
-  --raw-leading-xs: 15px;
+  --raw-text-xs: 12px;
+  --raw-leading-xs: 16px;
 
-  --raw-text-sm: 12px;
-  --raw-leading-sm: 16px;
+  --raw-text-sm: 13px;
+  --raw-leading-sm: 18px;
 
-  --raw-text-base: 13px;
-  --raw-leading-base: 18px;
+  --raw-text-base: 14px;
+  --raw-leading-base: 20px;
 
-  --raw-text-md: 14px;
-  --raw-leading-md: 20px;
+  --raw-text-md: 15px;
+  --raw-leading-md: 22px;
 
-  --raw-text-lg: 16px;
-  --raw-leading-lg: 22px;
+  --raw-text-lg: 18px;
+  --raw-leading-lg: 24px;
 
-  --raw-text-xl: 18px;
-  --raw-leading-xl: 24px;
+  --raw-text-xl: 22px;
+  --raw-leading-xl: 28px;
 
-  --raw-text-2xl: 22px;
-  --raw-leading-2xl: 28px;
+  --raw-text-2xl: 28px;
+  --raw-leading-2xl: 34px;
 
   --raw-tracking-tight: -0.022em;
   --raw-tracking-normal: -0.01em;

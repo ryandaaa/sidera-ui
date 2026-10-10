@@ -68,34 +68,34 @@ export function TokensPage() {
       </div>
 
       {/* 1. Live Semantic Tokens */}
-      <section className="space-y-3">
+      <section className="space-y-4">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
             1. Semantic Tokens (Current Theme Live Values)
           </h2>
-          <p className="text-[11px] text-[var(--text-secondary)]">
+          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
             Dynamically updated when switching Light/Dark, Compact/Comfortable, or Brand.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {semanticColors.map((item) => (
             <div
               key={item.token}
-              className="flex items-center gap-3 p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)]"
+              className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)] transition-colors"
             >
               <div
-                className="h-7 w-7 rounded-[var(--radius-xs)] shrink-0 border"
+                className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border shadow-xs"
                 style={{
                   backgroundColor: item.bgVar,
                   borderColor: item.borderVar || 'var(--border)',
                 }}
               />
               <div className="min-w-0 flex-1">
-                <span className="text-[11px] font-mono font-medium text-[var(--text)] block truncate">
+                <span className="text-xs font-mono font-medium text-[var(--text)] block truncate">
                   {item.token}
                 </span>
-                <span className="text-[10px] text-[var(--text-muted)] block truncate">
+                <span className="text-xs text-[var(--text-secondary)] block truncate">
                   {item.label}
                 </span>
               </div>
@@ -105,30 +105,30 @@ export function TokensPage() {
       </section>
 
       {/* 2. Raw Grayscale Primitives */}
-      <section className="space-y-3 pt-2 border-t border-[var(--border)]">
+      <section className="space-y-4 pt-4 border-t border-[var(--border)]">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
             2. Raw Grayscale Primitives (primitives.css)
           </h2>
-          <p className="text-[11px] text-[var(--text-secondary)]">
+          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
             Strict monochrome neutral scale. Components never import these directly.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
           {rawGrays.map((g) => (
             <div
               key={g.name}
-              className="p-2 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] flex flex-col gap-1.5"
+              className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface)] flex flex-col gap-2"
             >
               <div
-                className="h-8 w-full rounded-[var(--radius-none)] border border-[var(--border)]"
+                className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border)]"
                 style={{ backgroundColor: g.color }}
               />
-              <div className="font-mono text-[9px] text-[var(--text-muted)] truncate">
+              <div className="font-mono text-[11px] font-medium text-[var(--text)] truncate">
                 {g.name.replace('--raw-', '')}
               </div>
-              <div className="font-mono text-[9px] text-[var(--text-secondary)]">
+              <div className="font-mono text-[11px] text-[var(--text-muted)]">
                 {g.color}
               </div>
             </div>
@@ -137,7 +137,7 @@ export function TokensPage() {
       </section>
 
       {/* 3. Typography Scale */}
-      <section className="space-y-3 pt-2 border-t border-[var(--border)]">
+      <section className="space-y-4 pt-4 border-t border-[var(--border)]">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] font-mono">
             3. Typography Scale (Satoshi Self-Hosted)

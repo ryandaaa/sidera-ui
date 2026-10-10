@@ -47,11 +47,11 @@ const groups: NavGroup[] = [
 
 export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
   return (
-    <aside className="w-56 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] min-h-[calc(100vh-40px)] flex flex-col p-3 select-none">
-      <nav className="flex flex-col gap-5 text-xs">
+    <aside className="w-64 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] min-h-[calc(100vh-48px)] flex flex-col p-4 select-none">
+      <nav className="flex flex-col gap-6 text-[13px]">
         {groups.map((group) => (
-          <div key={group.title} className="flex flex-col gap-1">
-            <span className="text-[10px] font-mono font-medium uppercase tracking-wider text-[var(--text-muted)] px-2">
+          <div key={group.title} className="flex flex-col gap-1.5">
+            <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-[var(--text-muted)] px-2.5">
               {group.title}
             </span>
             <div className="flex flex-col gap-0.5">
@@ -63,10 +63,10 @@ export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
                   return (
                     <div
                       key={item.id}
-                      className="flex items-center justify-between px-2 py-1 text-[11px] text-[var(--text-tertiary)] cursor-not-allowed"
+                      className="flex items-center justify-between px-2.5 py-1.5 text-xs text-[var(--text-tertiary)] cursor-not-allowed"
                     >
                       <span>{item.label.split(' ')[0]}</span>
-                      <span className="text-[9px] font-mono text-[var(--text-muted)]">
+                      <span className="text-[10px] font-mono text-[var(--text-muted)]">
                         soon
                       </span>
                     </div>
@@ -78,7 +78,7 @@ export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
                     key={item.id}
                     type="button"
                     onClick={() => onRouteChange(item.id)}
-                    className={`flex items-center justify-between px-2 py-1.5 rounded-[var(--radius-xs)] text-left text-xs transition-colors ${
+                    className={`flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-left text-[13px] transition-colors ${
                       isActive
                         ? 'bg-[var(--surface-overlay)] text-[var(--text)] font-semibold'
                         : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)]'

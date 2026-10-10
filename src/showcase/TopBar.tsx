@@ -19,18 +19,18 @@ export function TopBar({
   onBrandChange,
 }: TopBarProps) {
   return (
-    <header className="h-[var(--control-h-lg)] min-h-[40px] border-b border-[var(--border)] bg-[var(--surface)] px-4 flex items-center justify-between sticky top-0 z-30 select-none">
-      <div className="flex items-center gap-2.5">
+    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-6 flex items-center justify-between sticky top-0 z-30 select-none">
+      <div className="flex items-center gap-3">
         <a
           href="#tokens"
-          className="flex items-center gap-2 text-[var(--text)] font-semibold text-xs tracking-tight hover:opacity-80 transition-opacity"
+          className="flex items-center gap-2.5 text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
         >
-          <div className="h-4 w-4 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius-xs)] flex items-center justify-center font-mono text-[9px] font-bold">
+          <div className="h-5 w-5 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius-xs)] flex items-center justify-center font-mono text-[10px] font-bold">
             S
           </div>
           <span>SIDERA UI</span>
         </a>
-        <span className="font-mono text-[10px] text-[var(--text-muted)]">
+        <span className="font-mono text-xs text-[var(--text-muted)]">
           v0.1.0
         </span>
       </div>
