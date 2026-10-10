@@ -63,9 +63,16 @@ const groups: NavGroup[] = [
     ],
   },
   {
+    title: 'Navigation',
+    items: [
+      { id: 'tabs', label: 'Tabs' },
+      { id: 'breadcrumb-pagination', label: 'Breadcrumb & Pages' },
+      { id: 'command-search', label: 'Command Search' },
+    ],
+  },
+  {
     title: 'Upcoming (Phase 2)',
     items: [
-      { id: 'navigation', label: 'Navigation (Tabs, Breadcrumb)', badge: 'next' },
       { id: 'layout', label: 'Layout (Stack, Inline, PageHeader)', badge: 'next' },
     ],
   },

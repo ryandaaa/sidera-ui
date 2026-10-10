@@ -25,6 +25,9 @@ import { TooltipPreview } from './showcase/previews/TooltipPreview'
 import { DialogPreview } from './showcase/previews/DialogPreview'
 import { PopoverPreview } from './showcase/previews/PopoverPreview'
 import { DropdownMenuPreview } from './showcase/previews/DropdownMenuPreview'
+import { TabsPreview } from './showcase/previews/TabsPreview'
+import { BreadcrumbPaginationPreview } from './showcase/previews/BreadcrumbPaginationPreview'
+import { CommandSearchPreview } from './showcase/previews/CommandSearchPreview'
 import { ToastProvider } from './components/ui/Toast'
 
 export default function App() {
@@ -127,6 +130,9 @@ export default function App() {
             {route === 'dialog' && <DialogPreview />}
             {route === 'popover' && <PopoverPreview />}
             {route === 'dropdown-menu' && <DropdownMenuPreview />}
+            {route === 'tabs' && <TabsPreview />}
+            {route === 'breadcrumb-pagination' && <BreadcrumbPaginationPreview />}
+            {route === 'command-search' && <CommandSearchPreview />}
           </main>
         </div>
       </div>

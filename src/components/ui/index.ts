@@ -33,3 +33,10 @@ export * from './Toast'
 export * from './Dialog'
 export * from './Popover'
 export * from './DropdownMenu'
+
+// Navigation
+export * from './Tabs'
+export * from './Breadcrumb'
+export * from './Pagination'
+export * from './SidebarNavItem'
+export * from './CommandSearch'
