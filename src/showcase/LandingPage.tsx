@@ -6,17 +6,18 @@ import { ArrowRight, ExternalLink, Copy, Check } from 'lucide-react';
 
 interface LandingPageProps {
   onEnter: () => void;
+  isExiting?: boolean;
 }
 
 type PkgManager = 'pnpm' | 'npm' | 'curl';
 
 const INSTALL_COMMANDS: Record<PkgManager, string> = {
-  pnpm: 'pnpm add sidera-ui',
-  npm: 'npm i sidera-ui',
-  curl: 'curl -fsSL https://sidera.dev/install.sh | bash',
+  pnpm: 'pnpm dlx sidera-ui add button',
+  npm: 'npx sidera-ui add button',
+  curl: 'curl -fsSL https://raw.githubusercontent.com/ryandaaa/sidera-ui/main/bin/cli.js | node - add button',
 };
 
-export function LandingPage({ onEnter }: LandingPageProps) {
+export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
   const [pkgManager, setPkgManager] = React.useState<PkgManager>('pnpm');
   const [copied, setCopied] = React.useState(false);
 
@@ -30,7 +31,11 @@ export function LandingPage({ onEnter }: LandingPageProps) {
 
   return (
     <div
-      className="fixed inset-0 overflow-hidden"
+      className={`fixed inset-0 overflow-hidden transition-all duration-300 ease-out ${
+        isExiting
+          ? 'opacity-0 scale-[1.03] filter blur-[2px] pointer-events-none'
+          : 'opacity-100 scale-100'
+      }`}
       style={{ background: '#0a0a0f' }}
       data-theme="dark"
     >
