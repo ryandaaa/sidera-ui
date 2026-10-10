@@ -9,7 +9,7 @@ export const inputVariants = cva(
     'placeholder:text-[var(--text-muted)]',
     'transition-colors duration-150',
     'hover:border-[var(--text-secondary)]',
-    'focus:outline-none focus:ring-0',
+    'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
     'disabled:pointer-events-none disabled:opacity-40 disabled:border-dashed',
   ],
   {
@@ -71,6 +71,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           disabled={disabled}
           aria-invalid={hasError ? 'true' : undefined}
+          style={{ outline: 'none', ...props.style }}
           className={cn(
             inputVariants({ size, hasError }),
             leftElement ? 'pl-6' : 'pl-0.5',

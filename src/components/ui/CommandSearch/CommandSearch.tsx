@@ -60,13 +60,14 @@ export const CommandSearch = React.forwardRef<HTMLInputElement, CommandSearchPro
           onChange={handleChange}
           disabled={disabled}
           placeholder={placeholder}
+          style={{ outline: 'none', ...props.style }}
           className={cn(
             'flex w-full select-text text-[var(--text)] bg-transparent',
             'border-0 border-b border-[var(--border)] rounded-none',
             'pl-6 pr-14 placeholder:text-[var(--text-muted)]',
             'transition-colors duration-150',
             'hover:border-[var(--text-secondary)]',
-            'focus:outline-none focus:ring-0',
+            'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
             size === 'sm'
               ? 'h-[var(--control-h-sm)] text-[11px] pb-1 pt-1'
               : 'h-[var(--control-h-md)] text-xs pb-1.5 pt-1.5',

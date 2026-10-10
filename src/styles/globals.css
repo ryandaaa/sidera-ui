@@ -86,10 +86,16 @@ html, body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Strict keyboard focus ring */
-:focus-visible {
+/* Strict keyboard focus ring (excluding underline inputs with dedicated animated bottom line) */
+:focus-visible:not(input) {
   outline: 2px solid var(--focus-ring);
   outline-offset: 1px;
+}
+
+input:focus,
+input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Respect prefers-reduced-motion */
