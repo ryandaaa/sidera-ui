@@ -1,4 +1,3 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { TableOfContents, type TocItem } from './TableOfContents'
 
 interface TokenSwatch {
@@ -6,7 +5,6 @@ interface TokenSwatch {
   label: string
   bgVar: string
   borderVar?: string
-  textVar?: string
 }
 
 const semanticColors: TokenSwatch[] = [
@@ -28,20 +26,20 @@ const semanticColors: TokenSwatch[] = [
 ]
 
 const rawGrays = [
-  { name: '--raw-white', color: '#ffffff' },
-  { name: '--raw-gray-50', color: '#f8f9fa' },
-  { name: '--raw-gray-100', color: '#f1f3f5' },
-  { name: '--raw-gray-200', color: '#e2e4e8' },
-  { name: '--raw-gray-300', color: '#cfd3d8' },
-  { name: '--raw-gray-400', color: '#9da3ae' },
-  { name: '--raw-gray-500', color: '#6b7280' },
-  { name: '--raw-gray-600', color: '#4b525d' },
-  { name: '--raw-gray-700', color: '#333842' },
-  { name: '--raw-gray-800', color: '#22262d' },
-  { name: '--raw-gray-850', color: '#1a1d23' },
-  { name: '--raw-gray-900', color: '#121417' },
-  { name: '--raw-gray-950', color: '#08090a' },
-  { name: '--raw-black', color: '#050607' },
+  { name: 'white', color: '#ffffff' },
+  { name: 'gray-50', color: '#f8f9fa' },
+  { name: 'gray-100', color: '#f1f3f5' },
+  { name: 'gray-200', color: '#e2e4e8' },
+  { name: 'gray-300', color: '#cfd3d8' },
+  { name: 'gray-400', color: '#9da3ae' },
+  { name: 'gray-500', color: '#6b7280' },
+  { name: 'gray-600', color: '#4b525d' },
+  { name: 'gray-700', color: '#333842' },
+  { name: 'gray-800', color: '#22262d' },
+  { name: 'gray-850', color: '#1a1d23' },
+  { name: 'gray-900', color: '#121417' },
+  { name: 'gray-950', color: '#08090a' },
+  { name: 'black', color: '#050607' },
 ]
 
 const typeScale = [
@@ -68,9 +66,9 @@ export function TokensPage() {
   return (
     <div className="flex w-full items-start justify-between gap-10">
       {/* Center Documentation Content */}
-      <div className="flex-1 min-w-0 max-w-4xl space-y-12 text-left">
+      <div className="flex-1 min-w-0 max-w-4xl space-y-14 text-left">
         {/* Intro */}
-        <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-5 scroll-mt-20">
+        <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-6 scroll-mt-20">
           <h1 className="text-2xl font-bold tracking-tight text-[var(--text)]">
             Design Tokens Architecture
           </h1>
@@ -79,7 +77,7 @@ export function TokensPage() {
           </p>
         </div>
 
-        {/* 1. Live Semantic Tokens */}
+        {/* 1. Live Semantic Tokens (Boxless & Edge-to-Edge List) */}
         <section id="semantic-tokens" className="space-y-4 scroll-mt-20">
           <div>
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
@@ -90,65 +88,66 @@ export function TokensPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="border-y border-[var(--border)] divide-y divide-[var(--border)]">
             {semanticColors.map((item) => (
               <div
                 key={item.token}
-                className="flex items-center gap-3.5 p-3 rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--surface)] hover:border-[var(--text-secondary)] transition-colors shadow-2xs"
+                className="flex items-center justify-between py-2.5 px-1 hover:bg-[var(--surface-hover)] transition-colors group"
               >
-                <div
-                  className="h-10 w-10 rounded-[var(--radius-xs)] shrink-0 border-2 border-[var(--border-strong)]"
-                  style={{
-                    backgroundColor: item.bgVar,
-                  }}
-                />
-                <div className="min-w-0 flex-1">
-                  <span className="text-[13px] font-mono font-bold text-[var(--text)] block truncate">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div
+                    className="h-4 w-4 rounded-full border border-[var(--border-strong)] shrink-0 shadow-2xs"
+                    style={{ backgroundColor: item.bgVar }}
+                  />
+                  <span className="font-mono text-xs font-semibold text-[var(--text)] tracking-tight">
                     {item.token}
                   </span>
-                  <span className="text-xs text-[var(--text-secondary)] block truncate">
-                    {item.label}
-                  </span>
+                </div>
+                <div className="text-xs text-[var(--text-secondary)] font-medium text-right">
+                  {item.label}
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 2. Raw Grayscale Primitives */}
-        <section id="raw-primitives" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
+        {/* 2. Raw Grayscale Primitives (Edge-to-Edge Continuous Ramp) */}
+        <section id="raw-primitives" className="space-y-4 scroll-mt-20">
           <div>
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               2. Raw Grayscale Primitives (primitives.css)
             </h2>
             <p className="text-xs text-[var(--text-secondary)] mt-1">
-              Strict monochrome neutral scale. Components never import these directly.
+              Strict monochrome neutral ramp. Components never import these directly.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-            {rawGrays.map((g) => (
-              <div
-                key={g.name}
-                className="p-2.5 rounded-[var(--radius-xs)] border border-[var(--border-strong)] bg-[var(--surface)] flex flex-col gap-2 shadow-2xs"
-              >
+          <div className="space-y-2.5">
+            {/* Seamless edge-to-edge spectrum bar */}
+            <div className="h-12 w-full flex rounded-[var(--radius-xs)] overflow-hidden border border-[var(--border)] shadow-2xs">
+              {rawGrays.map((g) => (
                 <div
-                  className="h-10 w-full rounded-[var(--radius-none)] border border-[var(--border-strong)]"
+                  key={g.name}
+                  className="flex-1 h-full transition-transform hover:scale-y-110 relative group"
                   style={{ backgroundColor: g.color }}
+                  title={`${g.name}: ${g.color}`}
                 />
-                <div className="font-mono text-xs font-semibold text-[var(--text)] truncate">
-                  {g.name.replace('--raw-', '')}
-                </div>
-                <div className="font-mono text-xs text-[var(--text-muted)]">
-                  {g.color}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Seamless labels below */}
+            <div className="flex justify-between text-[11px] font-mono text-[var(--text-secondary)] px-1">
+              <span>white (#ffffff)</span>
+              <span>gray-300</span>
+              <span>gray-600</span>
+              <span>gray-850</span>
+              <span>black (#050607)</span>
+            </div>
           </div>
         </section>
 
-        {/* 3. Typography Scale */}
-        <section id="typography" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
+        {/* 3. Typography Scale (Edge-to-Edge Table) */}
+        <section id="typography" className="space-y-4 scroll-mt-20">
           <div>
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               3. Typography Scale (Satoshi Self-Hosted)
@@ -158,26 +157,26 @@ export function TokensPage() {
             </p>
           </div>
 
-          <div className="rounded-[var(--radius-sm)] border border-[var(--border)] overflow-hidden">
+          <div className="border-y border-[var(--border)] overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)]/60 text-xs text-[var(--text-muted)] font-mono">
-                  <th className="py-2.5 px-3.5 font-medium">Token</th>
-                  <th className="py-2.5 px-3.5 font-medium">Size / Leading</th>
-                  <th className="py-2.5 px-3.5 font-medium">Visual Sample</th>
+                <tr className="border-b border-[var(--border)] text-xs text-[var(--text)] font-semibold font-mono">
+                  <th className="py-2.5 px-2 font-medium">Token</th>
+                  <th className="py-2.5 px-2 font-medium">Size / Leading</th>
+                  <th className="py-2.5 px-2 font-medium">Visual Sample</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--border)] bg-[var(--surface)] text-xs">
+              <tbody className="divide-y divide-[var(--border)] text-xs">
                 {typeScale.map((t) => (
                   <tr key={t.token} className="hover:bg-[var(--surface-hover)]">
-                    <td className="py-2.5 px-3.5 font-mono font-medium text-[var(--text)]">
+                    <td className="py-2.5 px-2 font-mono font-semibold text-[var(--text)]">
                       {t.token}
                     </td>
-                    <td className="py-2.5 px-3.5 font-mono text-[var(--text-secondary)]">
+                    <td className="py-2.5 px-2 font-mono text-[var(--text-secondary)]">
                       {t.size} / {t.leading}
                     </td>
                     <td
-                      className="py-2.5 px-3.5 text-[var(--text)] tracking-tight"
+                      className="py-2.5 px-2 text-[var(--text)] tracking-tight"
                       style={{ fontSize: t.size, lineHeight: t.leading }}
                     >
                       {t.sample}
@@ -189,8 +188,8 @@ export function TokensPage() {
           </div>
         </section>
 
-        {/* 4. Radius Scale */}
-        <section id="radius-scale" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
+        {/* 4. Radius Scale (Boxless Edge-to-Edge) */}
+        <section id="radius-scale" className="space-y-4 scroll-mt-20">
           <div>
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               4. Radius Scale (Restrained 0-4px)
@@ -200,41 +199,36 @@ export function TokensPage() {
             </p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Corner Tokens</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2.5">
-              {[
-                { token: '--radius-none', px: '0px', desc: 'Square raw corners' },
-                { token: '--radius-xs', px: '2px', desc: 'Badges, small status dots' },
-                { token: '--radius-sm', px: '3px', desc: 'Buttons, Inputs, Cards' },
-                { token: '--radius-md', px: '4px', desc: 'Dialogs, floating menus' },
-              ].map((r) => (
-                <div
-                  key={r.token}
-                  className="flex items-center justify-between p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="h-6 w-6 border border-[var(--text-secondary)] bg-[var(--surface)]"
-                      style={{ borderRadius: r.px }}
-                    />
-                    <span className="font-mono text-xs text-[var(--text)]">
-                      {r.token}
-                    </span>
-                  </div>
-                  <div className="text-xs text-[var(--text-muted)] font-mono">
-                    {r.px} &bull; {r.desc}
-                  </div>
+          <div className="border-y border-[var(--border)] divide-y divide-[var(--border)]">
+            {[
+              { token: '--radius-none', px: '0px', desc: 'Square raw corners' },
+              { token: '--radius-xs', px: '2px', desc: 'Badges, small status dots' },
+              { token: '--radius-sm', px: '3px', desc: 'Buttons, Inputs, Cards' },
+              { token: '--radius-md', px: '4px', desc: 'Dialogs, floating menus' },
+            ].map((r) => (
+              <div
+                key={r.token}
+                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="h-4 w-4 border border-[var(--text)] bg-[var(--surface-raised)]"
+                    style={{ borderRadius: r.px }}
+                  />
+                  <span className="font-mono text-xs font-semibold text-[var(--text)]">
+                    {r.token}
+                  </span>
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+                <div className="text-xs text-[var(--text-secondary)] font-mono">
+                  {r.px} &bull; {r.desc}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* 5. Density & Control Heights */}
-        <section id="density-scale" className="space-y-4 pt-8 border-t border-[var(--border)] scroll-mt-20">
+        {/* 5. Density & Control Heights (Boxless Edge-to-Edge) */}
+        <section id="density-scale" className="space-y-4 scroll-mt-20">
           <div>
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               5. Density & Control Heights
@@ -244,31 +238,26 @@ export function TokensPage() {
             </p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Height System</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2.5">
-              {[
-                { token: '--control-h-sm', desc: '28px compact / 32px comfortable' },
-                { token: '--control-h-md', desc: '32px compact / 36px comfortable' },
-                { token: '--control-h-lg', desc: '36px compact / 40px comfortable' },
-                { token: '--space-unit', desc: '4px compact / 6px comfortable' },
-              ].map((d) => (
-                <div
-                  key={d.token}
-                  className="flex items-center justify-between p-2.5 rounded-[var(--radius-xs)] border border-[var(--border)] bg-[var(--surface-raised)]/40 text-xs"
-                >
-                  <span className="font-mono text-xs text-[var(--text)]">
-                    {d.token}
-                  </span>
-                  <span className="text-xs text-[var(--text-muted)] font-mono">
-                    {d.desc}
-                  </span>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+          <div className="border-y border-[var(--border)] divide-y divide-[var(--border)]">
+            {[
+              { token: '--control-h-sm', desc: '28px compact / 32px comfortable' },
+              { token: '--control-h-md', desc: '32px compact / 36px comfortable' },
+              { token: '--control-h-lg', desc: '36px compact / 40px comfortable' },
+              { token: '--space-unit', desc: '4px compact / 6px comfortable' },
+            ].map((d) => (
+              <div
+                key={d.token}
+                className="flex items-center justify-between py-2.5 px-1 text-xs hover:bg-[var(--surface-hover)] transition-colors"
+              >
+                <span className="font-mono text-xs font-semibold text-[var(--text)]">
+                  {d.token}
+                </span>
+                <span className="text-xs text-[var(--text-secondary)] font-mono">
+                  {d.desc}
+                </span>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
 

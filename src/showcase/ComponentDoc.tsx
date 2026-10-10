@@ -109,29 +109,29 @@ export function ComponentDoc({
             <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
               Props Specification
             </h2>
-            <div className="rounded-[var(--radius-sm)] border border-[var(--border)] overflow-hidden">
+            <div className="border-y border-[var(--border)] overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--surface-raised)] text-xs text-[var(--text)] font-semibold font-mono">
-                    <th className="py-2.5 px-3.5 font-medium">Prop</th>
-                    <th className="py-2.5 px-3.5 font-medium">Type</th>
-                    <th className="py-2.5 px-3.5 font-medium">Default</th>
-                    <th className="py-2.5 px-3.5 font-medium">Description</th>
+                  <tr className="border-b border-[var(--border)] text-xs text-[var(--text)] font-semibold font-mono">
+                    <th className="py-2.5 px-2 font-medium">Prop</th>
+                    <th className="py-2.5 px-2 font-medium">Type</th>
+                    <th className="py-2.5 px-2 font-medium">Default</th>
+                    <th className="py-2.5 px-2 font-medium">Description</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[var(--border)] bg-[var(--surface)] text-xs">
+                <tbody className="divide-y divide-[var(--border)] text-xs">
                   {propsSpec.map((spec) => (
                     <tr key={spec.name} className="hover:bg-[var(--surface-hover)]">
-                      <td className="py-2.5 px-3.5 font-mono font-medium text-[var(--text)]">
+                      <td className="py-2.5 px-2 font-mono font-medium text-[var(--text)]">
                         {spec.name}
                       </td>
-                      <td className="py-2.5 px-3.5 font-mono text-[var(--text-secondary)]">
+                      <td className="py-2.5 px-2 font-mono text-[var(--text-secondary)]">
                         {spec.type}
                       </td>
-                      <td className="py-2.5 px-3.5 font-mono text-[var(--text-muted)]">
+                      <td className="py-2.5 px-2 font-mono text-[var(--text-muted)]">
                         {spec.default || '-'}
                       </td>
-                      <td className="py-2.5 px-3.5 text-[var(--text-secondary)]">
+                      <td className="py-2.5 px-2 text-[var(--text-secondary)]">
                         {spec.description}
                       </td>
                     </tr>
