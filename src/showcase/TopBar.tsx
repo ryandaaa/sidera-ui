@@ -1,4 +1,4 @@
-import { Sun, Moon, Maximize2, Minimize2 } from 'lucide-react'
+import { Sun, Moon, Maximize2, Minimize2, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 
 export interface TopBarProps {
@@ -10,6 +10,8 @@ export interface TopBarProps {
   onBrandChange: (brand: 'default' | 'cloudflare' | 'linear') => void
   zoom: '100%' | '110%' | '125%'
   onZoomChange: (zoom: '100%' | '110%' | '125%') => void
+  isSidebarCollapsed: boolean
+  onToggleSidebar: () => void
 }
 
 export function TopBar({
@@ -21,10 +23,23 @@ export function TopBar({
   onBrandChange,
   zoom,
   onZoomChange,
+  isSidebarCollapsed,
+  onToggleSidebar,
 }: TopBarProps) {
   return (
-    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-6 flex items-center justify-between sticky top-0 z-30 select-none">
-      <div className="flex items-center gap-3">
+    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 select-none">
+      <div className="flex items-center gap-2.5 sm:gap-3">
+        {/* Sidebar Hamburger Toggle Button */}
+        <button
+          type="button"
+          onClick={onToggleSidebar}
+          className="h-7 w-7 rounded-[var(--radius-xs)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors active:scale-95 cursor-pointer"
+          title={isSidebarCollapsed ? 'Expand sidebar (Ctrl+B)' : 'Collapse sidebar (Ctrl+B)'}
+          aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          <Menu className="h-4 w-4 stroke-[1.75]" />
+        </button>
+
         <a
           href="#tokens"
           className="flex items-center gap-2.5 text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
@@ -34,7 +49,7 @@ export function TopBar({
           </div>
           <span>SIDERA UI</span>
         </a>
-        <span className="font-mono text-xs text-[var(--text-muted)]">
+        <span className="font-mono text-xs text-[var(--text-muted)] hidden sm:inline-block">
           v0.1.0
         </span>
       </div>

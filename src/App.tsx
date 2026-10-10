@@ -58,7 +58,18 @@ export default function App() {
     return (localStorage.getItem('sidera-zoom') as '100%' | '110%' | '125%') || '110%'
   })
 
-  // 5. Hash Routing State
+  // 5. Sidebar Resizable Width State (Default: 256px)
+  const [sidebarWidth, setSidebarWidth] = React.useState<number>(() => {
+    const saved = localStorage.getItem('sidera-sidebar-width')
+    return saved ? Math.min(Math.max(parseInt(saved, 10), 200), 480) : 256
+  })
+
+  // 6. Sidebar Collapsed State (Default: false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState<boolean>(() => {
+    return localStorage.getItem('sidera-sidebar-collapsed') === 'true'
+  })
+
+  // 7. Hash Routing State
   const [route, setRoute] = React.useState<string>(() => {
     const hash = window.location.hash.replace('#', '')
     return hash || 'tokens'
@@ -90,6 +101,27 @@ export default function App() {
     window.dispatchEvent(new Event('resize'))
   }, [zoom])
 
+  // Persist sidebar width and collapsed state
+  React.useEffect(() => {
+    localStorage.setItem('sidera-sidebar-width', String(sidebarWidth))
+  }, [sidebarWidth])
+
+  React.useEffect(() => {
+    localStorage.setItem('sidera-sidebar-collapsed', String(isSidebarCollapsed))
+  }, [isSidebarCollapsed])
+
+  // Ctrl+B / Cmd+B keyboard shortcut to toggle sidebar collapse
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+        e.preventDefault()
+        setIsSidebarCollapsed((prev) => !prev)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
   // Synchronize hash changes
   React.useEffect(() => {
     const handleHashChange = () => {
@@ -109,7 +141,7 @@ export default function App() {
     <ToastProvider>
       <TocProvider>
         <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
-          {/* Top Bar with Brand, Zoom, Density, and Theme Toggles */}
+          {/* Top Bar with Brand, Zoom, Density, Theme Toggles, and Hamburger */}
           <TopBar
             theme={theme}
             onThemeChange={setTheme}
@@ -119,11 +151,20 @@ export default function App() {
             onBrandChange={setBrand}
             zoom={zoom}
             onZoomChange={setZoom}
+            isSidebarCollapsed={isSidebarCollapsed}
+            onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           />
 
-          {/* Main Workspace: Left Sidebar + Center Content Area + Right TOC */}
+          {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
           <div className="flex-1 flex w-full items-start">
-            <Sidebar currentRoute={route} onRouteChange={handleRouteChange} />
+            <Sidebar
+              currentRoute={route}
+              onRouteChange={handleRouteChange}
+              width={sidebarWidth}
+              onWidthChange={setSidebarWidth}
+              isCollapsed={isSidebarCollapsed}
+              onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+            />
 
             <main className="flex-1 min-w-0 p-8 lg:p-10">
               {route === 'tokens' && <TokensPage />}
