@@ -8,6 +8,8 @@ export interface TopBarProps {
   onDensityChange: (density: 'compact' | 'comfortable') => void
   brand: 'default' | 'cloudflare' | 'linear'
   onBrandChange: (brand: 'default' | 'cloudflare' | 'linear') => void
+  zoom: '100%' | '110%' | '125%'
+  onZoomChange: (zoom: '100%' | '110%' | '125%') => void
 }
 
 export function TopBar({
@@ -17,6 +19,8 @@ export function TopBar({
   onDensityChange,
   brand,
   onBrandChange,
+  zoom,
+  onZoomChange,
 }: TopBarProps) {
   return (
     <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-6 flex items-center justify-between sticky top-0 z-30 select-none">
@@ -81,6 +85,27 @@ export function TopBar({
             />
             Linear
           </button>
+        </div>
+
+        <div className="h-3.5 w-px bg-[var(--border)] mx-1" aria-hidden="true" />
+
+        {/* UI Zoom Controller */}
+        <div className="flex items-center gap-0.5 text-xs font-mono">
+          {(['100%', '110%', '125%'] as const).map((level) => (
+            <button
+              key={level}
+              type="button"
+              onClick={() => onZoomChange(level)}
+              className={`px-2 py-0.5 rounded-[var(--radius-xs)] text-[11px] transition-colors ${
+                zoom === level
+                  ? 'text-[var(--text)] font-semibold bg-[var(--surface-hover)]'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+              }`}
+              title={`Scale UI to ${level}`}
+            >
+              {level}
+            </button>
+          ))}
         </div>
 
         <div className="h-3.5 w-px bg-[var(--border)] mx-1" aria-hidden="true" />

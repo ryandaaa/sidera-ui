@@ -52,7 +52,12 @@ export default function App() {
     return (localStorage.getItem('sidera-brand') as 'default' | 'cloudflare' | 'linear') || 'default'
   })
 
-  // 4. Hash Routing State
+  // 4. UI Zoom State (Default: 110% as preferred by user)
+  const [zoom, setZoom] = React.useState<'100%' | '110%' | '125%'>(() => {
+    return (localStorage.getItem('sidera-zoom') as '100%' | '110%' | '125%') || '110%'
+  })
+
+  // 5. Hash Routing State
   const [route, setRoute] = React.useState<string>(() => {
     const hash = window.location.hash.replace('#', '')
     return hash || 'tokens'
@@ -74,6 +79,20 @@ export default function App() {
     localStorage.setItem('sidera-brand', brand)
   }, [brand])
 
+  // Synchronize UI Zoom
+  React.useEffect(() => {
+    const zoomMap: Record<string, string> = {
+      '100%': '1',
+      '110%': '1.1',
+      '125%': '1.25',
+    }
+    const zoomValue = zoomMap[zoom] || '1.1'
+    ;(document.documentElement.style as unknown as { zoom: string }).zoom = zoomValue
+    localStorage.setItem('sidera-zoom', zoom)
+    // Dispatch window resize so indicator and sticky measurements update immediately
+    window.dispatchEvent(new Event('resize'))
+  }, [zoom])
+
   // Synchronize hash changes
   React.useEffect(() => {
     const handleHashChange = () => {
@@ -92,7 +111,7 @@ export default function App() {
   return (
     <ToastProvider>
       <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
-        {/* Top Bar with Brand, Density, and Theme Toggles */}
+        {/* Top Bar with Brand, Zoom, Density, and Theme Toggles */}
         <TopBar
           theme={theme}
           onThemeChange={setTheme}
@@ -100,6 +119,8 @@ export default function App() {
           onDensityChange={setDensity}
           brand={brand}
           onBrandChange={setBrand}
+          zoom={zoom}
+          onZoomChange={setZoom}
         />
 
         {/* Main Workspace: Left Sidebar + Right Content Area */}
