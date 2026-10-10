@@ -155,70 +155,38 @@ export function TopBar({
           }}
         />
 
-        {/* Live Search Results Dropdown with Rich Previews */}
+        {/* Live Search Results Dropdown */}
         {isSearchOpen && searchQuery.trim() && (
           <div
             ref={dropdownRef}
-            className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-84 overflow-y-auto p-1.5 text-xs flex flex-col gap-1"
+            className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-72 overflow-y-auto p-1 text-xs"
           >
             {searchResults.length === 0 ? (
-              <div className="py-6 px-4 text-center space-y-1">
-                <p className="text-xs font-mono text-[var(--text-muted)]">
-                  No components matching "{searchQuery}"
-                </p>
-                <p className="text-[11px] text-[var(--text-secondary)]">
-                  Try searching by alias: "modal", "toggle", "loader", "dropdown", or "colors"
-                </p>
+              <div className="py-3 px-3 text-center text-[var(--text-muted)] text-xs font-mono">
+                No components matching "{searchQuery}"
               </div>
             ) : (
-              <>
-                <div className="px-2 py-0.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] border-b border-[var(--border)] pb-1">
-                  <span>Components</span>
-                  <span>{searchResults.length} {searchResults.length === 1 ? 'match' : 'matches'}</span>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  {searchResults.map(({ item, matchedReason }, index) => {
-                    const isSelected = index === selectedIndex
-                    return (
-                      <button
-                        key={item.id}
-                        type="button"
-                        onClick={() => handleSelectRoute(item.id)}
-                        onMouseEnter={() => setSelectedIndex(index)}
-                        className={`w-full flex flex-col p-2 rounded-[var(--radius-xs)] text-left transition-colors cursor-pointer ${
-                          isSelected
-                            ? 'bg-[var(--surface-raised)] border-l-2 border-[var(--primary)] pl-2.5'
-                            : 'hover:bg-[var(--surface-hover)] pl-2 border-l-2 border-transparent'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="font-semibold text-xs text-[var(--text)]">
-                            {item.label}
-                          </span>
-                          <div className="flex items-center gap-1.5">
-                            {matchedReason && (
-                              <span className="font-mono text-[9px] px-1.5 py-0.5 rounded-[var(--radius-xs)] bg-[var(--surface-raised)] border border-[var(--border)] text-[var(--text-muted)]">
-                                {matchedReason}
-                              </span>
-                            )}
-                            <span className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
-                              {item.group}
-                            </span>
-                          </div>
-                        </div>
-                        <p className="text-[11px] text-[var(--text-secondary)] line-clamp-1 mt-0.5 font-normal">
-                          {item.description}
-                        </p>
-                      </button>
-                    )
-                  })}
-                </div>
-                <div className="px-2 py-1 pt-1.5 border-t border-[var(--border)] flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)] select-none">
-                  <span>↑↓ Navigate</span>
-                  <span>↵ Select</span>
-                  <span>ESC Close</span>
-                </div>
-              </>
+              searchResults.map(({ item }, index) => {
+                const isSelected = index === selectedIndex
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleSelectRoute(item.id)}
+                    onMouseEnter={() => setSelectedIndex(index)}
+                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-[var(--radius-xs)] text-left transition-colors cursor-pointer ${
+                      isSelected
+                        ? 'bg-[var(--surface-raised)] text-[var(--text)] font-medium'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)]'
+                    }`}
+                  >
+                    <span className="font-medium text-[var(--text)]">{item.label}</span>
+                    <span className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
+                      {item.group}
+                    </span>
+                  </button>
+                )
+              })
             )}
           </div>
         )}
