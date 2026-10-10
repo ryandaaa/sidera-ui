@@ -30,7 +30,7 @@ export const SidebarNavItem = React.forwardRef<HTMLButtonElement, SidebarNavItem
         disabled={disabled}
         aria-current={active ? 'page' : undefined}
         className={cn(
-          'group flex w-full items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-left text-[13px] transition-colors select-none',
+          'group flex w-full items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-left text-[13px] transition-all duration-150 active:scale-[0.98] active:translate-y-[0.5px] select-none',
           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--focus-ring)]',
           active
             ? 'bg-[var(--surface-overlay)] text-[var(--text)] font-semibold'
@@ -64,9 +64,6 @@ export const SidebarNavItem = React.forwardRef<HTMLButtonElement, SidebarNavItem
             <span className="text-[10px] font-mono text-[var(--text-muted)]">
               {badge}
             </span>
-          )}
-          {active && (
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" aria-hidden="true" />
           )}
         </div>
       </button>
