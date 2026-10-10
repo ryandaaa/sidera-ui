@@ -27,7 +27,7 @@ export function TopBar({
   onToggleSidebar,
 }: TopBarProps) {
   return (
-    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 select-none">
+    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] pl-2.5 pr-4 sm:pr-6 flex items-center justify-between sticky top-0 z-30 select-none">
       <div className="flex items-center gap-1.5">
         {/* Sidebar Hamburger Toggle Button */}
         <button
