@@ -25,8 +25,10 @@ export interface ContainerProps
 
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, size, as: Component = 'div', ...props }, ref) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any
     return (
-      <Component
+      <Comp
         ref={ref}
         className={cn(containerVariants({ size, className }))}
         {...props}

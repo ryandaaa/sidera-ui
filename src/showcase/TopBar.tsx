@@ -26,6 +26,7 @@ export function TopBar({
   onZoomChange,
   isSidebarCollapsed,
   onToggleSidebar,
+  onRouteChange,
 }: TopBarProps) {
   return (
     <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] pl-2.5 pr-4 sm:pr-6 flex items-center justify-between sticky top-0 z-30 select-none gap-3">
@@ -42,8 +43,12 @@ export function TopBar({
         </button>
 
         <a
-          href="#tokens"
-          className="text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault()
+            onRouteChange?.('')
+          }}
+          className="text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity cursor-pointer"
         >
           sidera-ui
         </a>

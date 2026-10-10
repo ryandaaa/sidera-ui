@@ -38,8 +38,10 @@ export interface StackProps
 
 export const Stack = React.forwardRef<HTMLDivElement, StackProps>(
   ({ className, gap, align, divider, as: Component = 'div', ...props }, ref) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any
     return (
-      <Component
+      <Comp
         ref={ref}
         className={cn(stackVariants({ gap, align, divider, className }))}
         {...props}

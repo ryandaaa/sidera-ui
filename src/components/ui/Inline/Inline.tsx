@@ -56,8 +56,10 @@ export const Inline = React.forwardRef<HTMLDivElement, InlineProps>(
     },
     ref,
   ) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Comp = Component as any
     return (
-      <Component
+      <Comp
         ref={ref}
         className={cn(inlineVariants({ gap, align, justify, wrap, className }))}
         {...props}

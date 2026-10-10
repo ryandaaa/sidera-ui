@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { TopBar } from './showcase/TopBar'
 import { Sidebar } from './showcase/Sidebar'
+import { LandingPage } from './showcase/LandingPage'
 import { TokensPage } from './showcase/TokensPage'
 import { ButtonPreview } from './showcase/previews/ButtonPreview'
 import { InputPreview } from './showcase/previews/InputPreview'
@@ -66,8 +67,7 @@ export default function App() {
 
   // 6. Hash Routing State
   const [route, setRoute] = React.useState<string>(() => {
-    const hash = window.location.hash.replace('#', '')
-    return hash || 'tokens'
+    return window.location.hash.replace('#', '') // '' = landing page
   })
 
   // Synchronize DOM attributes with design token layers
@@ -121,7 +121,7 @@ export default function App() {
   React.useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '')
-      if (hash) setRoute(hash)
+      setRoute(hash) // '' is valid — shows landing page
     }
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
@@ -135,33 +135,40 @@ export default function App() {
   return (
     <ToastProvider>
       <TocProvider>
-        <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
-          {/* Top Bar with Brand, Zoom, Density, Theme Toggles, Hamburger, and Command Search */}
-          <TopBar
-            theme={theme}
-            onThemeChange={setTheme}
-            density={density}
-            onDensityChange={setDensity}
-            zoom={zoom}
-            onZoomChange={setZoom}
-            isSidebarCollapsed={isSidebarCollapsed}
-            onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            onRouteChange={handleRouteChange}
-          />
+        {/* Landing Page (shown when hash is empty / root URL) */}
+        {route === '' && (
+          <LandingPage onEnter={() => handleRouteChange('tokens')} />
+        )}
 
-          {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
-          <div className="flex-1 flex w-full items-start">
-            <Sidebar
-              currentRoute={route}
+        {/* Docs layout (shown for all component routes) */}
+        {route !== '' && (
+          <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text">
+            {/* Top Bar with Brand, Zoom, Density, Theme Toggles, Hamburger, and Command Search */}
+            <TopBar
+              theme={theme}
+              onThemeChange={setTheme}
+              density={density}
+              onDensityChange={setDensity}
+              zoom={zoom}
+              onZoomChange={setZoom}
+              isSidebarCollapsed={isSidebarCollapsed}
+              onToggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
               onRouteChange={handleRouteChange}
-              width={sidebarWidth}
-              onWidthChange={setSidebarWidth}
-              isCollapsed={isSidebarCollapsed}
-              onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
             />
 
-            <main className="flex-1 min-w-0 p-8 lg:p-10">
-              {route === 'tokens' && <TokensPage />}
+            {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
+            <div className="flex-1 flex w-full items-start">
+              <Sidebar
+                currentRoute={route}
+                onRouteChange={handleRouteChange}
+                width={sidebarWidth}
+                onWidthChange={setSidebarWidth}
+                isCollapsed={isSidebarCollapsed}
+                onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+              />
+
+              <main className="flex-1 min-w-0 p-8 lg:p-10">
+                {route === 'tokens' && <TokensPage />}
               {route === 'button' && <ButtonPreview />}
               {route === 'input' && <InputPreview />}
               {route === 'textarea' && <TextareaPreview />}
@@ -195,6 +202,7 @@ export default function App() {
             <TableOfContents />
           </div>
         </div>
+        )}
       </TocProvider>
     </ToastProvider>
   )
