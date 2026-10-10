@@ -1,0 +1,10 @@
+/**
+ * default.css
+ * Default monochrome brand theme.
+ * Pure utilitarian craft: contrast, weight, and hairline borders.
+ */
+
+:root,
+[data-brand="default"] {
+  /* Inherits purely from tokens.css */
+}

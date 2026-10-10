@@ -1,0 +1,175 @@
+/**
+ * tokens.css
+ * Two-layer semantic tokens system.
+ * Components consume ONLY these tokens.
+ * Switches via [data-theme="dark|light"] and [data-density="compact|comfortable"].
+ */
+
+/* ==========================================================================
+   Base & Font Tokens
+   ========================================================================== */
+:root {
+  --font-sans: var(--raw-font-sans);
+  --font-mono: var(--raw-font-mono);
+
+  --radius-none: var(--raw-radius-none);
+  --radius-xs: var(--raw-radius-xs);
+  --radius-sm: var(--raw-radius-sm);
+  --radius-md: var(--raw-radius-md);
+  --radius-full: var(--raw-radius-full);
+
+  --tracking-tight: var(--raw-tracking-tight);
+  --tracking-normal: var(--raw-tracking-normal);
+
+  /* Default density: compact */
+  --control-h-sm: 28px;
+  --control-h-md: 32px;
+  --control-h-lg: 36px;
+
+  --control-px-sm: 8px;
+  --control-px-md: 12px;
+  --control-px-lg: 14px;
+
+  --control-gap-sm: 4px;
+  --control-gap-md: 6px;
+  --control-gap-lg: 8px;
+
+  --space-unit: 4px;
+}
+
+/* Comfortable density override */
+:root[data-density="comfortable"],
+[data-density="comfortable"] {
+  --control-h-sm: 32px;
+  --control-h-md: 36px;
+  --control-h-lg: 40px;
+
+  --control-px-sm: 10px;
+  --control-px-md: 14px;
+  --control-px-lg: 16px;
+
+  --control-gap-sm: 6px;
+  --control-gap-md: 8px;
+  --control-gap-lg: 10px;
+
+  --space-unit: 6px;
+}
+
+/* ==========================================================================
+   Dark Theme (Default Canvas Ladder & Monochromatic Focus)
+   ========================================================================== */
+:root,
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces (Linear-inspired 4-step surface ladder) */
+  --bg: var(--raw-gray-950);                 /* Canvas: #08090a deepest dark */
+  --surface: var(--raw-gray-900);            /* Surface 1: #121417 */
+  --surface-raised: var(--raw-gray-850);     /* Surface 2: #1a1d23 */
+  --surface-overlay: var(--raw-gray-800);    /* Surface 3: #22262d floating layers */
+  --surface-hover: rgba(255, 255, 255, 0.04);
+  --surface-active: rgba(255, 255, 255, 0.08);
+
+  /* Hairline Borders (1px structural) */
+  --border: var(--raw-gray-800);             /* Hairline: subtle divider */
+  --border-strong: var(--raw-gray-700);      /* Hairline strong: control borders */
+  --border-tertiary: var(--raw-gray-850);    /* Secondary hair lines */
+
+  /* Text (Ink scale) */
+  --text: var(--raw-gray-100);               /* Main text / headings */
+  --text-secondary: var(--raw-gray-400);     /* Body muted / descriptions */
+  --text-muted: var(--raw-gray-500);         /* Subtle metadata / placeholder */
+  --text-tertiary: var(--raw-gray-600);      /* Disabled text / footnotes */
+
+  /* Primary Monochrome Accent (Emphasis via Contrast & Inversion) */
+  --primary: var(--raw-white);
+  --primary-foreground: var(--raw-black);
+  --primary-hover: var(--raw-gray-200);
+
+  /* Focus Ring */
+  --focus-ring: rgba(255, 255, 255, 0.7);
+
+  /* Semantic Status (Strictly low-saturation & muted) */
+  --success: var(--raw-success-light);
+  --success-fg: #86efac;
+  --success-bg: var(--raw-success-bg-dark);
+  --success-border: var(--raw-success-border-dark);
+
+  --warning: var(--raw-warning-light);
+  --warning-fg: #fde047;
+  --warning-bg: var(--raw-warning-bg-dark);
+  --warning-border: var(--raw-warning-border-dark);
+
+  --danger: var(--raw-danger-light);
+  --danger-fg: #fca5a5;
+  --danger-bg: var(--raw-danger-bg-dark);
+  --danger-border: var(--raw-danger-border-dark);
+
+  --info: var(--raw-info-light);
+  --info-fg: #7dd3fc;
+  --info-bg: var(--raw-info-bg-dark);
+  --info-border: var(--raw-info-border-dark);
+
+  /* Shadows (Only for floating overlays) */
+  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-strong);
+}
+
+/* ==========================================================================
+   Light Theme (Monochromatic Crisp Contrast)
+   ========================================================================== */
+:root[data-theme="light"],
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #fbfbfc;                             /* Crisp off-white canvas */
+  --surface: #ffffff;                        /* Surface 1 */
+  --surface-raised: var(--raw-gray-50);      /* Surface 2 */
+  --surface-overlay: var(--raw-white);       /* Surface 3 floating */
+  --surface-hover: rgba(0, 0, 0, 0.03);
+  --surface-active: rgba(0, 0, 0, 0.06);
+
+  /* Hairline Borders */
+  --border: var(--raw-gray-200);             /* Hairline: #e2e4e8 */
+  --border-strong: var(--raw-gray-300);      /* Hairline strong: #cfd3d8 */
+  --border-tertiary: var(--raw-gray-150);
+
+  /* Text */
+  --text: var(--raw-gray-950);               /* Near-black ink */
+  --text-secondary: var(--raw-gray-600);     /* Secondary descriptions */
+  --text-muted: var(--raw-gray-400);         /* Subtle metadata */
+  --text-tertiary: var(--raw-gray-300);      /* Disabled text */
+
+  /* Primary Monochrome Accent (Near-black fill on light) */
+  --primary: var(--raw-gray-950);
+  --primary-foreground: var(--raw-white);
+  --primary-hover: var(--raw-gray-800);
+
+  /* Focus Ring */
+  --focus-ring: rgba(8, 9, 10, 0.6);
+
+  /* Semantic Status */
+  --success: var(--raw-success-dark);
+  --success-fg: #15803d;
+  --success-bg: var(--raw-success-bg-light);
+  --success-border: var(--raw-success-border-light);
+
+  --warning: var(--raw-warning-dark);
+  --warning-fg: #b45309;
+  --warning-bg: var(--raw-warning-bg-light);
+  --warning-border: var(--raw-warning-border-light);
+
+  --danger: var(--raw-danger-dark);
+  --danger-fg: #be123c;
+  --danger-bg: var(--raw-danger-bg-light);
+  --danger-border: var(--raw-danger-border-light);
+
+  --info: var(--raw-info-dark);
+  --info-fg: #0369a1;
+  --info-bg: var(--raw-info-bg-light);
+  --info-border: var(--raw-info-border-light);
+
+  /* Shadows (Only for floating overlays) */
+  --shadow-overlay: 0 4px 16px -2px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--border-strong);
+}

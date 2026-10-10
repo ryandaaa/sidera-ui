@@ -1,0 +1,112 @@
+/**
+ * primitives.css
+ * Raw scale definitions.
+ * RULE: Components NEVER import or consume primitives directly.
+ * Only tokens.css and theme files consume these values.
+ */
+
+:root {
+  /* --- Raw Color Scales: Neutral Grayscale --- */
+  --raw-black: #050607;
+  --raw-white: #ffffff;
+
+  --raw-gray-50: #f8f9fa;
+  --raw-gray-100: #f1f3f5;
+  --raw-gray-150: #e9ecef;
+  --raw-gray-200: #e2e4e8;
+  --raw-gray-300: #cfd3d8;
+  --raw-gray-400: #9da3ae;
+  --raw-gray-500: #6b7280;
+  --raw-gray-600: #4b525d;
+  --raw-gray-700: #333842;
+  --raw-gray-800: #22262d;
+  --raw-gray-850: #1a1d23;
+  --raw-gray-900: #121417;
+  --raw-gray-925: #0d0f12;
+  --raw-gray-950: #08090a;
+
+  /* --- Raw Color Scales: Semantic Status (Muted & Low-Saturation) --- */
+  /* Success: muted sage/emerald */
+  --raw-success-light: #22c55e;
+  --raw-success-dark: #16a34a;
+  --raw-success-bg-dark: rgba(34, 197, 94, 0.08);
+  --raw-success-bg-light: rgba(22, 163, 74, 0.08);
+  --raw-success-border-dark: rgba(34, 197, 94, 0.22);
+  --raw-success-border-light: rgba(22, 163, 74, 0.22);
+
+  /* Warning: muted amber */
+  --raw-warning-light: #f59e0b;
+  --raw-warning-dark: #d97706;
+  --raw-warning-bg-dark: rgba(245, 158, 11, 0.08);
+  --raw-warning-bg-light: rgba(217, 119, 6, 0.08);
+  --raw-warning-border-dark: rgba(245, 158, 11, 0.22);
+  --raw-warning-border-light: rgba(217, 119, 6, 0.22);
+
+  /* Danger: muted crimson/rose */
+  --raw-danger-light: #f43f5e;
+  --raw-danger-dark: #e11d48;
+  --raw-danger-bg-dark: rgba(244, 63, 94, 0.08);
+  --raw-danger-bg-light: rgba(225, 29, 72, 0.08);
+  --raw-danger-border-dark: rgba(244, 63, 94, 0.22);
+  --raw-danger-border-light: rgba(225, 29, 72, 0.22);
+
+  /* Info: muted slate-blue */
+  --raw-info-light: #38bdf8;
+  --raw-info-dark: #0284c7;
+  --raw-info-bg-dark: rgba(56, 189, 248, 0.08);
+  --raw-info-bg-light: rgba(2, 132, 199, 0.08);
+  --raw-info-border-dark: rgba(56, 189, 248, 0.22);
+  --raw-info-border-light: rgba(2, 132, 199, 0.22);
+
+  /* --- Raw Typography Scales --- */
+  --raw-font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --raw-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --raw-text-2xs: 10px;
+  --raw-leading-2xs: 13px;
+
+  --raw-text-xs: 11px;
+  --raw-leading-xs: 15px;
+
+  --raw-text-sm: 12px;
+  --raw-leading-sm: 16px;
+
+  --raw-text-base: 13px;
+  --raw-leading-base: 18px;
+
+  --raw-text-md: 14px;
+  --raw-leading-md: 20px;
+
+  --raw-text-lg: 16px;
+  --raw-leading-lg: 22px;
+
+  --raw-text-xl: 18px;
+  --raw-leading-xl: 24px;
+
+  --raw-text-2xl: 22px;
+  --raw-leading-2xl: 28px;
+
+  --raw-tracking-tight: -0.022em;
+  --raw-tracking-normal: -0.01em;
+
+  /* --- Raw Radius Scale (Restrained 0-4px max) --- */
+  --raw-radius-none: 0px;
+  --raw-radius-xs: 2px;
+  --raw-radius-sm: 3px;
+  --raw-radius-md: 4px;
+  --raw-radius-full: 9999px;
+
+  /* --- Raw Spacing --- */
+  --raw-space-0: 0px;
+  --raw-space-1: 2px;
+  --raw-space-2: 4px;
+  --raw-space-3: 6px;
+  --raw-space-4: 8px;
+  --raw-space-5: 10px;
+  --raw-space-6: 12px;
+  --raw-space-7: 14px;
+  --raw-space-8: 16px;
+  --raw-space-10: 20px;
+  --raw-space-12: 24px;
+  --raw-space-16: 32px;
+}

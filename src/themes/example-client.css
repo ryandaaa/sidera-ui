@@ -1,0 +1,29 @@
+/**
+ * example-client.css
+ * Example Client Brand: Linear-inspired Lavender Accent
+ * Proves that client branding swaps ONLY semantic tokens without touching component code.
+ */
+
+/* Dark Mode Brand Overrides */
+[data-brand="linear"],
+[data-brand="example-client"] {
+  --primary: #5e6ad2;
+  --primary-foreground: #ffffff;
+  --primary-hover: #717fe3;
+  --focus-ring: rgba(94, 106, 210, 0.55);
+
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+/* Light Mode Brand Overrides */
+:root[data-theme="light"][data-brand="linear"],
+:root[data-theme="light"][data-brand="example-client"],
+[data-theme="light"][data-brand="linear"],
+[data-theme="light"][data-brand="example-client"] {
+  --primary: #4c57b8;
+  --primary-foreground: #ffffff;
+  --primary-hover: #3d469c;
+  --focus-ring: rgba(76, 87, 184, 0.45);
+}
