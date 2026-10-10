@@ -55,9 +55,16 @@ const groups: NavGroup[] = [
     ],
   },
   {
+    title: 'Overlay',
+    items: [
+      { id: 'dialog', label: 'Dialog' },
+      { id: 'popover', label: 'Popover' },
+      { id: 'dropdown-menu', label: 'Dropdown Menu' },
+    ],
+  },
+  {
     title: 'Upcoming (Phase 2)',
     items: [
-      { id: 'overlay', label: 'Overlay (Dialog, Popover, Menu)', badge: 'next' },
       { id: 'navigation', label: 'Navigation (Tabs, Breadcrumb)', badge: 'next' },
       { id: 'layout', label: 'Layout (Stack, Inline, PageHeader)', badge: 'next' },
     ],

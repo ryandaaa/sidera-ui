@@ -22,6 +22,9 @@ import { AlertPreview } from './showcase/previews/AlertPreview'
 import { ToastPreview } from './showcase/previews/ToastPreview'
 import { ProgressSpinnerPreview } from './showcase/previews/ProgressSpinnerPreview'
 import { TooltipPreview } from './showcase/previews/TooltipPreview'
+import { DialogPreview } from './showcase/previews/DialogPreview'
+import { PopoverPreview } from './showcase/previews/PopoverPreview'
+import { DropdownMenuPreview } from './showcase/previews/DropdownMenuPreview'
 import { ToastProvider } from './components/ui/Toast'
 
 export default function App() {
@@ -121,6 +124,9 @@ export default function App() {
             {route === 'toast' && <ToastPreview />}
             {route === 'progress-spinner' && <ProgressSpinnerPreview />}
             {route === 'tooltip' && <TooltipPreview />}
+            {route === 'dialog' && <DialogPreview />}
+            {route === 'popover' && <PopoverPreview />}
+            {route === 'dropdown-menu' && <DropdownMenuPreview />}
           </main>
         </div>
       </div>

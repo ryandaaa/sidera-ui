@@ -28,3 +28,8 @@ export * from './Spinner'
 export * from './Progress'
 export * from './Tooltip'
 export * from './Toast'
+
+// Overlay
+export * from './Dialog'
+export * from './Popover'
+export * from './DropdownMenu'
