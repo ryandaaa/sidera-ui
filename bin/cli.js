@@ -70,7 +70,7 @@ const COMPONENTS = {
 function printBanner() {
   console.log(`
 \x1b[90m┌──────────────────────────────────────────────┐\x1b[0m
-\x1b[1m\x1b[37m  sidera-ui\x1b[0m \x1b[90mv0.1.0\x1b[0m
+\x1b[1m\x1b[37m  sidera-ui\x1b[0m \x1b[90mv0.1.1\x1b[0m
 \x1b[90m  Minimalist, utilitarian UI primitives for React\x1b[0m
 \x1b[90m└──────────────────────────────────────────────┘\x1b[0m
 `);

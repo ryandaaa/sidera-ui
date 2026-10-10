@@ -193,7 +193,7 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
 
       {/* Bottom Left — version */}
       <div className="absolute bottom-5 left-6 z-20 font-mono text-[11px] text-white/25 select-none hidden sm:block">
-        v0.1.0
+        v0.1.1
       </div>
 
       {/* Bottom Right — personal github profile link */}

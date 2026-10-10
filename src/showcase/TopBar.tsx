@@ -53,7 +53,7 @@ export function TopBar({
           sidera-ui
         </a>
         <span className="font-mono text-[11px] text-[var(--text-muted)] ml-1 hidden sm:inline-block select-none">
-          v0.1.0
+          v0.1.1
         </span>
       </div>
 
