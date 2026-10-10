@@ -1,17 +1,15 @@
 import * as React from 'react'
-import { Check, Minus } from 'lucide-react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
 export const checkboxBoxVariants = cva(
   [
     'peer shrink-0 flex items-center justify-center',
-    'rounded-[var(--radius-xs)] border transition-all duration-100',
-    'bg-[var(--surface)] border-[var(--border-strong)]',
-    'group-hover:border-[var(--text-secondary)]',
+    'rounded-[var(--radius-xs)] border transition-all duration-200 ease-out active:scale-90',
     'group-focus-within:ring-2 group-focus-within:ring-[var(--focus-ring)] group-focus-within:ring-offset-1 group-focus-within:ring-offset-[var(--bg)]',
     'data-[state=checked]:bg-[var(--primary)] data-[state=checked]:border-[var(--primary)] data-[state=checked]:text-[var(--primary-foreground)]',
     'data-[state=indeterminate]:bg-[var(--primary)] data-[state=indeterminate]:border-[var(--primary)] data-[state=indeterminate]:text-[var(--primary-foreground)]',
+    'data-[state=unchecked]:bg-transparent data-[state=unchecked]:border-[var(--border-strong)] group-hover:data-[state=unchecked]:border-[var(--border-hover)]',
     'data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-45',
   ],
   {
@@ -68,7 +66,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
     const state = indeterminate ? 'indeterminate' : checked ? 'checked' : 'unchecked'
 
-    const iconSizeClass = size === 'sm' ? 'h-2.5 w-2.5' : size === 'lg' ? 'h-3.5 w-3.5' : 'h-3 w-3'
+    const svgSizeClass = size === 'sm' ? 'h-2.5 w-2.5' : size === 'lg' ? 'h-3.5 w-3.5' : 'h-3 w-3'
 
     const content = (
       <div
@@ -79,11 +77,45 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         data-state={state}
         data-disabled={disabled ? 'true' : 'false'}
       >
-        {indeterminate ? (
-          <Minus className={cn(iconSizeClass, 'stroke-[2.5]')} />
-        ) : checked ? (
-          <Check className={cn(iconSizeClass, 'stroke-[2.5]')} />
-        ) : null}
+        <svg
+          viewBox="0 0 16 16"
+          className={cn(
+            'overflow-visible select-none pointer-events-none fill-none',
+            svgSizeClass,
+          )}
+          aria-hidden="true"
+        >
+          {/* Indeterminate Minus Bar */}
+          <path
+            d="M3.5 8h9"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            style={{ transformOrigin: '8px 8px' }}
+            className={cn(
+              'transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+              indeterminate
+                ? 'scale-100 opacity-100'
+                : 'scale-0 opacity-0 pointer-events-none',
+            )}
+          />
+          {/* Checkmark with SVG Dashoffset Path Draw & Spring Pop */}
+          <path
+            d="M3.5 8.25L6.5 11.25L12.5 4.75"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="16"
+            style={{ transformOrigin: '8px 8px' }}
+            className={cn(
+              'transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+              !indeterminate && checked
+                ? '[stroke-dashoffset:0] scale-100 opacity-100 rotate-0'
+                : '[stroke-dashoffset:16] scale-50 opacity-0 -rotate-12 pointer-events-none',
+            )}
+          />
+        </svg>
       </div>
     )
 

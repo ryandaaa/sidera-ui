@@ -77,11 +77,8 @@ RadioGroup.displayName = 'RadioGroup'
 
 export const radioCircleVariants = cva(
   [
-    'shrink-0 rounded-full flex items-center justify-center border transition-all duration-100',
-    'bg-[var(--surface)] border-[var(--border-strong)]',
-    'group-hover:border-[var(--text-secondary)]',
+    'shrink-0 rounded-full flex items-center justify-center transition-transform duration-150 ease-out active:scale-90',
     'group-focus-within:ring-2 group-focus-within:ring-[var(--focus-ring)] group-focus-within:ring-offset-1 group-focus-within:ring-offset-[var(--bg)]',
-    'data-[state=checked]:border-[var(--primary)]',
     'data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-45',
   ],
   {
@@ -128,9 +125,6 @@ export const RadioItem = React.forwardRef<HTMLInputElement, RadioItemProps>(
     const isDisabled = itemDisabled || context?.disabled
     const size = itemSize || context?.size || 'md'
 
-    const dotSizeClass =
-      size === 'sm' ? 'h-1.5 w-1.5' : size === 'lg' ? 'h-2.5 w-2.5' : 'h-2 w-2'
-
     return (
       <label
         htmlFor={inputId}
@@ -157,14 +151,42 @@ export const RadioItem = React.forwardRef<HTMLInputElement, RadioItemProps>(
           data-state={isChecked ? 'checked' : 'unchecked'}
           data-disabled={isDisabled ? 'true' : 'false'}
         >
-          {isChecked && (
-            <span
+          <svg
+            viewBox="0 0 16 16"
+            className="h-full w-full overflow-visible select-none pointer-events-none"
+            aria-hidden="true"
+          >
+            {/* Outer Ring - Smooth border morph */}
+            <circle
+              cx="8"
+              cy="8"
+              r="6.8"
+              fill="var(--surface)"
+              stroke="currentColor"
+              strokeWidth="1.4"
               className={cn(
-                'rounded-full bg-[var(--primary)]',
-                dotSizeClass,
+                'transition-colors duration-200 ease-out',
+                isChecked
+                  ? 'stroke-[var(--primary)] text-[var(--primary)]'
+                  : 'stroke-[var(--border-strong)] text-[var(--border-strong)] group-hover:stroke-[var(--border-hover)]',
+                isDisabled && 'opacity-40',
               )}
             />
-          )}
+            {/* Center Dot - Mathematically dead center at (8, 8) with overkill spring scale animation */}
+            <circle
+              cx="8"
+              cy="8"
+              r="3.5"
+              fill="var(--primary)"
+              style={{ transformOrigin: '8px 8px' }}
+              className={cn(
+                'transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+                isChecked
+                  ? 'scale-100 opacity-100'
+                  : 'scale-0 opacity-0 pointer-events-none',
+              )}
+            />
+          </svg>
         </div>
         {(label || description) && (
           <div className="flex flex-col leading-tight -mt-0.5">
