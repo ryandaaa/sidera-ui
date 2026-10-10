@@ -4,23 +4,24 @@ import { cn } from '@/lib/cn'
 
 export const inputVariants = cva(
   [
-    'flex w-full select-text text-xs text-[var(--text)] bg-[var(--surface-raised)]',
-    'rounded-[var(--radius-sm)] border border-[var(--border-strong)]',
+    'flex w-full select-text text-[var(--text)] bg-transparent',
+    'border-0 border-b border-[var(--border)] rounded-none',
     'placeholder:text-[var(--text-muted)]',
-    'transition-colors duration-100',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:border-transparent',
-    'disabled:pointer-events-none disabled:opacity-45',
+    'transition-colors duration-150',
+    'hover:border-[var(--text-secondary)]',
+    'focus:outline-none focus:ring-0',
+    'disabled:pointer-events-none disabled:opacity-40 disabled:border-dashed',
   ],
   {
     variants: {
       size: {
-        sm: 'h-[var(--control-h-sm)] px-2 text-[11px]',
-        md: 'h-[var(--control-h-md)] px-2.5 text-xs',
-        lg: 'h-[var(--control-h-lg)] px-3 text-xs',
+        sm: 'h-[var(--control-h-sm)] text-[11px] pb-1 pt-1',
+        md: 'h-[var(--control-h-md)] text-xs pb-1.5 pt-1.5',
+        lg: 'h-[var(--control-h-lg)] text-sm pb-2 pt-2',
       },
       hasError: {
-        true: 'border-[var(--danger)] focus-visible:ring-[var(--danger)]',
-        false: 'hover:border-[var(--text-secondary)]',
+        true: 'border-[var(--danger)]',
+        false: '',
       },
     },
     defaultVariants: {
@@ -41,8 +42,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
-      size,
-      hasError,
+      size = 'md',
+      hasError = false,
       leftElement,
       rightElement,
       disabled,
@@ -51,49 +52,50 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
-    if (leftElement || rightElement) {
-      return (
-        <div
-          className={cn(
-            'relative flex items-center w-full',
-            disabled && 'opacity-45 pointer-events-none',
-          )}
-        >
-          {leftElement && (
-            <div className="absolute left-2.5 flex items-center pointer-events-none text-[var(--text-muted)]">
-              {leftElement}
-            </div>
-          )}
-          <input
-            ref={ref}
-            type={type}
-            disabled={disabled}
-            aria-invalid={hasError ? 'true' : undefined}
-            className={cn(
-              inputVariants({ size, hasError, className }),
-              leftElement && 'pl-8',
-              rightElement && 'pr-8',
-            )}
-            {...props}
-          />
-          {rightElement && (
-            <div className="absolute right-2.5 flex items-center pointer-events-none text-[var(--text-muted)]">
-              {rightElement}
-            </div>
-          )}
-        </div>
-      )
-    }
-
     return (
-      <input
-        ref={ref}
-        type={type}
-        disabled={disabled}
-        aria-invalid={hasError ? 'true' : undefined}
-        className={cn(inputVariants({ size, hasError, className }))}
-        {...props}
-      />
+      <div
+        className={cn(
+          'group relative flex items-center w-full',
+          disabled && 'opacity-40 pointer-events-none',
+          className,
+        )}
+      >
+        {leftElement && (
+          <div className="absolute left-0 flex items-center pointer-events-none text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
+            {leftElement}
+          </div>
+        )}
+
+        <input
+          ref={ref}
+          type={type}
+          disabled={disabled}
+          aria-invalid={hasError ? 'true' : undefined}
+          className={cn(
+            inputVariants({ size, hasError }),
+            leftElement ? 'pl-6' : 'pl-0.5',
+            rightElement ? 'pr-7' : 'pr-0.5',
+          )}
+          {...props}
+        />
+
+        {rightElement && (
+          <div className="absolute right-0 flex items-center text-[var(--text-muted)] group-focus-within:text-[var(--text)] transition-colors duration-150">
+            {rightElement}
+          </div>
+        )}
+
+        {/* Smooth animated active bottom line */}
+        <span
+          aria-hidden="true"
+          className={cn(
+            'absolute bottom-0 left-0 right-0 h-[1.5px] pointer-events-none origin-left transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)]',
+            hasError
+              ? 'bg-[var(--danger)] scale-x-100'
+              : 'bg-[var(--primary)] scale-x-0 group-focus-within:scale-x-100',
+          )}
+        />
+      </div>
     )
   },
 )

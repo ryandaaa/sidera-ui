@@ -61,7 +61,7 @@ export function InputPreview() {
   return (
     <ComponentDoc
       title="Input"
-      description="Single-line text input control. Token-bound surface, 1px border-strong, clear focus ring, optional icon slots."
+      description="Minimalist underline input control. Boxless flat baseline, smooth animated active bottom line transition, token-bound monochrome palette, and optional icon slots."
       componentPath="src/components/ui/Input"
       propsSpec={propsSpec}
       usageCode={usageCode}
