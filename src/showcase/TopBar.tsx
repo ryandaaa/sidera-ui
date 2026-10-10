@@ -1,6 +1,5 @@
 import { Sun, Moon, Maximize2, Minimize2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 
 export interface TopBarProps {
   theme: 'dark' | 'light'
@@ -31,9 +30,9 @@ export function TopBar({
           </div>
           <span>SIDERA UI</span>
         </a>
-        <Badge variant="neutral" size="sm">
-          v0.1.0-dev
-        </Badge>
+        <span className="font-mono text-[10px] text-[var(--text-muted)]">
+          v0.1.0
+        </span>
       </div>
 
       <div className="flex items-center gap-2">

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Copy, Check } from 'lucide-react'
-import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 
 export interface PropSpec {
@@ -39,13 +38,13 @@ export function ComponentDoc({
     <div className="space-y-8 max-w-5xl text-left">
       {/* Component Header */}
       <div className="space-y-1.5 border-b border-[var(--border)] pb-4">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-baseline gap-2.5">
           <h1 className="text-xl font-bold tracking-tight text-[var(--text)]">
             {title}
           </h1>
-          <Badge variant="outline" size="sm" className="font-mono text-[10px]">
+          <span className="font-mono text-[11px] text-[var(--text-muted)]">
             {componentPath}
-          </Badge>
+          </span>
         </div>
         <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
           {description}

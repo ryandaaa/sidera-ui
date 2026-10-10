@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/Badge'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 
 interface TokenSwatch {
@@ -60,14 +59,9 @@ export function TokensPage() {
     <div className="space-y-10 max-w-5xl text-left">
       {/* Intro */}
       <div className="space-y-1.5 border-b border-[var(--border)] pb-4">
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold tracking-tight text-[var(--text)]">
-            Design Tokens Architecture
-          </h1>
-          <Badge variant="neutral" size="sm">
-            2-Layer System
-          </Badge>
-        </div>
+        <h1 className="text-xl font-bold tracking-tight text-[var(--text)]">
+          Design Tokens Architecture
+        </h1>
         <p className="text-xs text-[var(--text-secondary)] leading-relaxed max-w-2xl">
           Two-tier token design: raw scales in <code className="text-[var(--text)] font-mono">primitives.css</code> are mapped to semantic tokens in <code className="text-[var(--text)] font-mono">tokens.css</code>. Components consume exclusively semantic tokens.
         </p>
