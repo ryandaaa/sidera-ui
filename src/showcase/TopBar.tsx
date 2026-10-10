@@ -1,6 +1,7 @@
 import { Sun, Moon, Maximize2, Minimize2, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { GithubIcon } from './icons/GithubIcon'
+import { EXTERNAL_LINKS } from '@/config/links'
 
 export interface TopBarProps {
   theme: 'dark' | 'light'
@@ -114,15 +115,15 @@ export function TopBar({
 
         {/* GitHub Repository Link */}
         <a
-          href="https://github.com/ryandaaa/sidera-ui"
+          href={EXTERNAL_LINKS.githubRepo.url}
           target="_blank"
           rel="noopener noreferrer"
           className="h-7 px-2 rounded-[var(--radius-xs)] flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors active:scale-95 cursor-pointer"
-          title="View GitHub repository (github.com/ryandaaa/sidera-ui)"
+          title={`View GitHub repository (${EXTERNAL_LINKS.githubRepo.url})`}
           aria-label="GitHub Repository"
         >
           <GithubIcon className="h-3.5 w-3.5 shrink-0 stroke-[1.75]" />
-          <span className="hidden sm:inline text-xs font-normal">GitHub</span>
+          <span className="hidden sm:inline text-xs font-normal">{EXTERNAL_LINKS.githubRepo.label}</span>
         </a>
       </div>
     </header>

@@ -35,6 +35,7 @@ import {
 import { CommandSearch } from '@/components/ui/CommandSearch'
 import { searchComponents } from './searchIndex'
 import { GithubIcon } from './icons/GithubIcon'
+import { EXTERNAL_LINKS } from '@/config/links'
 
 export interface SidebarProps {
   currentRoute: string
@@ -455,30 +456,30 @@ export function Sidebar({
       >
         {/* Link 1: Personal Web */}
         <a
-          href="https://space.ryandaollama.dev"
+          href={EXTERNAL_LINKS.personalSpace.url}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors group cursor-pointer"
-          title="Visit personal website (space.ryandaollama.dev)"
+          title={`Visit personal website (${EXTERNAL_LINKS.personalSpace.label})`}
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <Globe className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
-            <span className="truncate font-mono text-[11px]">space.ryandaollama.dev</span>
+            <span className="truncate font-mono text-[11px]">{EXTERNAL_LINKS.personalSpace.label}</span>
           </div>
           <ExternalLink className="h-3 w-3 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors opacity-60 group-hover:opacity-100" />
         </a>
 
         {/* Link 2: GitHub Profile */}
         <a
-          href="https://github.com/ryandaaa"
+          href={EXTERNAL_LINKS.githubProfile.url}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors group cursor-pointer"
-          title="Visit GitHub profile (github.com/ryandaaa)"
+          title={`Visit GitHub profile (${EXTERNAL_LINKS.githubProfile.label})`}
         >
           <div className="flex items-center gap-2.5 min-w-0">
             <GithubIcon className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
-            <span className="truncate font-mono text-[11px]">github.com/ryandaaa</span>
+            <span className="truncate font-mono text-[11px]">{EXTERNAL_LINKS.githubProfile.label}</span>
           </div>
           <ExternalLink className="h-3 w-3 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors opacity-60 group-hover:opacity-100" />
         </a>
