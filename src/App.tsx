@@ -80,17 +80,13 @@ export default function App() {
     localStorage.setItem('sidera-brand', brand)
   }, [brand])
 
-  // Synchronize UI Zoom
+  // Synchronize UI Zoom (Scale root font-size cleanly to avoid Chromium sticky compositor drift bug)
   React.useEffect(() => {
-    const zoomMap: Record<string, string> = {
-      '100%': '1',
-      '110%': '1.1',
-      '125%': '1.25',
-    }
-    const zoomValue = zoomMap[zoom] || '1.1'
-    ;(document.documentElement.style as unknown as { zoom: string }).zoom = zoomValue
+    // Clear legacy CSS zoom that causes Chromium sticky scroll drift
+    ;(document.documentElement.style as unknown as { zoom: string }).zoom = ''
+    // Scale root font-size cleanly (100% = 16px, 110% = 17.6px, 125% = 20px)
+    document.documentElement.style.fontSize = zoom
     localStorage.setItem('sidera-zoom', zoom)
-    // Dispatch window resize so indicator and sticky measurements update immediately
     window.dispatchEvent(new Event('resize'))
   }, [zoom])
 

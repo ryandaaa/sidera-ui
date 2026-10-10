@@ -113,7 +113,7 @@ const groups: NavGroup[] = [
 
 export function Sidebar({ currentRoute, onRouteChange }: SidebarProps) {
   return (
-    <aside className="w-64 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] h-[calc(100vh-48px)] sticky top-12 overflow-y-auto flex flex-col p-4 select-none">
+    <aside className="w-64 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] h-[calc(100vh-3rem)] sticky top-12 overflow-y-auto flex flex-col p-4 select-none">
       <nav className="flex flex-col gap-6 text-[13px]">
         {groups.map((group) => (
           <div key={group.title} className="flex flex-col gap-1.5">

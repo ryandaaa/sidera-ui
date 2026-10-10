@@ -115,7 +115,7 @@ export function TableOfContents({ items: propItems }: TableOfContentsProps) {
   if (items.length === 0) return null
 
   return (
-    <nav className="w-56 shrink-0 hidden xl:block sticky top-12 h-[calc(100vh-48px)] overflow-y-auto py-8 pr-6 select-none">
+    <nav className="w-56 shrink-0 hidden xl:block sticky top-12 h-fit max-h-[calc(100vh-3rem)] overflow-y-auto py-8 pr-6 select-none">
       <div className="space-y-3">
         <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text)]">
           On this page
