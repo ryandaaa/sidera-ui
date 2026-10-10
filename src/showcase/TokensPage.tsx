@@ -1,4 +1,4 @@
-import { TableOfContents, type TocItem } from './TableOfContents'
+import { useToc, type TocItem } from './TableOfContents'
 
 interface TokenSwatch {
   token: string
@@ -63,10 +63,10 @@ const tokensToc: TocItem[] = [
 ]
 
 export function TokensPage() {
+  useToc(tokensToc)
+
   return (
-    <div className="flex w-full items-start justify-between gap-10">
-      {/* Center Documentation Content */}
-      <div className="flex-1 min-w-0 max-w-4xl space-y-14 text-left">
+    <div className="w-full max-w-4xl space-y-14 text-left">
         {/* Intro */}
         <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-6 scroll-mt-20">
           <h1 className="text-2xl font-bold tracking-tight text-[var(--text)]">
@@ -259,10 +259,6 @@ export function TokensPage() {
             ))}
           </div>
         </section>
-      </div>
-
-      {/* Right Column: Sticky Table of Contents */}
-      <TableOfContents items={tokensToc} />
     </div>
   )
 }

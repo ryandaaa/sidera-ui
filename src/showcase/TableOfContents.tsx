@@ -6,11 +6,44 @@ export interface TocItem {
   level?: number
 }
 
-export interface TableOfContentsProps {
-  items: TocItem[]
+interface TocContextType {
+  tocItems: TocItem[]
+  setTocItems: (items: TocItem[]) => void
 }
 
-export function TableOfContents({ items }: TableOfContentsProps) {
+const TocContext = React.createContext<TocContextType>({
+  tocItems: [],
+  setTocItems: () => {},
+})
+
+export function TocProvider({ children }: { children: React.ReactNode }) {
+  const [tocItems, setTocItems] = React.useState<TocItem[]>([])
+  return (
+    <TocContext.Provider value={{ tocItems, setTocItems }}>
+      {children}
+    </TocContext.Provider>
+  )
+}
+
+export function useToc(items?: TocItem[]) {
+  const { setTocItems } = React.useContext(TocContext)
+
+  React.useEffect(() => {
+    if (items && items.length > 0) {
+      setTocItems(items)
+      return () => setTocItems([])
+    }
+  }, [items, setTocItems])
+}
+
+export interface TableOfContentsProps {
+  items?: TocItem[]
+}
+
+export function TableOfContents({ items: propItems }: TableOfContentsProps) {
+  const { tocItems: contextItems } = React.useContext(TocContext)
+  const items = propItems || contextItems
+
   const [activeId, setActiveId] = React.useState<string>(items[0]?.id || '')
   const isManualClickRef = React.useRef(false)
   const timeoutRef = React.useRef<number | undefined>(undefined)
@@ -82,7 +115,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   if (items.length === 0) return null
 
   return (
-    <nav className="w-56 shrink-0 hidden xl:block sticky top-12 h-[calc(100vh-48px)] overflow-y-auto py-6 pr-4 select-none">
+    <nav className="w-56 shrink-0 hidden xl:block sticky top-12 h-[calc(100vh-48px)] overflow-y-auto py-8 pr-6 select-none">
       <div className="space-y-3">
         <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text)]">
           On this page
