@@ -18,6 +18,38 @@ export interface TopBarProps {
   onRouteChange?: (route: string) => void
 }
 
+function HighlightMatch({ text, query }: { text: string; query: string }) {
+  const trimmed = query.trim()
+  if (!trimmed || !text) return <>{text}</>
+
+  const words = trimmed.split(/\s+/).filter(Boolean)
+  if (words.length === 0) return <>{text}</>
+
+  const escapedWords = words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi')
+  const parts = text.split(regex)
+  const lowerWords = new Set(words.map((w) => w.toLowerCase()))
+
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (!part) return null
+        if (lowerWords.has(part.toLowerCase())) {
+          return (
+            <span
+              key={i}
+              className="text-[var(--text)] font-semibold bg-[var(--surface-active)] px-0.5 rounded-[2px] underline underline-offset-2 decoration-1 decoration-current"
+            >
+              {part}
+            </span>
+          )
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>
+      })}
+    </>
+  )
+}
+
 export function TopBar({
   theme,
   onThemeChange,
@@ -34,16 +66,25 @@ export function TopBar({
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const searchInputRef = React.useRef<HTMLInputElement>(null)
   const dropdownRef = React.useRef<HTMLDivElement>(null)
+  const itemRefs = React.useRef<(HTMLButtonElement | null)[]>([])
 
   // Enhanced search across labels, aliases, descriptions, and subcomponents
   const searchResults = React.useMemo(() => {
     return searchComponents(searchQuery)
   }, [searchQuery])
 
-  // Reset selected index when search query updates
+  // Reset selected index and item refs when search query updates
   React.useEffect(() => {
     setSelectedIndex(0)
+    itemRefs.current = []
   }, [searchQuery])
+
+  // Scroll selected item into view on keyboard navigation
+  React.useEffect(() => {
+    if (isSearchOpen && itemRefs.current[selectedIndex]) {
+      itemRefs.current[selectedIndex]?.scrollIntoView({ block: 'nearest' })
+    }
+  }, [selectedIndex, isSearchOpen])
 
   // Global Ctrl+K / Cmd+K shortcut to focus search input
   React.useEffect(() => {
@@ -159,31 +200,56 @@ export function TopBar({
         {isSearchOpen && searchQuery.trim() && (
           <div
             ref={dropdownRef}
-            className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-72 overflow-y-auto p-1 text-xs"
+            className="absolute left-0 right-0 top-full mt-1.5 bg-[var(--surface-overlay)] border border-[var(--border)] rounded-[var(--radius-sm)] shadow-[var(--shadow-overlay)] z-50 max-h-80 overflow-y-auto p-1 text-xs"
           >
             {searchResults.length === 0 ? (
               <div className="py-3 px-3 text-center text-[var(--text-muted)] text-xs font-mono">
                 No components matching "{searchQuery}"
               </div>
             ) : (
-              searchResults.map(({ item }, index) => {
+              searchResults.map(({ item, matchSnippet }, index) => {
                 const isSelected = index === selectedIndex
                 return (
                   <button
                     key={item.id}
+                    ref={(el) => {
+                      itemRefs.current[index] = el
+                    }}
                     type="button"
                     onClick={() => handleSelectRoute(item.id)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full flex items-center justify-between px-3 py-1.5 rounded-[var(--radius-xs)] text-left transition-colors cursor-pointer ${
+                    className={`w-full flex flex-col px-3 py-1.5 rounded-[var(--radius-xs)] text-left transition-colors cursor-pointer gap-0.5 ${
                       isSelected
-                        ? 'bg-[var(--surface-raised)] text-[var(--text)] font-medium'
-                        : 'text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)]'
+                        ? 'bg-[var(--surface-raised)]'
+                        : 'hover:bg-[var(--surface-hover)]'
                     }`}
                   >
-                    <span className="font-medium text-[var(--text)]">{item.label}</span>
-                    <span className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
-                      {item.group}
-                    </span>
+                    {/* Line 1: Component Title (Left) + Category (Right) */}
+                    <div className="flex items-center justify-between w-full gap-2">
+                      <span
+                        className={`text-xs truncate ${
+                          isSelected
+                            ? 'font-semibold text-[var(--text)]'
+                            : 'font-medium text-[var(--text)]'
+                        }`}
+                      >
+                        <HighlightMatch text={item.label} query={searchQuery} />
+                      </span>
+                      <span className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-wider shrink-0">
+                        {item.group}
+                      </span>
+                    </div>
+
+                    {/* Line 2: Matched location & context snippet */}
+                    <div
+                      className={`text-[11px] truncate leading-tight ${
+                        isSelected
+                          ? 'text-[var(--text-secondary)]'
+                          : 'text-[var(--text-muted)]'
+                      }`}
+                    >
+                      <HighlightMatch text={matchSnippet} query={searchQuery} />
+                    </div>
                   </button>
                 )
               })

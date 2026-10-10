@@ -250,7 +250,38 @@ export const searchableItems: SearchableItem[] = [
 export interface SearchResult {
   item: SearchableItem
   score: number
-  matchedReason?: string
+  matchSnippet: string
+}
+
+function getSnippet(fullText: string, query: string, maxLength = 75): string {
+  const lowerText = fullText.toLowerCase()
+  const clean = query.toLowerCase().trim()
+  let index = lowerText.indexOf(clean)
+
+  if (index === -1) {
+    const words = clean.split(/\s+/).filter(Boolean)
+    for (const w of words) {
+      const idx = lowerText.indexOf(w)
+      if (idx !== -1) {
+        index = idx
+        break
+      }
+    }
+  }
+
+  if (index === -1) {
+    if (fullText.length <= maxLength) return fullText
+    return fullText.slice(0, maxLength).trimEnd() + '...'
+  }
+
+  const contextBefore = 20
+  const start = Math.max(0, index - contextBefore)
+  const end = Math.min(fullText.length, start + maxLength)
+
+  let snippet = fullText.slice(start, end)
+  if (start > 0) snippet = '...' + snippet.trimStart()
+  if (end < fullText.length) snippet = snippet.trimEnd() + '...'
+  return snippet
 }
 
 export function searchComponents(query: string): SearchResult[] {
@@ -269,7 +300,7 @@ export function searchComponents(query: string): SearchResult[] {
     const subLower = (item.subcomponents || []).map((s) => s.toLowerCase())
 
     let score = 0
-    let matchedReason: string | undefined
+    let matchSnippet: string | undefined
 
     // 1. Exact or prefix matches on Title
     if (labelLower === clean) {
@@ -280,41 +311,55 @@ export function searchComponents(query: string): SearchResult[] {
       score += 250
     }
 
-    // 2. ID match
+    // 2. Aliases / Synonyms match (e.g. 'modal' -> Dialog)
+    for (const alias of item.aliases) {
+      const aLower = alias.toLowerCase()
+      if (aLower === clean) {
+        score += 450
+        if (!matchSnippet && aLower !== labelLower) {
+          matchSnippet = `Alias: "${alias}"`
+        }
+        break
+      } else if (aLower.includes(clean)) {
+        score += 200
+        if (!matchSnippet && aLower !== labelLower) {
+          matchSnippet = `Alias: "${alias}"`
+        }
+      }
+    }
+
+    // 3. Subcomponents match
+    if (item.subcomponents) {
+      for (const sub of item.subcomponents) {
+        const sLower = sub.toLowerCase()
+        if (sLower === clean) {
+          score += 350
+          if (!matchSnippet && sLower !== labelLower) {
+            matchSnippet = `Export: <${sub} />`
+          }
+          break
+        } else if (sLower.includes(clean)) {
+          score += 150
+          if (!matchSnippet && sLower !== labelLower) {
+            matchSnippet = `Export: <${sub} />`
+          }
+        }
+      }
+    }
+
+    // 4. Description match
+    if (descLower.includes(clean)) {
+      score += 120
+      if (!matchSnippet) {
+        matchSnippet = getSnippet(item.description, clean)
+      }
+    }
+
+    // 5. ID match
     if (idLower === clean) {
       score += 300
     } else if (idLower.includes(clean)) {
       score += 150
-    }
-
-    // 3. Aliases / Synonyms match (e.g. 'modal' -> Dialog)
-    for (const alias of aliasesLower) {
-      if (alias === clean) {
-        score += 400
-        matchedReason = `Alias: "${alias}"`
-        break
-      } else if (alias.includes(clean)) {
-        score += 180
-        if (!matchedReason) matchedReason = `Alias: "${alias}"`
-      }
-    }
-
-    // 4. Subcomponents match
-    for (const sub of subLower) {
-      if (sub === clean) {
-        score += 250
-        matchedReason = `Export: <${sub} />`
-        break
-      } else if (sub.includes(clean)) {
-        score += 120
-        if (!matchedReason) matchedReason = `Export: <${sub} />`
-      }
-    }
-
-    // 5. Description match
-    if (descLower.includes(clean)) {
-      score += 90
-      if (!matchedReason) matchedReason = 'Description match'
     }
 
     // 6. Group match
@@ -338,7 +383,20 @@ export function searchComponents(query: string): SearchResult[] {
     }
 
     if (score > 0) {
-      results.push({ item, score, matchedReason })
+      if (!matchSnippet) {
+        for (const w of words) {
+          if (descLower.includes(w)) {
+            matchSnippet = getSnippet(item.description, w)
+            break
+          }
+        }
+      }
+
+      results.push({
+        item,
+        score,
+        matchSnippet: matchSnippet || getSnippet(item.description, clean),
+      })
     }
   }
 
