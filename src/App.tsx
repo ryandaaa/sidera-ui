@@ -121,6 +121,34 @@ export default function App() {
   const [isTransitioning, setIsTransitioning] = React.useState(false)
   const [transitionTarget, setTransitionTarget] = React.useState<string | null>(null)
 
+  // Strict scroll lock when on Landing Page (prevent rubber-banding, pulling, and empty space drag)
+  React.useEffect(() => {
+    if (route === '') {
+      document.documentElement.style.overflow = 'hidden'
+      document.documentElement.style.height = '100%'
+      document.documentElement.style.overscrollBehavior = 'none'
+      document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
+      document.body.style.overscrollBehavior = 'none'
+    } else {
+      document.documentElement.style.overflow = ''
+      document.documentElement.style.height = ''
+      document.documentElement.style.overscrollBehavior = ''
+      document.body.style.overflow = ''
+      document.body.style.height = ''
+      document.body.style.overscrollBehavior = ''
+    }
+
+    return () => {
+      document.documentElement.style.overflow = ''
+      document.documentElement.style.height = ''
+      document.documentElement.style.overscrollBehavior = ''
+      document.body.style.overflow = ''
+      document.body.style.height = ''
+      document.body.style.overscrollBehavior = ''
+    }
+  }, [route])
+
   // Synchronize hash changes
   React.useEffect(() => {
     const handleHashChange = () => {

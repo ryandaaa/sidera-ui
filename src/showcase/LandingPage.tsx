@@ -31,12 +31,16 @@ export function LandingPage({ onEnter, isExiting = false }: LandingPageProps) {
 
   return (
     <div
-      className={`fixed inset-0 overflow-hidden transition-all duration-300 ease-out ${
+      className={`fixed inset-0 overflow-hidden select-none touch-none overscroll-none transition-all duration-300 ease-out ${
         isExiting
           ? 'opacity-0 scale-[1.03] filter blur-[2px] pointer-events-none'
           : 'opacity-100 scale-100'
       }`}
-      style={{ background: '#0a0a0f' }}
+      style={{
+        background: '#0a0a0f',
+        overscrollBehavior: 'none',
+        touchAction: 'none',
+      }}
       data-theme="dark"
     >
       {/* Silk animated canvas background */}
