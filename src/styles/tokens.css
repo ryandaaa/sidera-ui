@@ -92,8 +92,8 @@
   /* Cloudflare Brand Accent Token */
   --cf-orange: #f6821f;
 
-  /* Focus Ring */
-  --focus-ring: rgba(246, 130, 31, 0.7);
+  /* Focus Ring (Monochrome subtle focus ring) */
+  --focus-ring: rgba(255, 255, 255, 0.4);
 
   /* Semantic Status (Muted low-saturation status communication) */
   --success: #22c55e;
@@ -156,8 +156,8 @@
   /* Cloudflare Brand Accent Token */
   --cf-orange: #f6821f;
 
-  /* Focus Ring */
-  --focus-ring: rgba(246, 130, 31, 0.65);
+  /* Focus Ring (Monochrome subtle focus ring) */
+  --focus-ring: rgba(0, 0, 0, 0.35);
 
   /* Semantic Status (Legible on light surface) */
   --success: #16a34a;

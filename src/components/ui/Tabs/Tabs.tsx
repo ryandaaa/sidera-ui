@@ -160,7 +160,7 @@ TabsList.displayName = TabsPrimitive.List.displayName
 export const tabsTriggerVariants = cva(
   [
     'relative z-10 inline-flex items-center justify-center whitespace-nowrap text-xs font-medium transition-colors duration-150',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]',
+    'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
     'disabled:pointer-events-none disabled:opacity-45',
   ],
   {
@@ -206,7 +206,7 @@ export const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      'mt-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]',
+      'mt-3 outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
       className,
     )}
     {...props}

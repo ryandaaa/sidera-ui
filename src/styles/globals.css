@@ -88,8 +88,8 @@ html, body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Strict keyboard focus ring (excluding underline inputs with dedicated animated bottom line) */
-:focus-visible:not(input) {
+/* Strict keyboard focus ring (excluding inputs and tabs with dedicated visual indicators) */
+:focus-visible:not(input):not([role="tab"]):not([role="tabpanel"]) {
   outline: 2px solid var(--focus-ring);
   outline-offset: 1px;
 }
