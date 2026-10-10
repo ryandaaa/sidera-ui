@@ -26,11 +26,11 @@ export const avatarVariants = cva(
   },
 )
 
-const statusIndicator = {
-  online: 'bg-[var(--success)]',
-  busy: 'bg-[var(--danger)]',
-  away: 'bg-[var(--warning)]',
-  offline: 'bg-[var(--text-muted)]',
+const statusBorder: Record<NonNullable<AvatarProps['status']>, string> = {
+  online: 'border-b-2 border-b-[var(--success)]',
+  busy: 'border-b-2 border-b-[var(--danger)]',
+  away: 'border-b-2 border-b-[var(--warning)]',
+  offline: 'border-b-2 border-b-[var(--text-muted)]',
 }
 
 export interface AvatarProps
@@ -52,41 +52,42 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       alt = '',
       fallback,
       status,
+      'aria-label': ariaLabel,
       ...props
     },
     ref,
   ) => {
     const [hasError, setHasError] = React.useState(false)
 
+    const computedAriaLabel =
+      ariaLabel ||
+      (status
+        ? `${alt || fallback || 'User'} (${status})`
+        : alt || fallback || undefined)
+
     return (
-      <div className="relative inline-flex">
-        <div
-          ref={ref}
-          className={cn(avatarVariants({ size, shape, className }))}
-          {...props}
-        >
-          {src && !hasError ? (
-            <img
-              src={src}
-              alt={alt}
-              onError={() => setHasError(true)}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <span className="uppercase tracking-wider">
-              {fallback || alt.slice(0, 2) || '?'}
-            </span>
-          )}
-        </div>
-        {status && (
-          <span
-            className={cn(
-              'absolute bottom-0 right-0 block rounded-full ring-2 ring-[var(--surface)]',
-              statusIndicator[status],
-              size === 'sm' ? 'h-1.5 w-1.5' : size === 'lg' ? 'h-2.5 w-2.5' : 'h-2 w-2',
-            )}
-            aria-label={`Status: ${status}`}
+      <div
+        ref={ref}
+        className={cn(
+          avatarVariants({ size, shape }),
+          status && statusBorder[status],
+          className,
+        )}
+        data-status={status}
+        aria-label={computedAriaLabel}
+        {...props}
+      >
+        {src && !hasError ? (
+          <img
+            src={src}
+            alt={alt}
+            onError={() => setHasError(true)}
+            className="h-full w-full object-cover"
           />
+        ) : (
+          <span className="uppercase tracking-wider">
+            {fallback || alt.slice(0, 2) || '?'}
+          </span>
         )}
       </div>
     )

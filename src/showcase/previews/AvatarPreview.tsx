@@ -30,7 +30,7 @@ const propsSpec: PropSpec[] = [
     name: 'status',
     type: "'online' | 'offline' | 'busy' | 'away'",
     default: '-',
-    description: 'Status indicator badge positioned at bottom-right.',
+    description: 'Presence status indicator rendered as an accent bottom border.',
   },
 ]
 
@@ -57,7 +57,7 @@ export function AvatarPreview() {
   return (
     <ComponentDoc
       title="Avatar"
-      description="Dense user or service identity element with uppercase initials fallback and optional status dot. Defaulted to square shape for utilitarian aesthetics."
+      description="Dense user or service identity element with uppercase initials fallback and bottom border presence indicator. Defaulted to square shape for utilitarian aesthetics."
       componentPath="src/components/ui/Avatar"
       propsSpec={propsSpec}
       usageCode={usageCode}
