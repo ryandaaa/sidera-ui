@@ -10,12 +10,12 @@ export const SelectValue = SelectPrimitive.Value
 
 export const selectTriggerVariants = cva(
   [
-    'flex w-full items-center justify-between select-none text-xs text-[var(--text)] bg-[var(--surface-raised)]',
-    'rounded-[var(--radius-sm)] border border-[var(--border-strong)]',
+    'flex w-full items-center justify-between select-none text-xs text-[var(--text)] bg-transparent',
+    'rounded-[var(--radius-sm)] border border-[var(--border)]',
     'placeholder:text-[var(--text-muted)]',
-    'transition-colors duration-100',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:border-transparent',
-    'disabled:pointer-events-none disabled:opacity-45 [&>span]:line-clamp-1',
+    'transition-colors duration-150',
+    'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
+    'disabled:pointer-events-none disabled:opacity-40 [&>span]:line-clamp-1',
   ],
   {
     variants: {
@@ -25,8 +25,8 @@ export const selectTriggerVariants = cva(
         lg: 'h-[var(--control-h-lg)] px-3 text-xs',
       },
       hasError: {
-        true: 'border-[var(--danger)] focus-visible:ring-[var(--danger)]',
-        false: 'hover:border-[var(--text-secondary)]',
+        true: 'border-[var(--danger)] focus:border-[var(--danger)] focus-visible:border-[var(--danger)]',
+        false: 'hover:border-[var(--border-hover)] focus:border-[var(--primary)] focus-visible:border-[var(--primary)]',
       },
     },
     defaultVariants: {

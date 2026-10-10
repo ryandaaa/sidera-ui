@@ -4,12 +4,12 @@ import { cn } from '@/lib/cn'
 
 export const textareaVariants = cva(
   [
-    'flex w-full select-text text-xs text-[var(--text)] bg-[var(--surface-raised)]',
-    'rounded-[var(--radius-sm)] border border-[var(--border-strong)]',
+    'flex w-full select-text text-xs text-[var(--text)] bg-transparent',
+    'rounded-[var(--radius-sm)] border border-[var(--border)]',
     'placeholder:text-[var(--text-muted)]',
-    'transition-colors duration-100',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:border-transparent',
-    'disabled:pointer-events-none disabled:opacity-45',
+    'transition-colors duration-150',
+    'outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0',
+    'disabled:pointer-events-none disabled:opacity-40 disabled:border-dashed',
   ],
   {
     variants: {
@@ -19,8 +19,8 @@ export const textareaVariants = cva(
         lg: 'p-3 text-xs min-h-[96px]',
       },
       hasError: {
-        true: 'border-[var(--danger)] focus-visible:ring-[var(--danger)]',
-        false: 'hover:border-[var(--text-secondary)]',
+        true: 'border-[var(--danger)] focus:border-[var(--danger)] focus-visible:border-[var(--danger)]',
+        false: 'hover:border-[var(--border-hover)] focus:border-[var(--primary)] focus-visible:border-[var(--primary)]',
       },
       resize: {
         none: 'resize-none',
@@ -48,6 +48,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         rows={rows}
         disabled={disabled}
         aria-invalid={hasError ? 'true' : undefined}
+        style={{ outline: 'none', ...props.style }}
         className={cn(textareaVariants({ size, hasError, resize, className }))}
         {...props}
       />
