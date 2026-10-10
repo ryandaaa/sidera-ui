@@ -24,6 +24,11 @@ const groups: NavGroup[] = [
     items: [
       { id: 'button', label: 'Button' },
       { id: 'input', label: 'Input' },
+      { id: 'textarea', label: 'Textarea' },
+      { id: 'select', label: 'Select' },
+      { id: 'checkbox', label: 'Checkbox' },
+      { id: 'radio', label: 'Radio' },
+      { id: 'switch', label: 'Switch' },
       { id: 'field', label: 'Field' },
     ],
   },

@@ -4,6 +4,11 @@ import { Sidebar } from './showcase/Sidebar'
 import { TokensPage } from './showcase/TokensPage'
 import { ButtonPreview } from './showcase/previews/ButtonPreview'
 import { InputPreview } from './showcase/previews/InputPreview'
+import { TextareaPreview } from './showcase/previews/TextareaPreview'
+import { SelectPreview } from './showcase/previews/SelectPreview'
+import { CheckboxPreview } from './showcase/previews/CheckboxPreview'
+import { RadioPreview } from './showcase/previews/RadioPreview'
+import { SwitchPreview } from './showcase/previews/SwitchPreview'
 import { FieldPreview } from './showcase/previews/FieldPreview'
 import { BadgePreview } from './showcase/previews/BadgePreview'
 import { CardPreview } from './showcase/previews/CardPreview'
@@ -86,6 +91,11 @@ export default function App() {
           {route === 'tokens' && <TokensPage />}
           {route === 'button' && <ButtonPreview />}
           {route === 'input' && <InputPreview />}
+          {route === 'textarea' && <TextareaPreview />}
+          {route === 'select' && <SelectPreview />}
+          {route === 'checkbox' && <CheckboxPreview />}
+          {route === 'radio' && <RadioPreview />}
+          {route === 'switch' && <SwitchPreview />}
           {route === 'field' && <FieldPreview />}
           {route === 'badge' && <BadgePreview />}
           {route === 'card' && <CardPreview />}
