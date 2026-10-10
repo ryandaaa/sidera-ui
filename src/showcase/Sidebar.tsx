@@ -71,9 +71,9 @@ const groups: NavGroup[] = [
     ],
   },
   {
-    title: 'Upcoming (Phase 2)',
+    title: 'Layout',
     items: [
-      { id: 'layout', label: 'Layout (Stack, Inline, PageHeader)', badge: 'next' },
+      { id: 'layout', label: 'Layout Primitives' },
     ],
   },
 ]

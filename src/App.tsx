@@ -28,6 +28,7 @@ import { DropdownMenuPreview } from './showcase/previews/DropdownMenuPreview'
 import { TabsPreview } from './showcase/previews/TabsPreview'
 import { BreadcrumbPaginationPreview } from './showcase/previews/BreadcrumbPaginationPreview'
 import { CommandSearchPreview } from './showcase/previews/CommandSearchPreview'
+import { LayoutPreview } from './showcase/previews/LayoutPreview'
 import { ToastProvider } from './components/ui/Toast'
 
 export default function App() {
@@ -133,6 +134,7 @@ export default function App() {
             {route === 'tabs' && <TabsPreview />}
             {route === 'breadcrumb-pagination' && <BreadcrumbPaginationPreview />}
             {route === 'command-search' && <CommandSearchPreview />}
+            {route === 'layout' && <LayoutPreview />}
           </main>
         </div>
       </div>

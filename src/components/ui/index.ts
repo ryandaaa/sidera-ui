@@ -40,3 +40,9 @@ export * from './Breadcrumb'
 export * from './Pagination'
 export * from './SidebarNavItem'
 export * from './CommandSearch'
+
+// Layout
+export * from './Stack'
+export * from './Inline'
+export * from './Container'
+export * from './PageHeader'
