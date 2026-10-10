@@ -28,7 +28,7 @@ export function TopBar({
 }: TopBarProps) {
   return (
     <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 select-none">
-      <div className="flex items-center gap-2.5 sm:gap-3">
+      <div className="flex items-center gap-1.5">
         {/* Sidebar Hamburger Toggle Button */}
         <button
           type="button"
@@ -42,14 +42,11 @@ export function TopBar({
 
         <a
           href="#tokens"
-          className="flex items-center gap-2.5 text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
+          className="text-[var(--text)] font-semibold text-sm tracking-tight hover:opacity-80 transition-opacity"
         >
-          <div className="h-5 w-5 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-[var(--radius-xs)] flex items-center justify-center font-mono text-[10px] font-bold">
-            S
-          </div>
-          <span>SIDERA UI</span>
+          SIDERA UI
         </a>
-        <span className="font-mono text-xs text-[var(--text-muted)] hidden sm:inline-block">
+        <span className="font-mono text-xs text-[var(--text-muted)] ml-1 hidden sm:inline-block">
           v0.1.0
         </span>
       </div>
