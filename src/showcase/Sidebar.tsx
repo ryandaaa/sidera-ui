@@ -28,10 +28,13 @@ import {
   Navigation,
   Search,
   LayoutGrid,
+  Globe,
+  ExternalLink,
 } from 'lucide-react'
 
 import { CommandSearch } from '@/components/ui/CommandSearch'
 import { searchComponents } from './searchIndex'
+import { GithubIcon } from './icons/GithubIcon'
 
 export interface SidebarProps {
   currentRoute: string
@@ -443,10 +446,42 @@ export function Sidebar({
           ))}
         </nav>
 
-        <div className="mt-auto pt-6 border-t border-[var(--border)] text-[10px] text-[var(--text-muted)] px-2 space-y-1">
-          <p className="font-mono">Dense &bull; Monochromatic</p>
-          <p>WCAG AA Compliant</p>
-        </div>
+      </div>
+
+      {/* Pinned Sticky Footer at Bottom of Sidebar */}
+      <div
+        className="px-4 py-2.5 border-t border-[var(--border)] bg-[var(--surface)] shrink-0 z-20 flex flex-col gap-1"
+        style={{ width: `${width}px` }}
+      >
+        {/* Link 1: Personal Web */}
+        <a
+          href="https://space.ryandaollama.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors group cursor-pointer"
+          title="Visit personal website (space.ryandaollama.dev)"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <Globe className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
+            <span className="truncate font-mono text-[11px]">space.ryandaollama.dev</span>
+          </div>
+          <ExternalLink className="h-3 w-3 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors opacity-60 group-hover:opacity-100" />
+        </a>
+
+        {/* Link 2: GitHub Profile */}
+        <a
+          href="https://github.com/ryandaaa"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between px-2.5 py-1.5 rounded-[var(--radius-xs)] text-xs text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors group cursor-pointer"
+          title="Visit GitHub profile (github.com/ryandaaa)"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <GithubIcon className="h-3.5 w-3.5 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors" />
+            <span className="truncate font-mono text-[11px]">github.com/ryandaaa</span>
+          </div>
+          <ExternalLink className="h-3 w-3 shrink-0 stroke-[1.75] text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors opacity-60 group-hover:opacity-100" />
+        </a>
       </div>
 
       {/* Manual Resize Handle on Right Border */}
