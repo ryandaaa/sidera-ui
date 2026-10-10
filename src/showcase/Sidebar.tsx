@@ -36,7 +36,13 @@ const groups: NavGroup[] = [
     title: 'Display',
     items: [
       { id: 'badge', label: 'Badge' },
+      { id: 'tag', label: 'Tag' },
+      { id: 'avatar', label: 'Avatar' },
       { id: 'card', label: 'Card' },
+      { id: 'table', label: 'Table' },
+      { id: 'desc-list', label: 'Description List' },
+      { id: 'code-block', label: 'Code & Code Block' },
+      { id: 'display-utils', label: 'Kbd, Separator, Empty' },
     ],
   },
   {

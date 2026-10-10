@@ -12,6 +12,12 @@ import { SwitchPreview } from './showcase/previews/SwitchPreview'
 import { FieldPreview } from './showcase/previews/FieldPreview'
 import { BadgePreview } from './showcase/previews/BadgePreview'
 import { CardPreview } from './showcase/previews/CardPreview'
+import { TagPreview } from './showcase/previews/TagPreview'
+import { AvatarPreview } from './showcase/previews/AvatarPreview'
+import { TablePreview } from './showcase/previews/TablePreview'
+import { DescriptionListPreview } from './showcase/previews/DescriptionListPreview'
+import { CodeBlockPreview } from './showcase/previews/CodeBlockPreview'
+import { DisplayUtilitiesPreview } from './showcase/previews/DisplayUtilitiesPreview'
 
 export default function App() {
   // 1. Theme State (Default: dark, persisted in localStorage)
@@ -98,7 +104,13 @@ export default function App() {
           {route === 'switch' && <SwitchPreview />}
           {route === 'field' && <FieldPreview />}
           {route === 'badge' && <BadgePreview />}
+          {route === 'tag' && <TagPreview />}
+          {route === 'avatar' && <AvatarPreview />}
           {route === 'card' && <CardPreview />}
+          {route === 'table' && <TablePreview />}
+          {route === 'desc-list' && <DescriptionListPreview />}
+          {route === 'code-block' && <CodeBlockPreview />}
+          {route === 'display-utils' && <DisplayUtilitiesPreview />}
         </main>
       </div>
     </div>

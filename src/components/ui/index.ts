@@ -1,3 +1,4 @@
+// Foundation
 export * from './Button'
 export * from './Input'
 export * from './Textarea'
@@ -7,5 +8,16 @@ export * from './Checkbox'
 export * from './Radio'
 export * from './Switch'
 export * from './Select'
+
+// Display
 export * from './Badge'
 export * from './Card'
+export * from './Tag'
+export * from './Avatar'
+export * from './Table'
+export * from './DescriptionList'
+export * from './CodeBlock'
+export * from './Kbd'
+export * from './Separator'
+export * from './Skeleton'
+export * from './EmptyState'
