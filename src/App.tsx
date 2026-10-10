@@ -216,7 +216,7 @@ export default function App() {
         {/* Docs layout (shown for all component routes) — smooth crossfade without fake skeleton */}
         {route !== '' && (
           <div
-            className={`min-h-screen w-full max-w-full overflow-x-hidden bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-all duration-300 ease-out ${
+            className={`min-h-screen w-full max-w-full bg-[var(--bg)] text-[var(--text)] flex flex-col font-sans select-text transition-all duration-300 ease-out ${
               isTransitioning
                 ? 'opacity-0 scale-[0.99] filter blur-[1px]'
                 : 'opacity-100 scale-100 filter-none animate-in fade-in'
@@ -236,7 +236,7 @@ export default function App() {
             />
 
             {/* Main Workspace: Left Resizable Sidebar + Center Content Area + Right TOC */}
-            <div className="flex-1 flex w-full max-w-full items-start overflow-x-hidden">
+            <div className="flex-1 flex w-full max-w-full items-start">
               <Sidebar
                 currentRoute={route}
                 onRouteChange={handleRouteChange}
@@ -246,7 +246,7 @@ export default function App() {
                 onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
               />
 
-              <main className="flex-1 min-w-0 max-w-full p-4 sm:p-6 md:p-8 lg:p-10 overflow-x-hidden">
+              <main className="flex-1 min-w-0 max-w-full p-4 sm:p-6 md:p-8 lg:p-10">
                 {route === 'tokens' && <TokensPage />}
               {route === 'button' && <ButtonPreview />}
               {route === 'input' && <InputPreview />}

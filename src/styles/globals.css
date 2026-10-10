@@ -72,11 +72,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  max-width: 100%;
   min-height: 100%;
-  overflow-x: hidden;
-  overscroll-behavior: none;
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
