@@ -109,13 +109,13 @@ export function CardPreview() {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
+              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)] hover:border-[var(--border-hover)] transition-colors duration-150">
                 <span className="text-[var(--text-secondary)] block text-[11px] font-medium">
                   CPU TIME
                 </span>
                 <span className="text-[var(--text)] font-bold text-sm">1.82 ms</span>
               </div>
-              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)]">
+              <div className="p-2.5 bg-[var(--surface-raised)] border border-[var(--border)] rounded-[var(--radius-xs)] hover:border-[var(--border-hover)] transition-colors duration-150">
                 <span className="text-[var(--text-secondary)] block text-[11px] font-medium">
                   P99 LATENCY
                 </span>

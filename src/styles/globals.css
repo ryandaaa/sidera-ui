@@ -28,6 +28,7 @@
 
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-border-hover: var(--border-hover);
   --color-border-tertiary: var(--border-tertiary);
 
   --color-text: var(--text);

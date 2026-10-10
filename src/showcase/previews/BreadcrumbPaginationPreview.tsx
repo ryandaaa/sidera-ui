@@ -131,7 +131,7 @@ export function BreadcrumbPaginationPreview() {
         <span className="text-xs font-mono font-semibold text-[var(--text)] uppercase tracking-wider block">
           Sidebar Nav Items
         </span>
-        <div className="max-w-xs space-y-1 p-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)]">
+        <div className="max-w-xs space-y-1 p-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-hover)] transition-colors duration-200">
           <SidebarNavItem
             active={activeItem === 'isolates'}
             onClick={() => setActiveItem('isolates')}

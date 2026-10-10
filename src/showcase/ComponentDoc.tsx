@@ -71,7 +71,7 @@ export function ComponentDoc({
             Live Preview & State Ladder
           </h2>
         </div>
-        <div className="p-6 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] space-y-6">
+        <div className="p-6 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] space-y-6 transition-colors duration-200 hover:border-[var(--border-hover)]">
           {children}
         </div>
       </section>
@@ -97,7 +97,7 @@ export function ComponentDoc({
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border-strong)] bg-[var(--bg)] p-4 overflow-x-auto font-mono text-xs text-[var(--text-secondary)] leading-relaxed">
+        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--bg)] p-4 overflow-x-auto font-mono text-xs text-[var(--text-secondary)] leading-relaxed transition-colors duration-200 hover:border-[var(--border-hover)]">
           <pre>{usageCode}</pre>
         </div>
       </section>

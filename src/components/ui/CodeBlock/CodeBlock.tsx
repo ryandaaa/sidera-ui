@@ -54,6 +54,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
         ref={ref}
         className={cn(
           'relative w-full overflow-hidden rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] text-left',
+          'transition-colors duration-200 hover:border-[var(--border-hover)]',
           className,
         )}
         {...props}
