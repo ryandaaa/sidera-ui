@@ -49,7 +49,7 @@ export function ComponentDoc({
   useToc(activeToc)
 
   return (
-    <div className="w-full max-w-4xl space-y-10 text-left">
+    <div className="w-full max-w-4xl min-w-0 space-y-10 text-left">
       {/* Component Header / Overview */}
       <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-5 scroll-mt-20">
         <div className="flex items-baseline gap-3">
@@ -72,7 +72,7 @@ export function ComponentDoc({
             Live Preview & State Ladder
           </h2>
         </div>
-        <div className="p-6 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] space-y-6 transition-colors duration-200 hover:border-[var(--border-hover)]">
+        <div className="p-4 sm:p-6 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] space-y-6 transition-colors duration-200 hover:border-[var(--border-hover)] max-w-full overflow-x-auto">
           {children}
         </div>
       </section>
@@ -98,7 +98,7 @@ export function ComponentDoc({
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] p-4 overflow-x-auto font-mono text-xs leading-relaxed transition-colors duration-200 hover:border-[var(--border-hover)] select-text">
+        <div className="relative rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--surface)] p-4 overflow-x-auto font-mono text-xs leading-relaxed transition-colors duration-200 hover:border-[var(--border-hover)] select-text max-w-full">
           <pre
             className="text-[var(--syntax-text)] whitespace-pre font-mono"
             dangerouslySetInnerHTML={{
@@ -114,7 +114,7 @@ export function ComponentDoc({
           <h2 className="text-base font-semibold tracking-tight text-[var(--text)]">
             Props Specification
           </h2>
-          <div className="border-y border-[var(--border)] overflow-x-auto">
+          <div className="border-y border-[var(--border)] overflow-x-auto max-w-full">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
                 <tr className="border-b border-[var(--border)] text-xs text-[var(--text)] font-semibold font-mono">

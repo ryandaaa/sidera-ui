@@ -29,7 +29,7 @@ export function TopBar({
   onRouteChange,
 }: TopBarProps) {
   return (
-    <header className="h-12 border-b border-[var(--border)] bg-[var(--surface)] pl-2.5 pr-4 sm:pr-6 flex items-center justify-between sticky top-0 z-30 select-none gap-3">
+    <header className="w-full max-w-full h-12 border-b border-[var(--border)] bg-[var(--surface)] pl-2.5 pr-4 sm:pr-6 flex items-center justify-between sticky top-0 z-30 select-none gap-3">
       {/* Left: Sidebar Toggle, Title (sidera-ui), and Version Tag */}
       <div className="flex items-center gap-1.5 shrink-0">
         <button

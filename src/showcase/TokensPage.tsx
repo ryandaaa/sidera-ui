@@ -66,7 +66,7 @@ export function TokensPage() {
   useToc(tokensToc)
 
   return (
-    <div className="w-full max-w-4xl space-y-14 text-left">
+    <div className="w-full max-w-4xl min-w-0 max-w-full space-y-14 text-left">
         {/* Intro */}
         <div id="overview" className="space-y-2 border-b border-[var(--border)] pb-6 scroll-mt-20">
           <h1 className="text-2xl font-bold tracking-tight text-[var(--text)]">
@@ -136,7 +136,7 @@ export function TokensPage() {
             </div>
 
             {/* Seamless labels below */}
-            <div className="flex justify-between text-[11px] font-mono text-[var(--text-secondary)] px-1">
+            <div className="flex justify-between gap-1 text-[10px] sm:text-[11px] font-mono text-[var(--text-secondary)] px-1 overflow-x-auto">
               <span>white (#ffffff)</span>
               <span>gray-300</span>
               <span>gray-600</span>
