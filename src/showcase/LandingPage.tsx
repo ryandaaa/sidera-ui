@@ -1,13 +1,33 @@
+import * as React from 'react';
 import Silk from './Silk';
 import { EXTERNAL_LINKS } from '../config/links';
 import { GithubIcon } from './icons/GithubIcon';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink, Copy, Check } from 'lucide-react';
 
 interface LandingPageProps {
   onEnter: () => void;
 }
 
+type PkgManager = 'pnpm' | 'npm' | 'curl';
+
+const INSTALL_COMMANDS: Record<PkgManager, string> = {
+  pnpm: 'pnpm add sidera-ui',
+  npm: 'npm i sidera-ui',
+  curl: 'curl -fsSL https://sidera.dev/install.sh | bash',
+};
+
 export function LandingPage({ onEnter }: LandingPageProps) {
+  const [pkgManager, setPkgManager] = React.useState<PkgManager>('pnpm');
+  const [copied, setCopied] = React.useState(false);
+
+  const activeCommand = INSTALL_COMMANDS[pkgManager];
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(activeCommand);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div
       className="fixed inset-0 overflow-hidden"
@@ -32,11 +52,11 @@ export function LandingPage({ onEnter }: LandingPageProps) {
         style={{ background: 'rgba(0,0,0,0.32)' }}
       />
 
-      {/* Hero content — centered, minimal, full lowercase */}
-      <main className="relative z-10 flex flex-col items-center justify-center h-full gap-5 px-6 text-center select-none">
+      {/* Hero content — centered, minimal, full lowercase, strict optical vertical rhythm */}
+      <main className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center select-none">
         {/* Wordmark — full lowercase sidera-ui */}
         <h1
-          className="font-mono font-light tracking-[0.25em] lowercase"
+          className="font-mono font-light tracking-[0.25em] lowercase leading-none mb-4 sm:mb-5"
           style={{
             fontSize: 'clamp(2.2rem, 6vw, 3.8rem)',
             color: 'rgba(255,255,255,0.95)',
@@ -46,9 +66,9 @@ export function LandingPage({ onEnter }: LandingPageProps) {
           sidera-ui
         </h1>
 
-        {/* Tagline */}
+        {/* Tagline / Slug */}
         <p
-          className="font-sans font-light max-w-sm leading-relaxed"
+          className="font-sans font-light max-w-sm leading-relaxed mb-4 sm:mb-5"
           style={{ fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)', color: 'rgba(255,255,255,0.5)' }}
         >
           A minimal, opinionated UI component library
@@ -56,11 +76,56 @@ export function LandingPage({ onEnter }: LandingPageProps) {
           built with React and Tailwind CSS.
         </p>
 
+        {/* Quick copy install command box (pnpm / npm / curl) */}
+        <div
+          className="mb-4 sm:mb-5 flex items-center justify-between rounded-md border border-white/15 bg-black/40 backdrop-blur-md px-2.5 py-1.5 transition-colors hover:border-white/25 w-full max-w-[340px] sm:max-w-[370px]"
+          style={{ height: '36px' }}
+        >
+          {/* Package manager pill toggle */}
+          <div className="flex items-center gap-1 shrink-0 font-mono text-[10px]">
+            {(['pnpm', 'npm', 'curl'] as const).map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setPkgManager(tab)}
+                className={`px-1.5 py-0.5 rounded transition-colors cursor-pointer ${
+                  pkgManager === tab
+                    ? 'bg-white/15 text-white font-medium'
+                    : 'text-white/40 hover:text-white/70'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Command display */}
+          <div className="flex items-center gap-1.5 min-w-0 px-2 font-mono text-[11px] text-white/85 truncate">
+            <span className="text-white/30 select-none">$</span>
+            <span className="truncate">{activeCommand}</span>
+          </div>
+
+          {/* Copy button */}
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="h-6 w-6 rounded flex items-center justify-center text-white/45 hover:text-white hover:bg-white/10 transition-colors shrink-0 cursor-pointer"
+            title="Copy command"
+            aria-label="Copy install command"
+          >
+            {copied ? (
+              <Check className="h-3 w-3 text-emerald-400" />
+            ) : (
+              <Copy className="h-3 w-3" />
+            )}
+          </button>
+        </div>
+
         {/* CTA buttons */}
-        <div className="flex items-center gap-3 mt-1">
+        <div className="flex items-center gap-3 mb-4 sm:mb-5">
           <button
             onClick={onEnter}
-            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150 cursor-pointer"
+            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150 cursor-pointer active:scale-95"
             style={{
               padding: '0.5rem 1.15rem',
               fontSize: '0.8rem',
@@ -83,7 +148,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
             href={EXTERNAL_LINKS.githubRepo.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150"
+            className="flex items-center gap-2 rounded-md font-medium transition-all duration-150 active:scale-95"
             style={{
               padding: '0.5rem 1.15rem',
               fontSize: '0.8rem',
@@ -108,7 +173,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
 
         {/* Subtle metrics info */}
         <p
-          className="font-sans mt-2"
+          className="font-sans"
           style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em' }}
         >
           24 components · Open source
